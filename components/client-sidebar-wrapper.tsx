@@ -6,7 +6,11 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { Sidebar } from "@/components/sidebar";
 import { ThemeProvider } from "./theme-provider";
 
-export function ClientSidebarWrapper({ children }: { children: React.ReactNode }) {
+export function ClientSidebarWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [defaultOpen, setDefaultOpen] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -16,7 +20,12 @@ export function ClientSidebarWrapper({ children }: { children: React.ReactNode }
 
   if (defaultOpen === null) return null;
   return (
-    <ThemeProvider defaultTheme="light" storageKey="theme">
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <SidebarProvider defaultOpen={defaultOpen}>
         <Sidebar />
         {children}
