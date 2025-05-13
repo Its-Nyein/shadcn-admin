@@ -15,13 +15,15 @@ export function Sidebar({ ...props }: React.ComponentProps<typeof UISidebar>) {
   return (
     <UISidebar collapsible="icon" variant="floating" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={sidebarData.teams}/>
+        <TeamSwitcher teams={sidebarData.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavGroup/>
+        {sidebarData.navGroups.map((nav) => (
+          <NavGroup key={nav.title} {...nav} />
+        ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser/>
+        <NavUser />
       </SidebarFooter>
       <SidebarRail />
     </UISidebar>
