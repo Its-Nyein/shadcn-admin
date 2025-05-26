@@ -5,11 +5,17 @@ import { ProfileDropdown } from "@/components/profile-dropdown";
 import { Search } from "@/components/search";
 import { ToggleTheme } from "@/components/toggle-theme";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DashboardCard } from "@/features/components/dashboard-card";
-import { DashboardOverview } from "@/features/components/dashboard-overview";
-import { DashboardRecentSales } from "@/features/components/dashboard-recent-sales";
+import { DashboardCard } from "@/features/dashboard/components/dashboard-card";
+import { DashboardOverview } from "@/features/dashboard/components/dashboard-overview";
+import { DashboardRecentSales } from "@/features/dashboard/components/dashboard-recent-sales";
 
 const topNav = [
   {
@@ -88,7 +94,7 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
 
-              <Card className='col-span-1 lg:col-span-3'>
+              <Card className="col-span-1 lg:col-span-3">
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
                   <CardDescription>
@@ -96,7 +102,7 @@ export default function DashboardPage() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <DashboardRecentSales/>
+                  <DashboardRecentSales />
                 </CardContent>
               </Card>
             </div>
