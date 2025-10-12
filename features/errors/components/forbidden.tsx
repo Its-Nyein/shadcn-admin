@@ -1,19 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
-export default function NotFound() {
+export function Forbidden() {
   const router = useRouter();
-
   return (
     <div className="h-svh w-full">
-      <div className="mx-auto flex h-full w-full flex-col items-center justify-center gap-2">
-        <h1 className="text-[7rem] leading-tight font-bold">404</h1>
-        <span className="font-medium">Oops! Page Not Found!</span>
+      <div className="m-auto flex h-full w-full flex-col items-center justify-center gap-2">
+        <h1 className="text-[7rem] leading-tight font-bold">403</h1>
+        <span className="font-medium">Access Forbidden</span>
         <p className="text-muted-foreground text-center">
-          It seems like the page you&apos;re looking for <br />
-          does not exist or might have been removed.
+          You don't have necessary permission <br />
+          to view this resource.
         </p>
         <div className="mt-6 flex gap-4">
           <Button variant="outline" onClick={() => router.back()}>

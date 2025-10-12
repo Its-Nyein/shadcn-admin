@@ -53,7 +53,7 @@ export function DashboardTopNav({
       <nav
         className={cn(
           "hidden items-center space-x-4 md:flex lg:space-x-6",
-          className
+          className,
         )}
         {...props}
       >

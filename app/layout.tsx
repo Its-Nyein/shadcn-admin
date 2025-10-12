@@ -9,9 +9,11 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-
 export const metadata: Metadata = {
   title: "Shadcn Admin",
+  icons: {
+    icon: "/favicon.png",
+  },
   description: "Admin Dashboard UI built with NextJs and Shadcn.",
 };
 
@@ -22,10 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.className} antialiased`}
-      >
-        <NextToploader color="var(--primary)" showSpinner={false}/>
+      <body className={`${inter.className} antialiased`}>
+        <NextToploader color="var(--primary)" showSpinner={false} />
         <ClientSidebarWrapper>{children}</ClientSidebarWrapper>
       </body>
     </html>
