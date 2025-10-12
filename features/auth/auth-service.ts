@@ -27,15 +27,22 @@ export const authService = {
 
     const token = btoa(`${email}:${Date.now()}`);
 
-    Cookies.set(AUTH_TOKEN_KEY, token, { expires: 7 });
-    Cookies.set(USER_DATA_KEY, JSON.stringify(MOCK_USER), { expires: 7 });
+    const cookieOptions = {
+      expires: 7,
+      path: "/",
+      sameSite: "lax" as const,
+      secure: process.env.NODE_ENV === "production",
+    };
+
+    Cookies.set(AUTH_TOKEN_KEY, token, cookieOptions);
+    Cookies.set(USER_DATA_KEY, JSON.stringify(MOCK_USER), cookieOptions);
 
     return MOCK_USER;
   },
 
   logout: () => {
-    Cookies.remove(AUTH_TOKEN_KEY);
-    Cookies.remove(USER_DATA_KEY);
+    Cookies.remove(AUTH_TOKEN_KEY, { path: "/" });
+    Cookies.remove(USER_DATA_KEY, { path: "/" });
   },
 
   getCurrentUser: async (): Promise<User | null> => {
