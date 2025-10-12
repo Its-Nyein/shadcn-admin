@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextToploader from "nextjs-toploader";
+import { AuthProvider } from "@/contexts/auth-context";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -26,7 +28,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
         <NextToploader color="var(--primary)" showSpinner={false} />
-        <ClientSidebarWrapper>{children}</ClientSidebarWrapper>
+        <AuthProvider>
+          <ClientSidebarWrapper>{children}</ClientSidebarWrapper>
+        </AuthProvider>
+        <Toaster />
       </body>
     </html>
   );
