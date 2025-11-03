@@ -27,16 +27,16 @@ export const authService = {
 
     const token = btoa(`${email}:${Date.now()}`);
 
-    const isSecure =
-      typeof window !== "undefined"
-        ? window.location.protocol === "https:"
-        : process.env.NODE_ENV === "production";
+    // const isSecure =
+    //   typeof window !== "undefined"
+    //     ? window.location.protocol === "https:"
+    //     : process.env.NODE_ENV === "production";
 
     const cookieOptions = {
       expires: 7,
       path: "/",
       sameSite: "lax" as const,
-      secure: isSecure,
+      secure: process.env.NODE_ENV === "production",
     };
 
     Cookies.set(AUTH_TOKEN_KEY, token, cookieOptions);

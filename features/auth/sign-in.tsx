@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +21,6 @@ import { useAuth } from "@/contexts/auth-context";
 import { toast } from "sonner";
 
 export default function SignIn() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
@@ -43,12 +42,14 @@ export default function SignIn() {
       });
 
       const callbackUrl = searchParams.get("callbackUrl") || "/";
-      router.push(callbackUrl);
+
+      // Use window.location for a full page reload to ensure cookies are properly read by middleware
+      // This prevents race conditions between client-side navigation and middleware cookie checks
+      window.location.href = callbackUrl;
     } catch (error) {
       toast.error("Authentication failed", {
         description: error instanceof Error ? error.message : "Invalid email or password",
       });
-    } finally {
       setIsLoading(false);
     }
   };
