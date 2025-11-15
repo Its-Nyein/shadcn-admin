@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const AUTH_TOKEN_KEY = "auth_token";
-
 const publicRoutes = ["/sign-in", "/sign-up", "/forgot-password", "/terms", "/privacy"];
 
 const authRoutes = ["/sign-in", "/sign-up", "/forgot-password"];
@@ -10,8 +8,9 @@ const authRoutes = ["/sign-in", "/sign-up", "/forgot-password"];
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const token = request.cookies.get(AUTH_TOKEN_KEY)?.value;
-  const isAuthenticated = !!token;
+  // Check for better-auth session token
+  const sessionToken = request.cookies.get("better-auth.session_token")?.value;
+  const isAuthenticated = !!sessionToken;
 
   const isPublicRoute = publicRoutes.some(route => pathname.startsWith(route));
   const isAuthRoute = authRoutes.some(route => pathname.startsWith(route));

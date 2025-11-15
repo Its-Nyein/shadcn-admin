@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -15,19 +13,27 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/auth-context";
-import { getUserInitials } from "@/lib/auth";
+import { getUserInitials } from "@/lib/utils/get-user-initials";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export function ProfileDropdown() {
   const { user, logout } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-    toast.success("Logged out successfully", {
-      description: "You have been logged out of your account.",
-    });
-    router.push("/sign-in");
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully", {
+        description: "You have been logged out of your account.",
+      });
+      router.push("/sign-in");
+    } catch {
+      toast.error("Logout failed", {
+        description: "An error occurred while logging out.",
+      });
+    }
   };
 
   if (!user) return null;
@@ -39,6 +45,7 @@ export function ProfileDropdown() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
+            <AvatarImage src={user.avatar} alt={user.name} />
             <AvatarFallback>{initials}</AvatarFallback>
           </Avatar>
         </Button>

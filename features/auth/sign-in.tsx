@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -14,16 +11,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { signInSchema, SignInSchema } from "@/utils/sign-in-schema";
 import { useAuth } from "@/contexts/auth-context";
+import { SignInSchema, signInSchema } from "@/utils/sign-in-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export default function SignIn() {
   const searchParams = useSearchParams();
-  const { login } = useAuth();
+  const { login, signInSocial } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [isSocialLoading, setIsSocialLoading] = useState<string | null>(null);
 
   const form = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
@@ -32,6 +33,19 @@ export default function SignIn() {
       password: "",
     },
   });
+
+  const handleSocialSignIn = async (provider: "google" | "github") => {
+    setIsSocialLoading(provider);
+    try {
+      const callbackUrl = searchParams.get("callbackUrl") || "/?success=true";
+      await signInSocial(provider, callbackUrl);
+    } catch (error) {
+      toast.error("Authentication failed", {
+        description: error instanceof Error ? error.message : `Failed to sign in with ${provider}`,
+      });
+      setIsSocialLoading(null);
+    }
+  };
 
   const onSubmit = async (data: SignInSchema) => {
     setIsLoading(true);
@@ -85,7 +99,12 @@ export default function SignIn() {
           <div className="w-full space-y-4 sm:space-y-6">
             <div className="space-y-2 sm:space-y-3">
               {/* Google */}
-              <Button variant="outline" className="w-full h-10 sm:h-11">
+              <Button
+                variant="outline"
+                className="w-full h-10 sm:h-11"
+                onClick={() => handleSocialSignIn("google")}
+                disabled={isSocialLoading !== null || isLoading}
+              >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -108,7 +127,12 @@ export default function SignIn() {
               </Button>
 
               {/* GitHub */}
-              <Button variant="outline" className="w-full h-10 sm:h-11">
+              <Button
+                variant="outline"
+                className="w-full h-10 sm:h-11"
+                onClick={() => handleSocialSignIn("github")}
+                disabled={isSocialLoading !== null || isLoading}
+              >
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
                   <path
                     fillRule="evenodd"
