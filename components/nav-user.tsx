@@ -1,6 +1,12 @@
 "use client";
 
+import { useAuth } from "@/contexts/auth-context";
+import { getUserInitials } from "@/lib/utils/get-user-initials";
+import { BadgeCheck, Bell, ChevronDown, CreditCard, LogOut, Sparkles } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,25 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "./ui/sidebar";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import {
-  BadgeCheck,
-  Bell,
-  ChevronDown,
-  CreditCard,
-  LogOut,
-  Sparkles,
-} from "lucide-react";
-import Link from "next/link";
-import { useAuth } from "@/contexts/auth-context";
-import { getUserInitials } from "@/lib/auth";
-import { toast } from "sonner";
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "./ui/sidebar";
 
 export function NavUser({
   user,
@@ -43,12 +31,18 @@ export function NavUser({
   const { logout } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();
-    toast.success("Logged out successfully", {
-      description: "You have been logged out of your account.",
-    });
-    router.push("/sign-in");
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully", {
+        description: "You have been logged out of your account.",
+      });
+      router.push("/sign-in");
+    } catch {
+      toast.error("Logout failed", {
+        description: "An error occurred while logging out.",
+      });
+    }
   };
 
   const initials = getUserInitials(user.name);
@@ -64,7 +58,7 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback>{initials}</AvatarFallback>
+                <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-semibold">{user.name}</span>

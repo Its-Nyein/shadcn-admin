@@ -1,15 +1,16 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { authClient } from "@/lib/auth-client";
 import { User } from "@/lib/type";
-import { authService } from "@/features/auth/auth-service";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
+  signInSocial: (provider: "google" | "github", callbackUrl?: string) => Promise<void>;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -20,22 +21,74 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const initAuth = async () => {
-      const currentUser = await authService.getCurrentUser();
-      setUser(currentUser);
-      setIsLoading(false);
+      try {
+        const { data: session } = await authClient.getSession();
+
+        if (session?.user) {
+          setUser({
+            id: session.user.id,
+            name: session.user.name,
+            email: session.user.email,
+            avatar: session.user.image || "",
+            role: "user",
+          });
+        }
+      } catch (error) {
+        console.error("Failed to get session:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     initAuth();
   }, []);
 
   const login = async (email: string, password: string) => {
-    const user = await authService.login(email, password);
-    setUser(user);
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message || "Failed to sign in");
+    }
+
+    if (data?.user) {
+      setUser({
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email,
+        avatar: data.user.image || "",
+        role: "user",
+      });
+    }
   };
 
-  const logout = () => {
-    authService.logout();
-    setUser(null);
+  const signInSocial = async (provider: "google" | "github", callbackUrl?: string) => {
+    const defaultCallbackUrl = callbackUrl || "/?success=true";
+    const finalCallbackUrl = defaultCallbackUrl.includes("?")
+      ? `${defaultCallbackUrl}&success=true`
+      : `${defaultCallbackUrl}?success=true`;
+
+    await authClient.signIn.social({
+      provider,
+      callbackURL: finalCallbackUrl,
+    });
+  };
+
+  const logout = async () => {
+    try {
+      await authClient.signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            setUser(null);
+          },
+        },
+      });
+    } catch (error) {
+      console.error("Logout failed:", error);
+      setUser(null);
+    }
   };
 
   return (
@@ -45,6 +98,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAuthenticated: !!user,
         isLoading,
         login,
+        signInSocial,
         logout,
       }}
     >

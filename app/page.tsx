@@ -1,3 +1,4 @@
+import { AuthSuccessToast } from "@/components/auth-success-toast";
 import { DashboardTopNav } from "@/components/dashboard-top-nav";
 import { Header } from "@/components/header";
 import { Main } from "@/components/main";
@@ -47,6 +48,7 @@ const topNav = [
 export default function DashboardPage() {
   return (
     <div className="w-full">
+      <AuthSuccessToast />
       <Header>
         <DashboardTopNav links={topNav} />
         <div className="ml-auto flex items-center space-x-4">

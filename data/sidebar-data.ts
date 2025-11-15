@@ -22,12 +22,6 @@ import {
 import { AudioWaveform, Command, GalleryVerticalEnd } from "lucide-react";
 
 export const sidebarData = {
-  user: {
-    id: "1",
-    name: "Admin User",
-    email: "admin@example.com",
-    avatar: "",
-  },
   teams: [
     {
       name: "Shadcn Admin",
