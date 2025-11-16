@@ -19,11 +19,7 @@ interface DashboardTopNavProps extends React.HTMLAttributes<HTMLElement> {
   }[];
 }
 
-export function DashboardTopNav({
-  className,
-  links,
-  ...props
-}: DashboardTopNavProps) {
+export function DashboardTopNav({ className, links, ...props }: DashboardTopNavProps) {
   return (
     <>
       <div className="md:hidden">
@@ -51,10 +47,7 @@ export function DashboardTopNav({
       </div>
 
       <nav
-        className={cn(
-          "hidden items-center space-x-4 md:flex lg:space-x-6",
-          className,
-        )}
+        className={cn("hidden items-center space-x-4 md:flex lg:space-x-6", className)}
         {...props}
       >
         {links.map(({ title, href, isActive, disabled }) => (

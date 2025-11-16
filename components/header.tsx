@@ -10,12 +10,7 @@ interface HeaderProps extends HTMLAttributes<HTMLElement> {
   ref?: Ref<HTMLElement>;
 }
 
-export const Header = ({
-  className,
-  fixed,
-  children,
-  ...props
-}: HeaderProps) => {
+export const Header = ({ className, fixed, children, ...props }: HeaderProps) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
@@ -36,7 +31,7 @@ export const Header = ({
         "bg-background flex h-16 items-center gap-3 p-4 sm:gap-4",
         fixed && "header-fixed peer/header fixed z-50 w-[inherit] rounded-md",
         offset > 10 && fixed ? "shadow-sm" : "shadow-none",
-        className,
+        className
       )}
       {...props}
     >
