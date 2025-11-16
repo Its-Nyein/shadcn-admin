@@ -5,6 +5,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { randomUUID } from "crypto";
 
 export const auth = betterAuth({
+  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL,
   database: drizzleAdapter(db, {
     provider: "pg",
     schema,
