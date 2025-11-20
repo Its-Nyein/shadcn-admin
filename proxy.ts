@@ -12,7 +12,8 @@ export async function proxy(request: NextRequest) {
   // Public routes that don't require authentication
   const publicRoutes = ["/sign-in", "/api/auth"];
   const isPublicRoute =
-    pathname === "/" || publicRoutes.some((route) => pathname.startsWith(route));
+    pathname === "/" ||
+    publicRoutes.some((route) => pathname.startsWith(route));
 
   // If accessing a protected route without a session, redirect to sign-in
   if (!isPublicRoute && !session) {
@@ -46,4 +47,3 @@ export const config = {
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
-

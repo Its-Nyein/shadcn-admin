@@ -26,9 +26,7 @@ function SignInFallback() {
             <h1 className="text-2xl font-semibold tracking-tight">
               Welcome Back
             </h1>
-            <p className="text-muted-foreground text-sm">
-              Loading...
-            </p>
+            <p className="text-muted-foreground text-sm">Loading...</p>
           </div>
         </div>
       </div>

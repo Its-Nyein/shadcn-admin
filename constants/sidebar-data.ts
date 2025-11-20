@@ -2,6 +2,7 @@ import {
   IconBarrierBlock,
   IconBrowserCheck,
   IconBug,
+  IconChartBar,
   IconChecklist,
   IconError404,
   IconHelp,
@@ -45,8 +46,13 @@ export const sidebarData = {
       items: [
         {
           title: "Dashboard",
-          url: "/",
+          url: "/dashboard",
           icon: IconLayoutDashboard,
+        },
+        {
+          title: "Business Dashboard",
+          url: "/dashboard2",
+          icon: IconChartBar,
         },
         {
           title: "Tasks",
