@@ -112,27 +112,27 @@ export const sidebarData = {
           items: [
             {
               title: "Unauthorized",
-              url: "/errors/unauthorized",
+              url: "/unauthorized",
               icon: IconLock,
             },
             {
               title: "Forbidden",
-              url: "/errors/forbidden",
+              url: "/forbidden",
               icon: IconUserOff,
             },
             {
               title: "Not Found",
-              url: "/errors/not-found",
+              url: "/not-found",
               icon: IconError404,
             },
             {
               title: "Internal Server Error",
-              url: "/errors/internal-server-error",
+              url: "/internal-server-error",
               icon: IconServerOff,
             },
             {
               title: "Maintenance Error",
-              url: "/errors/maintenance-error",
+              url: "/maintenance-error",
               icon: IconBarrierBlock,
             },
           ],
