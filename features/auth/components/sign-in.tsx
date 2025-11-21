@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { useAuth } from "@/contexts/auth-context";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -68,48 +69,104 @@ export default function SignIn() {
   };
 
   return (
-    <div className="relative container grid min-h-screen flex-col items-center justify-center px-4 lg:max-w-none lg:grid-cols-2 lg:px-0">
-      {/* Left Column - Branding */}
-      <div className="bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r">
-        <div className="absolute inset-0 bg-zinc-900" />
-        <div className="relative z-20 flex h-full items-center justify-center text-lg font-medium">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full text-lg font-semibold">
+    <div className="relative grid min-h-screen w-full lg:grid-cols-2">
+      {/* Left Column - Animated Background */}
+      <div className="relative hidden overflow-hidden bg-zinc-950 lg:block">
+        <div className="absolute inset-0 bg-linear-to-br from-violet-600/20 via-transparent to-cyan-600/20" />
+        <div className="absolute inset-0 bg-linear-to-tr from-fuchsia-600/10 via-transparent to-amber-600/10 animate-pulse" />
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)`,
+            backgroundSize: "50px 50px",
+          }}
+        />
+
+        <div className="absolute top-1/4 left-1/4 h-72 w-72 rounded-full bg-linear-to-r from-violet-500 to-fuchsia-500 opacity-20 blur-3xl animate-[pulse_4s_ease-in-out_infinite]" />
+        <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-linear-to-r from-cyan-500 to-blue-500 opacity-20 blur-3xl animate-[pulse_5s_ease-in-out_infinite_1s]" />
+        <div className="absolute top-1/2 right-1/3 h-64 w-64 rounded-full bg-linear-to-r from-amber-500 to-orange-500 opacity-10 blur-3xl animate-[pulse_6s_ease-in-out_infinite_2s]" />
+
+        <div className="absolute top-20 right-20 h-20 w-20 rotate-45 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm animate-[bounce_6s_ease-in-out_infinite]" />
+        <div className="absolute bottom-32 left-20 h-16 w-16 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm animate-[bounce_5s_ease-in-out_infinite_1s]" />
+        <div className="absolute top-1/2 left-1/4 h-12 w-12 rotate-12 rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm animate-[bounce_7s_ease-in-out_infinite_0.5s]" />
+
+        <div className="relative z-10 flex h-full flex-col justify-between p-12">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-linear-to-br from-violet-500 to-fuchsia-500 text-lg font-bold text-white shadow-lg shadow-violet-500/25 transition-transform group-hover:scale-105">
               SA
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-semibold">Shadcn Admin</span>
-              <span className="text-muted-foreground text-sm">
-                Shadcn Admin Dashboard
+              <span className="text-xl font-semibold text-white">
+                Shadcn Admin
               </span>
+              <span className="text-sm text-zinc-400">Admin Dashboard</span>
             </div>
           </Link>
+
+          <div className="flex flex-col items-center justify-center space-y-6">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+              <div className="flex items-center gap-4">
+                <div className="flex -space-x-3">
+                  {[...Array(4)].map((_, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        "h-10 w-10 rounded-full border-2 border-zinc-950 bg-linear-to-br",
+                        i === 0 && "from-violet-400 to-violet-600",
+                        i === 1 && "from-cyan-400 to-cyan-600",
+                        i === 2 && "from-fuchsia-400 to-fuchsia-600",
+                        i === 3 && "from-amber-400 to-amber-600",
+                      )}
+                    />
+                  ))}
+                </div>
+                <div className="text-white">
+                  <p className="font-medium">Join 10,000+ users</p>
+                  <p className="text-sm text-zinc-400">
+                    Building amazing dashboards
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="max-w-md space-y-4">
+            <blockquote className="text-lg italic text-zinc-300">
+              &ldquo;This dashboard has transformed how we manage our business.
+              The interface is beautiful and intuitive.&rdquo;
+            </blockquote>
+          </div>
         </div>
       </div>
 
       {/* Right Column - Sign In Form */}
-      <div className="lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Welcome Back
-            </h1>
-            <p className="text-muted-foreground text-sm">
-              Enter your credentials to sign in to your account
+      <div className="flex items-center justify-center bg-background p-6 lg:p-12">
+        <div className="mx-auto w-full max-w-[400px] space-y-8">
+          <div className="flex items-center justify-center gap-3 lg:hidden">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-violet-500 to-fuchsia-500 text-sm font-bold text-white">
+              SA
+            </div>
+            <span className="text-lg font-semibold">Shadcn Admin</span>
+          </div>
+
+          <div className="space-y-2 text-center lg:text-left">
+            <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
+            <p className="text-muted-foreground">
+              Sign in to your account to continue
             </p>
           </div>
 
-          <div className="w-full space-y-4 sm:space-y-6">
-            <div className="space-y-2 sm:space-y-3">
-              {/* Google */}
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-3">
               <Button
                 variant="outline"
-                className="w-full h-10 sm:h-11"
+                className="h-12 transition-all hover:bg-muted/50 hover:border-muted-foreground/20"
                 onClick={() => handleSocialSignIn("google")}
                 disabled={isSocialLoading !== null || isLoading}
                 type="button"
               >
-                <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+                <svg className="h-5 w-5" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                     fill="#4285F4"
@@ -127,19 +184,17 @@ export default function SignIn() {
                     fill="#EA4335"
                   />
                 </svg>
-                Continue with Google
               </Button>
 
-              {/* GitHub */}
               <Button
                 variant="outline"
-                className="w-full h-10 sm:h-11"
+                className="h-12 transition-all hover:bg-muted/50 hover:border-muted-foreground/20"
                 onClick={() => handleSocialSignIn("github")}
                 disabled={isSocialLoading !== null || isLoading}
                 type="button"
               >
                 <svg
-                  className="mr-2 h-4 w-4"
+                  className="h-5 w-5"
                   viewBox="0 0 24 24"
                   fill="currentColor"
                 >
@@ -149,21 +204,18 @@ export default function SignIn() {
                     d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
                   />
                 </svg>
-                Continue with GitHub
               </Button>
             </div>
 
-            {/* Separator */}
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <Separator orientation="horizontal" />
+                <Separator />
               </div>
-              <span className="relative flex justify-center text-xs uppercase bg-background text-muted-foreground px-2">
-                Or continue with
+              <span className="relative mx-auto flex w-fit bg-background px-4 text-xs uppercase text-muted-foreground">
+                or continue with email
               </span>
             </div>
 
-            {/* Email/Password Form */}
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
@@ -178,9 +230,9 @@ export default function SignIn() {
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="admin@example.com"
+                          placeholder="name@example.com"
                           disabled={isLoading}
-                          className="h-10 sm:h-11"
+                          className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background"
                           {...field}
                         />
                       </FormControl>
@@ -194,13 +246,21 @@ export default function SignIn() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <div className="flex items-center justify-between">
+                        <FormLabel>Password</FormLabel>
+                        <Link
+                          href="/forgot-password"
+                          className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          Forgot password?
+                        </Link>
+                      </div>
                       <FormControl>
                         <Input
                           type="password"
-                          placeholder="Enter your password..."
+                          placeholder="Enter your password"
                           disabled={isLoading}
-                          className="h-10 sm:h-11"
+                          className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background"
                           {...field}
                         />
                       </FormControl>
@@ -210,11 +270,33 @@ export default function SignIn() {
                 />
 
                 <Button
-                  className="w-full h-10 sm:h-11"
+                  className="h-12 w-full bg-linear-to-r from-violet-600 to-fuchsia-600 font-medium text-white transition-all hover:from-violet-700 hover:to-fuchsia-700 hover:shadow-lg hover:shadow-violet-500/25"
                   type="submit"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing in..." : "Sign In"}
+                  {isLoading ? (
+                    <span className="flex items-center gap-2">
+                      <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                          fill="none"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        />
+                      </svg>
+                      Signing in...
+                    </span>
+                  ) : (
+                    "Sign in"
+                  )}
                 </Button>
               </form>
             </Form>
