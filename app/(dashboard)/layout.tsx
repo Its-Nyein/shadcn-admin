@@ -14,6 +14,7 @@ import {
 import { SidebarConfigProvider } from "@/contexts/sidebar-context";
 import { Settings } from "lucide-react";
 import * as React from "react";
+import { toast } from "sonner";
 
 export default function DashboardLayout({
   children,
@@ -26,6 +27,18 @@ export default function DashboardLayout({
   React.useEffect(() => {
     setMounted(true);
   }, []);
+
+  React.useEffect(() => {
+    if (
+      mounted &&
+      sessionStorage.getItem("social-sign-in-pending") === "true"
+    ) {
+      toast.success("Signed in successfully!", {
+        description: "Welcome back to your dashboard.",
+      });
+      sessionStorage.removeItem("social-sign-in-pending");
+    }
+  }, [mounted]);
 
   // Prevent hydration mismatch
   if (!mounted) {
