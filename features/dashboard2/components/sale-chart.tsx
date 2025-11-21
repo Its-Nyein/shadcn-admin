@@ -53,7 +53,7 @@ export function SalesChart() {
   const [timeRange, setTimeRange] = useState("12m");
 
   return (
-    <Card className="cursor-pointer">
+    <Card className="cursor-pointer bg-linear-to-br from-violet-500/5 via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow">
       <CardHeader className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 pb-2">
         <div>
           <CardTitle>Sales Performance</CardTitle>

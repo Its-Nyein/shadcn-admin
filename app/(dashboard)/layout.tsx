@@ -50,24 +50,32 @@ export default function DashboardLayout({
       <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-            <SidebarTrigger className="-ml-1" />
-            <div className="ml-auto flex items-center space-x-4">
+          <header className="sticky top-0 z-50 flex h-16 shrink-0 items-center gap-2 border-b border-border/50 bg-background/80 px-4 backdrop-blur-xl">
+            <SidebarTrigger className="-ml-1 text-muted-foreground hover:text-foreground transition-colors" />
+
+            <div className="ml-auto flex items-center gap-1">
               <ToggleTheme />
+
               <Button
-                variant="outline"
+                variant="ghost"
                 size="icon"
                 onClick={() => setThemeCustomizerOpen(true)}
-                className="cursor-pointer"
+                className="text-muted-foreground hover:text-foreground"
               >
                 <Settings className="h-[1.2rem] w-[1.2rem]" />
                 <span className="sr-only">Open theme customizer</span>
               </Button>
+
               <ThemeCustomizer
                 open={themeCustomizerOpen}
                 onOpenChange={setThemeCustomizerOpen}
               />
-              <Separator orientation="vertical" className="h-6! w-px!" />
+
+              <Separator
+                orientation="vertical"
+                className="mx-2 h-6 bg-border/50"
+              />
+
               <ProfileDropdown />
             </div>
           </header>

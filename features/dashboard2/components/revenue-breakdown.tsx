@@ -87,7 +87,10 @@ export function RevenueBreakdown() {
   );
 
   return (
-    <Card data-chart={id} className="flex flex-col cursor-pointer">
+    <Card
+      data-chart={id}
+      className="flex flex-col cursor-pointer bg-linear-to-br from-fuchsia-500/5 via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow"
+    >
       <ChartStyle id={id} config={chartConfig} />
       <CardHeader className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 pb-2">
         <div>

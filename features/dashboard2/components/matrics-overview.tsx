@@ -63,27 +63,43 @@ const metrics = [
 
 export function MetricsOverview() {
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-linear-to-t *:data-[slot=card]:shadow-xs grid gap-4 sm:grid-cols-2 @5xl:grid-cols-4">
-      {metrics.map((metric) => {
+    <div className="grid gap-4 sm:grid-cols-2 @5xl:grid-cols-4">
+      {metrics.map((metric, index) => {
         const TrendIcon = metric.trend === "up" ? TrendingUp : TrendingDown;
+        const isUp = metric.trend === "up";
+        const gradientFrom =
+          index % 2 === 0 ? "from-violet-500/5" : "from-fuchsia-500/5";
 
         return (
-          <Card key={metric.title} className=" cursor-pointer">
+          <Card
+            key={metric.title}
+            className={`@container/card cursor-pointer bg-linear-to-br ${gradientFrom} via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow`}
+          >
             <CardHeader>
               <CardDescription>{metric.title}</CardDescription>
               <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
                 {metric.value}
               </CardTitle>
               <CardAction>
-                <Badge variant="outline">
-                  <TrendIcon className="h-4 w-4" />
+                <Badge
+                  variant="outline"
+                  className={
+                    isUp
+                      ? "border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400"
+                      : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400"
+                  }
+                >
+                  <TrendIcon className="size-3" />
                   {metric.change}
                 </Badge>
               </CardAction>
             </CardHeader>
             <CardFooter className="flex-col items-start gap-1.5 text-sm">
               <div className="line-clamp-1 flex gap-2 font-medium">
-                {metric.footer} <TrendIcon className="size-4" />
+                {metric.footer}{" "}
+                <TrendIcon
+                  className={`size-4 ${isUp ? "text-green-500" : "text-red-500"}`}
+                />
               </div>
               <div className="text-muted-foreground">{metric.subfooter}</div>
             </CardFooter>

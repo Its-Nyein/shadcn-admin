@@ -162,7 +162,7 @@ export function ChartAreaInteractive() {
   });
 
   return (
-    <Card className="@container/card">
+    <Card className="@container/card bg-linear-to-br from-violet-500/5 via-background to-background border-border/50 shadow-sm">
       <CardHeader>
         <CardTitle>Total Visitors</CardTitle>
         <CardDescription>

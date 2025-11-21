@@ -137,7 +137,7 @@ export function CustomerInsights() {
   const [activeTab, setActiveTab] = useState("growth");
 
   return (
-    <Card className="h-fit">
+    <Card className="h-fit bg-linear-to-br from-violet-500/5 via-background to-background border-border/50 shadow-sm">
       <CardHeader>
         <CardTitle>Customer Insights</CardTitle>
         <CardDescription>Growth trends and demographics</CardDescription>
