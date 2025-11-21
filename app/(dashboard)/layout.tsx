@@ -73,7 +73,7 @@ export default function DashboardLayout({
 
               <Separator
                 orientation="vertical"
-                className="mx-2 h-6 bg-border/50"
+                className="mx-2 h-6! bg-border/50"
               />
 
               <ProfileDropdown />

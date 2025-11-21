@@ -230,7 +230,7 @@ export default function SignIn() {
                       <FormControl>
                         <Input
                           type="email"
-                          placeholder="name@example.com"
+                          placeholder="admin@example.com"
                           disabled={isLoading}
                           className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background"
                           {...field}
@@ -258,7 +258,7 @@ export default function SignIn() {
                       <FormControl>
                         <Input
                           type="password"
-                          placeholder="Enter your password"
+                          placeholder="Admin123!@#"
                           disabled={isLoading}
                           className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background"
                           {...field}
