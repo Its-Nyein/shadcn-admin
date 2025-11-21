@@ -85,24 +85,36 @@ export const sidebarData = {
           icon: IconLockAccess,
           items: [
             {
-              title: "Sign In",
+              title: "Sign In 1",
               url: "/sign-in",
             },
             {
-              title: "Sign In (2 Col)",
-              url: "/sign-in-2",
+              title: "Sign In (2 Col) 1",
+              url: "/sign-in-2col-1",
             },
             {
-              title: "Sign Up",
-              url: "/sign-up",
+              title: "Sign In (2 Col) 2",
+              url: "/sign-in-2col-2",
             },
             {
-              title: "Forgot Password",
-              url: "/forgot-password",
+              title: "Sign Up 1",
+              url: "/sign-up-1",
             },
             {
-              title: "OTP",
-              url: "/otp",
+              title: "Sign Up 2",
+              url: "/sign-up-2",
+            },
+            {
+              title: "Sign Up 3",
+              url: "/sign-up-3",
+            },
+            {
+              title: "Reset Password 1",
+              url: "/reset-password-1",
+            },
+            {
+              title: "Reset Password 2",
+              url: "/reset-password-2",
             },
           ],
         },
