@@ -97,12 +97,8 @@ export const sidebarData = {
               url: "/sign-up-1",
             },
             {
-              title: "Sign Up 2",
+              title: "Sign Up 2 (2 Col)",
               url: "/sign-up-2",
-            },
-            {
-              title: "Sign Up 3",
-              url: "/sign-up-3",
             },
             {
               title: "Reset Password 1",

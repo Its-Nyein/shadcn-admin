@@ -7,7 +7,7 @@ Production-ready admin dashboard powered by Next.js, Shadcn/UI and Better-Auth. 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/shadcn-admin.git
+git clone https://github.com/Its-Nyein/shadcn-admin.git
 cd shadcn-admin
 ```
 

@@ -26,44 +26,48 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { SignIn1Schema, signIn1Schema } from "../utils/sign-in-1-schema";
+import { SignUp1Schema, signUp1Schema } from "../utils/sign-up-1-schema";
 
-export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
+export function SignUp1({ className, ...props }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSocialLoading, setIsSocialLoading] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const form = useForm<SignIn1Schema>({
-    resolver: zodResolver(signIn1Schema),
+  const form = useForm<SignUp1Schema>({
+    resolver: zodResolver(signUp1Schema),
     defaultValues: {
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
-      rememberMe: false,
+      confirmPassword: "",
+      terms: false,
     },
   });
 
-  const handleSocialSignIn = async (provider: "google" | "github") => {
+  const handleSocialSignUp = async (provider: "google" | "github") => {
     try {
       setIsSocialLoading(provider);
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      toast.success(`Signed in with ${provider} successfully!`);
+      toast.success(`Signed up with ${provider} successfully!`);
       window.location.href = "/dashboard";
     } catch {
-      toast.error(`Failed to sign in with ${provider}. Please try again.`);
+      toast.error(`Failed to sign up with ${provider}. Please try again.`);
     } finally {
       setIsSocialLoading(null);
     }
   };
 
-  const onSubmit = async (data: SignIn1Schema) => {
+  const onSubmit = async (data: SignUp1Schema) => {
     try {
       setIsLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Login data:", data);
-      toast.success("Signed in successfully!");
+      console.log("Sign up data:", data);
+      toast.success("Account created successfully!");
       window.location.href = "/dashboard";
     } catch {
-      toast.error("Failed to sign in. Please check your credentials.");
+      toast.error("Failed to create account. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -85,9 +89,11 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
                 SA
               </div>
             </div>
-            <CardTitle className="text-2xl text-center">Welcome back</CardTitle>
+            <CardTitle className="text-2xl text-center">
+              Create an account
+            </CardTitle>
             <CardDescription className="text-center">
-              Enter your credentials to access your account
+              Enter your information to get started
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -96,7 +102,7 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
               <Button
                 variant="outline"
                 className="h-11"
-                onClick={() => handleSocialSignIn("google")}
+                onClick={() => handleSocialSignUp("google")}
                 disabled={isSocialLoading !== null || isLoading}
                 type="button"
               >
@@ -143,7 +149,7 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
               <Button
                 variant="outline"
                 className="h-11"
-                onClick={() => handleSocialSignIn("github")}
+                onClick={() => handleSocialSignUp("github")}
                 disabled={isSocialLoading !== null || isLoading}
                 type="button"
               >
@@ -195,6 +201,45 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-4"
               >
+                <div className="grid grid-cols-2 gap-3">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="John"
+                            disabled={isLoading}
+                            className="h-11 bg-muted/30 border-muted-foreground/20"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Doe"
+                            disabled={isLoading}
+                            className="h-11 bg-muted/30 border-muted-foreground/20"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
                 <FormField
                   control={form.control}
                   name="email"
@@ -214,25 +259,18 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="flex items-center justify-between">
-                        <FormLabel>Password</FormLabel>
-                        <Link
-                          href="/reset-password-1"
-                          className="text-xs text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          Forgot password?
-                        </Link>
-                      </div>
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
                         <div className="relative">
                           <Input
                             type={showPassword ? "text" : "password"}
-                            placeholder="Enter your password"
+                            placeholder="Create a password"
                             disabled={isLoading}
                             className="h-11 bg-muted/30 border-muted-foreground/20 pr-10"
                             {...field}
@@ -257,18 +295,67 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
 
                 <FormField
                   control={form.control}
-                  name="rememberMe"
+                  name="confirmPassword"
                   render={({ field }) => (
-                    <FormItem className="flex items-center gap-2 space-y-0">
+                    <FormItem>
+                      <FormLabel>Confirm Password</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input
+                            type={showConfirmPassword ? "text" : "password"}
+                            placeholder="Confirm your password"
+                            disabled={isLoading}
+                            className="h-11 bg-muted/30 border-muted-foreground/20 pr-10"
+                            {...field}
+                          />
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setShowConfirmPassword(!showConfirmPassword)
+                            }
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                          >
+                            {showConfirmPassword ? (
+                              <EyeOff className="h-4 w-4" />
+                            ) : (
+                              <Eye className="h-4 w-4" />
+                            )}
+                          </button>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                    <FormItem className="flex items-start gap-2 space-y-0">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={field.onChange}
                           disabled={isLoading}
+                          className="mt-0.5"
                         />
                       </FormControl>
                       <FormLabel className="text-sm font-normal text-muted-foreground cursor-pointer">
-                        Remember me for 30 days
+                        I agree to the{" "}
+                        <Link
+                          href="#"
+                          className="text-violet-500 hover:text-violet-600"
+                        >
+                          Terms of Service
+                        </Link>{" "}
+                        and{" "}
+                        <Link
+                          href="#"
+                          className="text-violet-500 hover:text-violet-600"
+                        >
+                          Privacy Policy
+                        </Link>
                       </FormLabel>
                     </FormItem>
                   )}
@@ -297,22 +384,22 @@ export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         />
                       </svg>
-                      Signing in...
+                      Creating account...
                     </span>
                   ) : (
-                    "Sign in"
+                    "Create account"
                   )}
                 </Button>
 
                 <div className="text-center text-sm">
                   <span className="text-muted-foreground">
-                    Don&apos;t have an account?{" "}
+                    Already have an account?{" "}
                   </span>
                   <Link
-                    href="/sign-up-1"
+                    href="/sign-in-1"
                     className="text-violet-500 hover:text-violet-600 font-medium transition-colors"
                   >
-                    Sign up
+                    Sign in
                   </Link>
                 </div>
               </form>
