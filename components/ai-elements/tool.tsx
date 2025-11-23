@@ -20,6 +20,13 @@ import type { ComponentProps, ReactNode } from "react";
 import { isValidElement } from "react";
 import { CodeBlock } from "./code-block";
 
+// Extended state type to include approval states (not in current ai SDK but may be added)
+type ToolState =
+  | ToolUIPart["state"]
+  | "approval-requested"
+  | "approval-responded"
+  | "output-denied";
+
 export type ToolProps = ComponentProps<typeof Collapsible>;
 
 export const Tool = ({ className, ...props }: ToolProps) => (
@@ -32,12 +39,12 @@ export const Tool = ({ className, ...props }: ToolProps) => (
 export type ToolHeaderProps = {
   title?: string;
   type: ToolUIPart["type"];
-  state: ToolUIPart["state"];
+  state: ToolState;
   className?: string;
 };
 
-const getStatusBadge = (status: ToolUIPart["state"]) => {
-  const labels: Record<ToolUIPart["state"], string> = {
+const getStatusBadge = (status: ToolState) => {
+  const labels: Record<ToolState, string> = {
     "input-streaming": "Pending",
     "input-available": "Running",
     "approval-requested": "Awaiting Approval",
@@ -47,7 +54,7 @@ const getStatusBadge = (status: ToolUIPart["state"]) => {
     "output-denied": "Denied",
   };
 
-  const icons: Record<ToolUIPart["state"], ReactNode> = {
+  const icons: Record<ToolState, ReactNode> = {
     "input-streaming": <CircleIcon className="size-4" />,
     "input-available": <ClockIcon className="size-4 animate-pulse" />,
     "approval-requested": <ClockIcon className="size-4 text-yellow-600" />,
@@ -75,7 +82,7 @@ export const ToolHeader = ({
   <CollapsibleTrigger
     className={cn(
       "flex w-full items-center justify-between gap-4 p-3",
-      className
+      className,
     )}
     {...props}
   >
@@ -96,7 +103,7 @@ export const ToolContent = ({ className, ...props }: ToolContentProps) => (
   <CollapsibleContent
     className={cn(
       "data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-top-2 data-[state=open]:slide-in-from-top-2 text-popover-foreground outline-none data-[state=closed]:animate-out data-[state=open]:animate-in",
-      className
+      className,
     )}
     {...props}
   />
@@ -152,7 +159,7 @@ export const ToolOutput = ({
           "overflow-x-auto rounded-md text-xs [&_table]:w-full",
           errorText
             ? "bg-destructive/10 text-destructive"
-            : "bg-muted/50 text-foreground"
+            : "bg-muted/50 text-foreground",
         )}
       >
         {errorText && <div>{errorText}</div>}

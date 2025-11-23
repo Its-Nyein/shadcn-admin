@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { ToolUIPart } from "ai";
 import {
-  type ComponentProps,
   createContext,
-  type ReactNode,
   useContext,
+  type ComponentProps,
+  type ReactNode,
 } from "react";
 
 type ToolUIPartApproval =
@@ -39,13 +39,20 @@ type ToolUIPartApproval =
     }
   | undefined;
 
+// Extended state type to include approval states (not in current ai SDK but may be added)
+type ConfirmationState =
+  | ToolUIPart["state"]
+  | "approval-requested"
+  | "approval-responded"
+  | "output-denied";
+
 type ConfirmationContextValue = {
   approval: ToolUIPartApproval;
-  state: ToolUIPart["state"];
+  state: ConfirmationState;
 };
 
 const ConfirmationContext = createContext<ConfirmationContextValue | null>(
-  null
+  null,
 );
 
 const useConfirmation = () => {
@@ -60,7 +67,7 @@ const useConfirmation = () => {
 
 export type ConfirmationProps = ComponentProps<typeof Alert> & {
   approval?: ToolUIPartApproval;
-  state: ToolUIPart["state"];
+  state: ConfirmationState;
 };
 
 export const Confirmation = ({
