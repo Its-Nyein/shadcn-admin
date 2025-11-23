@@ -1,0 +1,282 @@
+[
+  {
+    "id": "TASK-1001",
+    "title": "Implement user authentication with Better Auth",
+    "status": "done",
+    "label": "feature",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1002",
+    "title": "Design dashboard layout with sidebar navigation",
+    "status": "done",
+    "label": "feature",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1003",
+    "title": "Create reusable data table component",
+    "status": "in progress",
+    "label": "feature",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1004",
+    "title": "Add dark mode support using next-themes",
+    "status": "done",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1005",
+    "title": "Fix mobile responsive issues on sign-in page",
+    "status": "todo",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1006",
+    "title": "Build user settings preferences panel",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1007",
+    "title": "Implement task filtering by status and priority",
+    "status": "in progress",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1008",
+    "title": "Add form validation using Zod schemas",
+    "status": "done",
+    "label": "feature",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1009",
+    "title": "Create user profile settings page",
+    "status": "todo",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1010",
+    "title": "Fix dropdown menu positioning on small screens",
+    "status": "todo",
+    "label": "bug",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1011",
+    "title": "Add toast notifications for user actions",
+    "status": "done",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1012",
+    "title": "Fix table row selection not persisting",
+    "status": "in progress",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1013",
+    "title": "Implement OAuth providers (Google, GitHub)",
+    "status": "done",
+    "label": "feature",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1014",
+    "title": "Add loading states for async operations",
+    "status": "todo",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1015",
+    "title": "Fix session persistence after page refresh",
+    "status": "done",
+    "label": "bug",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1016",
+    "title": "Create error boundary components",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1017",
+    "title": "Add keyboard shortcuts for common actions",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1018",
+    "title": "Implement pagination for task list",
+    "status": "done",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1019",
+    "title": "Fix table column header alignment",
+    "status": "canceled",
+    "label": "bug",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1020",
+    "title": "Add search functionality to sidebar",
+    "status": "todo",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1021",
+    "title": "Create API rate limiting middleware",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1022",
+    "title": "Fix button focus ring not visible in dark mode",
+    "status": "backlog",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1023",
+    "title": "Implement bulk task actions (delete, update)",
+    "status": "todo",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1024",
+    "title": "Fix chart rendering on dashboard",
+    "status": "in progress",
+    "label": "bug",
+    "priority": "high"
+  },
+  {
+    "id": "TASK-1025",
+    "title": "Add export to CSV functionality",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1026",
+    "title": "Create onboarding flow for new users",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1027",
+    "title": "Fix password visibility toggle accessibility",
+    "status": "done",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1028",
+    "title": "Add breadcrumb navigation component",
+    "status": "done",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1029",
+    "title": "Fix modal not closing on escape key",
+    "status": "todo",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1030",
+    "title": "Implement drag and drop for task reordering",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1031",
+    "title": "Add email verification flow",
+    "status": "canceled",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1032",
+    "title": "Fix sidebar collapse animation",
+    "status": "done",
+    "label": "bug",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1033",
+    "title": "Create notification center component",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1034",
+    "title": "Add i18n support for multiple languages",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1035",
+    "title": "Fix date picker timezone issues",
+    "status": "todo",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1036",
+    "title": "Implement real-time updates with WebSocket",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1037",
+    "title": "Fix input autofill background color in Chrome",
+    "status": "canceled",
+    "label": "bug",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1038",
+    "title": "Create dashboard analytics widgets",
+    "status": "backlog",
+    "label": "feature",
+    "priority": "low"
+  },
+  {
+    "id": "TASK-1039",
+    "title": "Fix form reset after successful submission",
+    "status": "done",
+    "label": "bug",
+    "priority": "medium"
+  },
+  {
+    "id": "TASK-1040",
+    "title": "Add role-based access control system",
+    "status": "todo",
+    "label": "feature",
+    "priority": "high"
+  }
+]
