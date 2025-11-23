@@ -3,23 +3,25 @@
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Calendar } from "@/features/calendar/components/calendar";
 import {
-  events,
-  eventDates,
   calendars,
+  eventDates,
+  events,
 } from "@/features/calendar/utils/calendar-data";
+import { cn } from "@/lib/utils";
 import {
+  ArrowUpRight,
   CalendarDays,
   Calendar as CalendarIcon,
   Clock,
+  TrendingDown,
+  TrendingUp,
   Users,
 } from "lucide-react";
 
@@ -31,36 +33,34 @@ export default function CalendarPage() {
     calendars: calendars.length,
   };
 
-  const upcomingCount = events.filter((e) => e.date >= new Date()).length;
-
-  const cards = [
+  const performanceMetrics = [
     {
       title: "Total Events",
-      value: stats.total.toString(),
-      change: `${upcomingCount} upcoming`,
+      current: stats.total.toString(),
+      previous: "10",
+      growth: 40.0,
       icon: CalendarDays,
-      gradient: "from-violet-500/5",
     },
     {
       title: "Meetings",
-      value: stats.meetings.toString(),
-      change: "Scheduled",
+      current: stats.meetings.toString(),
+      previous: "4",
+      growth: 25.0,
       icon: Users,
-      gradient: "from-blue-500/5",
     },
     {
       title: "Tasks",
-      value: stats.tasks.toString(),
-      change: "To complete",
+      current: stats.tasks.toString(),
+      previous: "3",
+      growth: 66.7,
       icon: Clock,
-      gradient: "from-amber-500/5",
     },
     {
       title: "Calendars",
-      value: stats.calendars.toString(),
-      change: "Active",
+      current: stats.calendars.toString(),
+      previous: "3",
+      growth: 66.7,
       icon: CalendarIcon,
-      gradient: "from-fuchsia-500/5",
     },
   ];
 
@@ -77,41 +77,50 @@ export default function CalendarPage() {
 
       <div className="@container/main px-4 lg:px-6 space-y-6">
         {/* Stats Cards */}
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {cards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <Card
-                key={card.title}
-                className={`@container/card bg-linear-to-br ${card.gradient} via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow`}
-              >
-                <CardHeader>
-                  <CardDescription>{card.title}</CardDescription>
-                  <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-                    {card.value}
-                  </CardTitle>
-                  <CardAction>
-                    <Badge
-                      variant="outline"
-                      className="border-violet-500/30 bg-violet-500/10 text-violet-600 dark:text-violet-400"
-                    >
-                      <Icon className="mr-1 size-3" />
-                      {card.change}
-                    </Badge>
-                  </CardAction>
-                </CardHeader>
-                <CardFooter className="flex-col items-start gap-1.5 text-sm">
-                  <div className="line-clamp-1 flex gap-2 font-medium text-muted-foreground">
-                    Track your schedule
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {performanceMetrics.map((metric, index) => (
+            <Card key={index} className="border">
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <metric.icon className="text-muted-foreground size-6" />
+                  <Badge
+                    variant="outline"
+                    className={cn(
+                      metric.growth >= 0
+                        ? "border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950/20 dark:text-green-400"
+                        : "border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950/20 dark:text-red-400",
+                    )}
+                  >
+                    {metric.growth >= 0 ? (
+                      <>
+                        <TrendingUp className="me-1 size-3" />+{metric.growth}%
+                      </>
+                    ) : (
+                      <>
+                        <TrendingDown className="me-1 size-3" />
+                        {metric.growth}%
+                      </>
+                    )}
+                  </Badge>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-muted-foreground text-sm font-medium">
+                    {metric.title}
+                  </p>
+                  <div className="text-2xl font-bold">{metric.current}</div>
+                  <div className="text-muted-foreground flex items-center gap-2 text-sm">
+                    <span>from {metric.previous}</span>
+                    <ArrowUpRight className="size-3" />
                   </div>
-                </CardFooter>
-              </Card>
-            );
-          })}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Calendar Card */}
-        <Card className="border-border/50 shadow-sm overflow-hidden">
+        <Card className="border overflow-hidden">
           <CardHeader>
             <CardTitle>Schedule</CardTitle>
             <CardDescription>

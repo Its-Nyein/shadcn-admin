@@ -3,10 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -14,7 +12,15 @@ import tasksData from "@/constants/tasks.json";
 import { columns } from "@/features/tasks/components/columns";
 import { DataTable } from "@/features/tasks/components/data-table";
 import type { Task } from "@/features/tasks/utils/schema";
-import { CheckCircle, Circle, Clock, TrendingUp } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  ArrowUpRight,
+  CheckCircle,
+  Circle,
+  Clock,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
 import { useState } from "react";
 
 export default function TasksPage() {
@@ -33,34 +39,34 @@ export default function TasksPage() {
 
   const completionRate = Math.round((stats.done / stats.total) * 100);
 
-  const cards = [
+  const performanceMetrics = [
     {
       title: "Total Tasks",
-      value: stats.total.toString(),
-      change: `${stats.todo} pending`,
+      current: stats.total.toString(),
+      previous: "35",
+      growth: 14.3,
       icon: Circle,
-      gradient: "from-violet-500/5",
     },
     {
       title: "Completed",
-      value: stats.done.toString(),
-      change: `${completionRate}% done`,
+      current: stats.done.toString(),
+      previous: "12",
+      growth: completionRate > 50 ? 8.5 : -5.2,
       icon: CheckCircle,
-      gradient: "from-emerald-500/5",
     },
     {
       title: "In Progress",
-      value: stats.inProgress.toString(),
-      change: "Active now",
+      current: stats.inProgress.toString(),
+      previous: "8",
+      growth: 12.5,
       icon: Clock,
-      gradient: "from-amber-500/5",
     },
     {
       title: "Completion Rate",
-      value: `${completionRate}%`,
-      change: "+5% this week",
+      current: `${completionRate}%`,
+      previous: "45%",
+      growth: completionRate - 45,
       icon: TrendingUp,
-      gradient: "from-fuchsia-500/5",
     },
   ];
 
@@ -77,41 +83,50 @@ export default function TasksPage() {
 
       <div className="@container/main px-4 lg:px-6 space-y-6">
         {/* Stats Cards */}
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {cards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <Card
-                key={card.title}
-                className={`@container/card bg-linear-to-br ${card.gradient} via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow`}
-              >
-                <CardHeader>
-                  <CardDescription>{card.title}</CardDescription>
-                  <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-                    {card.value}
-                  </CardTitle>
-                  <CardAction>
-                    <Badge
-                      variant="outline"
-                      className="border-violet-500/30 bg-violet-500/10 text-violet-600 dark:text-violet-400"
-                    >
-                      <Icon className="mr-1 size-3" />
-                      {card.change}
-                    </Badge>
-                  </CardAction>
-                </CardHeader>
-                <CardFooter className="flex-col items-start gap-1.5 text-sm">
-                  <div className="line-clamp-1 flex gap-2 font-medium text-muted-foreground">
-                    Track your progress
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {performanceMetrics.map((metric, index) => (
+            <Card key={index} className="border">
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <metric.icon className="text-muted-foreground size-6" />
+                  <Badge
+                    variant="outline"
+                    className={cn(
+                      metric.growth >= 0
+                        ? "border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950/20 dark:text-green-400"
+                        : "border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950/20 dark:text-red-400",
+                    )}
+                  >
+                    {metric.growth >= 0 ? (
+                      <>
+                        <TrendingUp className="me-1 size-3" />+{metric.growth}%
+                      </>
+                    ) : (
+                      <>
+                        <TrendingDown className="me-1 size-3" />
+                        {metric.growth}%
+                      </>
+                    )}
+                  </Badge>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-muted-foreground text-sm font-medium">
+                    {metric.title}
+                  </p>
+                  <div className="text-2xl font-bold">{metric.current}</div>
+                  <div className="text-muted-foreground flex items-center gap-2 text-sm">
+                    <span>from {metric.previous}</span>
+                    <ArrowUpRight className="size-3" />
                   </div>
-                </CardFooter>
-              </Card>
-            );
-          })}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Data Table Card */}
-        <Card className="border-border/50 shadow-sm">
+        <Card className="border">
           <CardHeader>
             <CardTitle>All Tasks</CardTitle>
             <CardDescription>

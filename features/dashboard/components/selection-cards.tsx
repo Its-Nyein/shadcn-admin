@@ -1,95 +1,89 @@
-import { TrendingDown, TrendingUp } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import {
-  Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  Activity,
+  ArrowUpRight,
+  DollarSign,
+  TrendingDown,
+  TrendingUp,
+  UserPlus,
+  Users,
+} from "lucide-react";
 
-const cards = [
+const performanceMetrics = [
   {
     title: "Total Revenue",
-    value: "$1,250",
-    change: "+12.5%",
-    trend: "up" as const,
-    footer: "Trending up this month",
-    subfooter: "Visitors for the last 6 months",
+    current: "$1,250",
+    previous: "$1,112",
+    growth: 12.5,
+    icon: DollarSign,
   },
   {
     title: "New Customers",
-    value: "1,234",
-    change: "-20%",
-    trend: "down" as const,
-    footer: "Down 20% this period",
-    subfooter: "Acquisition needs attention",
+    current: "1,234",
+    previous: "1,542",
+    growth: -20.0,
+    icon: UserPlus,
   },
   {
     title: "Active Accounts",
-    value: "45,678",
-    change: "+12.5%",
-    trend: "up" as const,
-    footer: "Strong user retention",
-    subfooter: "Engagement exceed targets",
+    current: "45,678",
+    previous: "40,602",
+    growth: 12.5,
+    icon: Users,
   },
   {
     title: "Growth Rate",
-    value: "4.5%",
-    change: "+4.5%",
-    trend: "up" as const,
-    footer: "Steady performance increase",
-    subfooter: "Meets growth projections",
+    current: "4.5%",
+    previous: "4.3%",
+    growth: 4.5,
+    icon: Activity,
   },
 ];
 
 export function SectionCards() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      {cards.map((card, index) => {
-        const TrendIcon = card.trend === "up" ? TrendingUp : TrendingDown;
-        const isUp = card.trend === "up";
-        const gradientFrom =
-          index % 2 === 0 ? "from-violet-500/5" : "from-fuchsia-500/5";
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {performanceMetrics.map((metric, index) => (
+        <Card key={index} className="border">
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <metric.icon className="text-muted-foreground size-6" />
+              <Badge
+                variant="outline"
+                className={cn(
+                  metric.growth >= 0
+                    ? "border-green-200 bg-green-50 text-green-700 dark:border-green-800 dark:bg-green-950/20 dark:text-green-400"
+                    : "border-red-200 bg-red-50 text-red-700 dark:border-red-800 dark:bg-red-950/20 dark:text-red-400",
+                )}
+              >
+                {metric.growth >= 0 ? (
+                  <>
+                    <TrendingUp className="me-1 size-3" />+{metric.growth}%
+                  </>
+                ) : (
+                  <>
+                    <TrendingDown className="me-1 size-3" />
+                    {metric.growth}%
+                  </>
+                )}
+              </Badge>
+            </div>
 
-        return (
-          <Card
-            key={card.title}
-            className={`@container/card cursor-pointer bg-linear-to-br ${gradientFrom} via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow`}
-          >
-            <CardHeader>
-              <CardDescription>{card.title}</CardDescription>
-              <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-                {card.value}
-              </CardTitle>
-              <CardAction>
-                <Badge
-                  variant="outline"
-                  className={
-                    isUp
-                      ? "border-green-500/30 bg-green-500/10 text-green-600 dark:text-green-400"
-                      : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400"
-                  }
-                >
-                  <TrendIcon className="size-3" />
-                  {card.change}
-                </Badge>
-              </CardAction>
-            </CardHeader>
-            <CardFooter className="flex-col items-start gap-1.5 text-sm">
-              <div className="line-clamp-1 flex gap-2 font-medium">
-                {card.footer}{" "}
-                <TrendIcon
-                  className={`size-4 ${isUp ? "text-green-500" : "text-red-500"}`}
-                />
+            <div className="space-y-2">
+              <p className="text-muted-foreground text-sm font-medium">
+                {metric.title}
+              </p>
+              <div className="text-2xl font-bold">{metric.current}</div>
+              <div className="text-muted-foreground flex items-center gap-2 text-sm">
+                <span>from {metric.previous}</span>
+                <ArrowUpRight className="size-3" />
               </div>
-              <div className="text-muted-foreground">{card.subfooter}</div>
-            </CardFooter>
-          </Card>
-        );
-      })}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }

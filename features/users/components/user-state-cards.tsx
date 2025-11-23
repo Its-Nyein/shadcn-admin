@@ -1,52 +1,50 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import {
   ArrowUpRight,
-  BarChart3,
-  DollarSign,
-  ShoppingCart,
+  Clock5,
+  CreditCard,
   TrendingDown,
   TrendingUp,
+  UserCheck,
   Users,
 } from "lucide-react";
 
 const performanceMetrics = [
   {
-    title: "Total Revenue",
-    current: "$54,230",
-    previous: "$48,420",
-    growth: 12.0,
-    icon: DollarSign,
-  },
-  {
-    title: "Active Customers",
-    current: "2,350",
-    previous: "2,234",
-    growth: 5.2,
+    title: "Total Users",
+    current: "2,847",
+    previous: "2,156",
+    growth: 32.1,
     icon: Users,
   },
   {
-    title: "Total Orders",
-    current: "1,247",
-    previous: "1,274",
-    growth: -2.1,
-    icon: ShoppingCart,
+    title: "Paid Users",
+    current: "1,423",
+    previous: "1,089",
+    growth: 30.7,
+    icon: CreditCard,
   },
   {
-    title: "Conversion Rate",
-    current: "3.24%",
-    previous: "2.99%",
-    growth: 8.3,
-    icon: BarChart3,
+    title: "Active Users",
+    current: "2,156",
+    previous: "1,834",
+    growth: 17.6,
+    icon: UserCheck,
+  },
+  {
+    title: "Pending Users",
+    current: "234",
+    previous: "312",
+    growth: -25.0,
+    icon: Clock5,
   },
 ];
 
-export function MetricsOverview() {
+export function UserStateCards() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 @5xl:grid-cols-4">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {performanceMetrics.map((metric, index) => (
         <Card key={index} className="border">
           <CardContent className="space-y-4">
@@ -62,7 +60,9 @@ export function MetricsOverview() {
               >
                 {metric.growth >= 0 ? (
                   <>
-                    <TrendingUp className="me-1 size-3" />+{metric.growth}%
+                    <TrendingUp className="me-1 size-3" />
+                    {metric.growth >= 0 ? "+" : ""}
+                    {metric.growth}%
                   </>
                 ) : (
                   <>
