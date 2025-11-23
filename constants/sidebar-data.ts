@@ -1,10 +1,14 @@
 import {
   IconBarrierBlock,
+  IconBrain,
   IconBrowserCheck,
   IconBug,
   IconCalendar,
   IconChartBar,
   IconChecklist,
+  IconCoin,
+  IconColumns,
+  IconCreditCard,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
@@ -16,6 +20,7 @@ import {
   IconPalette,
   IconServerOff,
   IconSettings,
+  IconTable,
   IconTool,
   IconUserCog,
   IconUserOff,
@@ -86,6 +91,12 @@ export const sidebarData = {
           url: "/calendar",
           icon: IconCalendar,
         },
+        {
+          title: "AI Chat",
+          url: "/ai-chat",
+          icon: IconBrain,
+          badge: "Coming Soon",
+        },
       ],
     },
     {
@@ -118,6 +129,28 @@ export const sidebarData = {
             {
               title: "Reset Password 2",
               url: "/reset-password-2",
+            },
+          ],
+        },
+        {
+          title: "Pricing",
+          icon: IconCreditCard,
+          badge: "Coming Soon",
+          items: [
+            {
+              title: "Column Pricing",
+              url: "/pricing/column",
+              icon: IconColumns,
+            },
+            {
+              title: "Table Pricing",
+              url: "/pricing/table",
+              icon: IconTable,
+            },
+            {
+              title: "Single Pricing",
+              url: "/pricing/single",
+              icon: IconCoin,
             },
           ],
         },
