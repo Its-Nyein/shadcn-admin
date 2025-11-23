@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/components/coming-soon";
+import AiChat from "@/features/ai-chat/components/ai-chat";
 
 export default function AIChatPage() {
-  return <ComingSoon />;
+  return <AiChat />;
 }
