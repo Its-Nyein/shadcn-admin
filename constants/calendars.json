@@ -1,0 +1,37 @@
+[
+  {
+    "id": "development",
+    "name": "Development",
+    "color": "bg-violet-500",
+    "visible": true,
+    "type": "work"
+  },
+  {
+    "id": "design",
+    "name": "Design Reviews",
+    "color": "bg-pink-500",
+    "visible": true,
+    "type": "work"
+  },
+  {
+    "id": "meetings",
+    "name": "Team Meetings",
+    "color": "bg-blue-500",
+    "visible": true,
+    "type": "shared"
+  },
+  {
+    "id": "releases",
+    "name": "Releases",
+    "color": "bg-emerald-500",
+    "visible": true,
+    "type": "work"
+  },
+  {
+    "id": "personal",
+    "name": "Personal",
+    "color": "bg-amber-500",
+    "visible": true,
+    "type": "personal"
+  }
+]

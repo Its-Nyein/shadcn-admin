@@ -2,6 +2,7 @@ import {
   IconBarrierBlock,
   IconBrowserCheck,
   IconBug,
+  IconCalendar,
   IconChartBar,
   IconChecklist,
   IconError404,
@@ -42,7 +43,7 @@ export const sidebarData = {
   ],
   navGroups: [
     {
-      title: "General",
+      title: "Dashboard",
       items: [
         {
           title: "Dashboard",
@@ -54,10 +55,20 @@ export const sidebarData = {
           url: "/dashboard2",
           icon: IconChartBar,
         },
+      ],
+    },
+    {
+      title: "General",
+      items: [
         {
           title: "Tasks",
           url: "/tasks",
           icon: IconChecklist,
+        },
+        {
+          title: "Users",
+          url: "/users",
+          icon: IconUsers,
         },
         {
           title: "Apps",
@@ -71,9 +82,9 @@ export const sidebarData = {
           icon: IconMessages,
         },
         {
-          title: "Users",
-          url: "/users",
-          icon: IconUsers,
+          title: "Calendar",
+          url: "/calendar",
+          icon: IconCalendar,
         },
       ],
     },
