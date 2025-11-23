@@ -61,20 +61,37 @@ const durationOptions = [
   "15 min", "30 min", "45 min", "1 hour", "1.5 hours", "2 hours", "3 hours", "All day"
 ]
 
-export function EventForm({ event, open, onOpenChange, onSave, onDelete }: EventFormProps) {
-  const [formData, setFormData] = useState({
-    title: event?.title || "",
-    date: event?.date || new Date(),
-    time: event?.time || "9:00 AM",
-    duration: event?.duration || "1 hour",
-    type: event?.type || "meeting",
-    location: event?.location || "",
-    description: event?.description || "",
-    attendees: event?.attendees || [],
+function getInitialFormData(event?: CalendarEvent | null) {
+  if (event) {
+    return {
+      title: event.title,
+      date: event.date,
+      time: event.time,
+      duration: event.duration,
+      type: event.type,
+      location: event.location,
+      description: event.description || "",
+      attendees: event.attendees,
+      allDay: false,
+      reminder: true
+    }
+  }
+  return {
+    title: "",
+    date: new Date(),
+    time: "9:00 AM",
+    duration: "1 hour",
+    type: "meeting" as CalendarEvent["type"],
+    location: "",
+    description: "",
+    attendees: [] as string[],
     allDay: false,
     reminder: true
-  })
+  }
+}
 
+export function EventForm({ event, open, onOpenChange, onSave, onDelete }: EventFormProps) {
+  const [formData, setFormData] = useState(() => getInitialFormData(event))
   const [showCalendar, setShowCalendar] = useState(false)
   const [newAttendee, setNewAttendee] = useState("")
 
@@ -191,7 +208,7 @@ export function EventForm({ event, open, onOpenChange, onSave, onDelete }: Event
                         setShowCalendar(false)
                       }
                     }}
-                    initialFocus
+                    autoFocus
                   />
                 </PopoverContent>
               </Popover>
@@ -279,7 +296,7 @@ export function EventForm({ event, open, onOpenChange, onSave, onDelete }: Event
                 placeholder="Add attendee..."
                 value={newAttendee}
                 onChange={(e) => setNewAttendee(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && addAttendee()}
+                onKeyDown={(e) => e.key === "Enter" && addAttendee()}
               />
               <Button onClick={addAttendee} variant="outline" className="cursor-pointer">Add</Button>
             </div>

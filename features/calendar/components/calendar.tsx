@@ -79,6 +79,7 @@ export function Calendar({ events, eventDates }: CalendarProps) {
 
       {/* Event Form Dialog */}
       <EventForm
+        key={calendar.editingEvent?.id ?? "new"}
         event={calendar.editingEvent}
         open={calendar.showEventForm}
         onOpenChange={calendar.setShowEventForm}
