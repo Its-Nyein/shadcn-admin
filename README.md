@@ -2,6 +2,8 @@
 
 Production-ready admin dashboard powered by Next.js, Shadcn/UI and Better-Auth. Includes authentication flows, interactive charts, data tables, and a distinctive gradient-accented design system.
 
+<img width="1440" height="812" alt="Image" src="https://github.com/user-attachments/assets/63c9b66e-9b66-4a98-96b0-76a65d44e781" />
+
 ## Getting Started
 
 ### 1. Clone the repository
