@@ -1,3 +1,4 @@
+import type { SidebarData } from "@/lib/types";
 import {
   IconBarrierBlock,
   IconBrain,
@@ -27,7 +28,7 @@ import {
 } from "@tabler/icons-react";
 import { AudioWaveform, Command, GalleryVerticalEnd } from "lucide-react";
 
-export const sidebarData = {
+export const sidebarData: SidebarData = {
   teams: [
     {
       name: "Shadcn Admin",
@@ -130,7 +131,7 @@ export const sidebarData = {
         {
           title: "Pricing",
           icon: IconCreditCard,
-          badge: "Coming Soon",
+          // badge: "Coming Soon",
           items: [
             {
               title: "Column Pricing",
@@ -188,6 +189,7 @@ export const sidebarData = {
         {
           title: "Settings",
           icon: IconSettings,
+          badge: "Coming Soon",
           items: [
             {
               title: "Profile",
@@ -220,6 +222,7 @@ export const sidebarData = {
           title: "Help Center",
           url: "/help-center",
           icon: IconHelp,
+          badge: "Coming Soon",
         },
       ],
     },
