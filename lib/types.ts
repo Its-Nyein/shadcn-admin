@@ -17,6 +17,7 @@ interface Team {
 interface BaseNavItem {
   title: string;
   badge?: string;
+  badgeColor?: "violet" | "green";
   icon?: React.ElementType;
 }
 

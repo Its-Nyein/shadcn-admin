@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/components/coming-soon";
+import { TablePricing } from "@/features/pricing/table-pricing";
 
-export default function TablePricingPage() {
-  return <ComingSoon />;
+export default function SinglePricingPage() {
+  return <TablePricing />;
 }

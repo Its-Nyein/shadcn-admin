@@ -66,11 +66,26 @@ export function NavGroup({ title, items }: NavGroup) {
   );
 }
 
-const NavBadge = ({ children }: { children: ReactNode }) => (
-  <Badge className="ml-auto rounded-full bg-violet-500/10 px-2 py-0.5 text-[10px] font-medium text-violet-600 dark:text-violet-400 border-0">
-    {children}
-  </Badge>
-);
+const NavBadge = ({
+  children,
+  color = "violet",
+}: {
+  children: ReactNode;
+  color?: "violet" | "green";
+}) => {
+  const colorClasses =
+    color === "green"
+      ? "bg-green-500/10 text-green-600 dark:text-green-400"
+      : "bg-violet-500/10 text-violet-600 dark:text-violet-400";
+
+  return (
+    <Badge
+      className={`ml-auto rounded-full border-0 px-2 py-0.5 text-[10px] font-medium ${colorClasses}`}
+    >
+      {children}
+    </Badge>
+  );
+};
 
 const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
   const { setOpenMobile } = useSidebar();
@@ -103,7 +118,9 @@ const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
             />
           )}
           <span className="font-medium">{item.title}</span>
-          {item.badge && <NavBadge>{item.badge}</NavBadge>}
+          {item.badge && (
+            <NavBadge color={item.badgeColor}>{item.badge}</NavBadge>
+          )}
         </Link>
       </SidebarMenuButton>
     </SidebarMenuItem>
@@ -142,7 +159,9 @@ const SidebarMenuCollapsible = ({
               />
             )}
             <span className="font-medium">{item.title}</span>
-            {item.badge && <NavBadge>{item.badge}</NavBadge>}
+            {item.badge && (
+              <NavBadge color={item.badgeColor}>{item.badge}</NavBadge>
+            )}
             <ChevronRight className="ml-auto size-4 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
@@ -167,7 +186,11 @@ const SidebarMenuCollapsible = ({
                     >
                       {subItem.icon && <subItem.icon className="size-4" />}
                       <span>{subItem.title}</span>
-                      {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
+                      {subItem.badge && (
+                        <NavBadge color={subItem.badgeColor}>
+                          {subItem.badge}
+                        </NavBadge>
+                      )}
                     </Link>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
@@ -211,7 +234,9 @@ const SidebarMenuCollapsedDropdown = ({
               />
             )}
             <span className="font-medium">{item.title}</span>
-            {item.badge && <NavBadge>{item.badge}</NavBadge>}
+            {item.badge && (
+              <NavBadge color={item.badgeColor}>{item.badge}</NavBadge>
+            )}
             <ChevronRight className="ml-auto size-4 text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </DropdownMenuTrigger>

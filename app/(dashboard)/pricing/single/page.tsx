@@ -1,5 +1,5 @@
-import { ComingSoon } from "@/components/coming-soon";
+import { SinglePricing } from "@/features/pricing/single-pricing";
 
 export default function SinglePricingPage() {
-  return <ComingSoon />;
+  return <SinglePricing />;
 }
