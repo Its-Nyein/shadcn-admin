@@ -1,5 +1,6 @@
 import type { SidebarData } from "@/lib/types";
 import {
+  IconArrowsExchange,
   IconBarrierBlock,
   IconBrain,
   IconBrowserCheck,
@@ -18,6 +19,7 @@ import {
   IconMessages,
   IconNotification,
   IconPalette,
+  IconReportMoney,
   IconServerOff,
   IconSettings,
   IconTable,
@@ -26,7 +28,13 @@ import {
   IconUserOff,
   IconUsers,
 } from "@tabler/icons-react";
-import { AudioWaveform, Command, GalleryVerticalEnd } from "lucide-react";
+import {
+  AudioWaveform,
+  Command,
+  GalleryVerticalEnd,
+  KanbanIcon,
+  MailIcon,
+} from "lucide-react";
 
 export const sidebarData: SidebarData = {
   teams: [
@@ -60,11 +68,33 @@ export const sidebarData: SidebarData = {
           url: "/dashboard2",
           icon: IconChartBar,
         },
+        {
+          title: "Payment Dashboard",
+          icon: IconReportMoney,
+          items: [
+            {
+              title: "Payment Dashboard",
+              url: "/payment-dashboard",
+              icon: IconCreditCard,
+            },
+            {
+              title: "Payment Transactions",
+              url: "/payment-transactions",
+              icon: IconArrowsExchange,
+            },
+          ],
+        },
       ],
     },
     {
       title: "General",
       items: [
+        {
+          title: "Mail",
+          url: "/mail",
+          icon: MailIcon,
+          badge: "Coming Soon",
+        },
         {
           title: "Tasks",
           url: "/tasks",
@@ -92,6 +122,12 @@ export const sidebarData: SidebarData = {
           icon: IconBrain,
           badge: "New",
           badgeColor: "green",
+        },
+        {
+          title: "Kanban",
+          url: "/kanban",
+          icon: KanbanIcon,
+          badge: "Coming Soon",
         },
       ],
     },

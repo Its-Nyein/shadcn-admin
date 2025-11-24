@@ -24,7 +24,7 @@ export function SidebarConfigProvider({
 }) {
   const [config, setConfig] = React.useState<SidebarConfig>({
     variant: "inset",
-    collapsible: "offcanvas",
+    collapsible: "icon",
     side: "left",
   });
 
