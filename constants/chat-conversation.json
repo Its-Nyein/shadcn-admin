@@ -1,0 +1,114 @@
+[
+  {
+    "id": "conv-1",
+    "type": "direct",
+    "participants": ["user-1"],
+    "name": "Olivia Martinez",
+    "avatar": "https://github.com/shadcn.png",
+    "lastMessage": {
+      "id": "msg-1-5",
+      "content": "Thanks! I'll review the documents and get back to you",
+      "timestamp": "2025-01-15T15:30:00Z",
+      "senderId": "user-1"
+    },
+    "unreadCount": 2,
+    "isPinned": true,
+    "isMuted": false
+  },
+  {
+    "id": "conv-2",
+    "type": "group",
+    "participants": ["user-2", "user-3", "user-6"],
+    "name": "Frontend Team",
+    "avatar": "https://github.com/leerob.png",
+    "lastMessage": {
+      "id": "msg-2-6",
+      "content": "James: The new component library is ready for testing",
+      "timestamp": "2025-01-15T14:15:00Z",
+      "senderId": "user-2"
+    },
+    "unreadCount": 0,
+    "isPinned": false,
+    "isMuted": false
+  },
+  {
+    "id": "conv-3",
+    "type": "direct",
+    "participants": ["user-3"],
+    "name": "Sophie Chen",
+    "avatar": "https://github.com/rauchg.png",
+    "lastMessage": {
+      "id": "msg-3-4",
+      "content": "Here are the updated mockups for the dashboard",
+      "timestamp": "2025-01-15T12:45:00Z",
+      "senderId": "user-3"
+    },
+    "unreadCount": 1,
+    "isPinned": false,
+    "isMuted": false
+  },
+  {
+    "id": "conv-4",
+    "type": "group",
+    "participants": ["user-1", "user-4", "user-5", "user-7"],
+    "name": "Project Alpha",
+    "avatar": "https://github.com/evilrabbit.png",
+    "lastMessage": {
+      "id": "msg-4-5",
+      "content": "Marcus: Deployment scheduled for tonight",
+      "timestamp": "2025-01-15T11:30:00Z",
+      "senderId": "user-4"
+    },
+    "unreadCount": 3,
+    "isPinned": true,
+    "isMuted": false
+  },
+  {
+    "id": "conv-5",
+    "type": "direct",
+    "participants": ["user-5"],
+    "name": "Emma Thompson",
+    "avatar": "https://github.com/shuding.png",
+    "lastMessage": {
+      "id": "msg-5-3",
+      "content": "Found a few edge cases in the payment flow",
+      "timestamp": "2025-01-15T10:20:00Z",
+      "senderId": "user-5"
+    },
+    "unreadCount": 0,
+    "isPinned": false,
+    "isMuted": true
+  },
+  {
+    "id": "conv-6",
+    "type": "direct",
+    "participants": ["user-2"],
+    "name": "James Wilson",
+    "avatar": "https://github.com/leerob.png",
+    "lastMessage": {
+      "id": "msg-6-4",
+      "content": "Code review completed, looks good to merge! 👍",
+      "timestamp": "2025-01-15T09:45:00Z",
+      "senderId": "user-2"
+    },
+    "unreadCount": 0,
+    "isPinned": false,
+    "isMuted": false
+  },
+  {
+    "id": "conv-7",
+    "type": "direct",
+    "participants": ["user-7"],
+    "name": "Ava Robinson",
+    "avatar": "https://github.com/jaredpalmer.png",
+    "lastMessage": {
+      "id": "msg-7-4",
+      "content": "The social media campaign is performing great! 📈",
+      "timestamp": "2025-01-15T16:00:00Z",
+      "senderId": "user-7"
+    },
+    "unreadCount": 1,
+    "isPinned": false,
+    "isMuted": false
+  }
+]

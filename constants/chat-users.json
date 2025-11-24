@@ -1,0 +1,72 @@
+[
+  {
+    "id": "user-1",
+    "name": "Olivia Martinez",
+    "email": "olivia.martinez@company.com",
+    "avatar": "https://github.com/shadcn.png",
+    "status": "online",
+    "lastSeen": "2025-01-15T10:30:00Z",
+    "role": "Product Manager",
+    "department": "Product"
+  },
+  {
+    "id": "user-2",
+    "name": "James Wilson",
+    "email": "james.wilson@company.com",
+    "avatar": "https://github.com/leerob.png",
+    "status": "away",
+    "lastSeen": "2025-01-15T09:45:00Z",
+    "role": "Senior Frontend Developer",
+    "department": "Engineering"
+  },
+  {
+    "id": "user-3",
+    "name": "Sophie Chen",
+    "email": "sophie.chen@company.com",
+    "avatar": "https://github.com/rauchg.png",
+    "status": "online",
+    "lastSeen": "2025-01-15T10:25:00Z",
+    "role": "UI/UX Designer",
+    "department": "Design"
+  },
+  {
+    "id": "user-4",
+    "name": "Marcus Johnson",
+    "email": "marcus.johnson@company.com",
+    "avatar": "https://github.com/evilrabbit.png",
+    "status": "offline",
+    "lastSeen": "2025-01-14T18:30:00Z",
+    "role": "DevOps Engineer",
+    "department": "Infrastructure"
+  },
+  {
+    "id": "user-5",
+    "name": "Emma Thompson",
+    "email": "emma.thompson@company.com",
+    "avatar": "https://github.com/shuding.png",
+    "status": "online",
+    "lastSeen": "2025-01-15T10:20:00Z",
+    "role": "QA Lead",
+    "department": "Quality Assurance"
+  },
+  {
+    "id": "user-6",
+    "name": "Daniel Park",
+    "email": "daniel.park@company.com",
+    "avatar": "https://github.com/timneutkens.png",
+    "status": "online",
+    "lastSeen": "2025-01-15T10:15:00Z",
+    "role": "Backend Developer",
+    "department": "Engineering"
+  },
+  {
+    "id": "user-7",
+    "name": "Ava Robinson",
+    "email": "ava.robinson@company.com",
+    "avatar": "https://github.com/jaredpalmer.png",
+    "status": "away",
+    "lastSeen": "2025-01-15T08:00:00Z",
+    "role": "Marketing Manager",
+    "department": "Marketing"
+  }
+]

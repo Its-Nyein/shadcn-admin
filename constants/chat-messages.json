@@ -1,0 +1,424 @@
+{
+  "conv-1": [
+    {
+      "id": "msg-1-1",
+      "content": "Hey! How's the new dashboard coming along?",
+      "timestamp": "2025-01-15T10:15:00Z",
+      "senderId": "user-1",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-1-2",
+      "content": "It's going great! We've implemented the new design system and it looks fantastic.",
+      "timestamp": "2025-01-15T10:17:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{ "emoji": "👍", "users": ["user-1"], "count": 1 }],
+      "replyTo": null
+    },
+    {
+      "id": "msg-1-3",
+      "content": "That's awesome! Can you share the project requirements?",
+      "timestamp": "2025-01-15T10:18:00Z",
+      "senderId": "user-1",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-1-4",
+      "content": "Here's the project documentation",
+      "timestamp": "2025-01-15T10:20:00Z",
+      "senderId": "current-user",
+      "type": "file",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-1-1",
+          "type": "pdf",
+          "name": "Project_Requirements_v2.pdf",
+          "url": "/files/project-requirements.pdf",
+          "size": "2.4 MB",
+          "mimeType": "application/pdf"
+        }
+      ]
+    },
+    {
+      "id": "msg-1-5",
+      "content": "Thanks! I'll review the documents and get back to you",
+      "timestamp": "2025-01-15T15:30:00Z",
+      "senderId": "user-1",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{ "emoji": "❤️", "users": ["current-user"], "count": 1 }],
+      "replyTo": null
+    }
+  ],
+  "conv-2": [
+    {
+      "id": "msg-2-1",
+      "content": "Hey team! The component library update is ready",
+      "timestamp": "2025-01-15T09:00:00Z",
+      "senderId": "user-2",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-2",
+      "content": "Awesome work James! 🚀",
+      "timestamp": "2025-01-15T09:05:00Z",
+      "senderId": "user-3",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-3",
+      "content": "Here are the preview screenshots",
+      "timestamp": "2025-01-15T09:10:00Z",
+      "senderId": "user-2",
+      "type": "image",
+      "isEdited": false,
+      "reactions": [
+        { "emoji": "🔥", "users": ["user-3", "user-6"], "count": 2 }
+      ],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-2-1",
+          "type": "image",
+          "name": "dashboard-preview.png",
+          "url": "/chat-image-1.png",
+          "size": "845 KB",
+          "mimeType": "image/png",
+          "thumbnail": "/chat-image-1.png"
+        },
+        {
+          "id": "att-2-2",
+          "type": "image",
+          "name": "components-showcase.png",
+          "url": "/chat-image-2.png",
+          "size": "468 KB",
+          "mimeType": "image/png",
+          "thumbnail": "/chat-image-2.png"
+        }
+      ]
+    },
+    {
+      "id": "msg-2-4",
+      "content": "I've tested the new Button and Input components, they work perfectly",
+      "timestamp": "2025-01-15T09:15:00Z",
+      "senderId": "user-6",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [
+        { "emoji": "✅", "users": ["user-2", "user-3"], "count": 2 }
+      ],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-5",
+      "content": "Great! I'll start integrating them into the main app",
+      "timestamp": "2025-01-15T09:20:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-2-6",
+      "content": "The new component library is ready for testing",
+      "timestamp": "2025-01-15T14:15:00Z",
+      "senderId": "user-2",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    }
+  ],
+  "conv-3": [
+    {
+      "id": "msg-3-1",
+      "content": "Hi! I've completed the wireframes for the new user onboarding flow",
+      "timestamp": "2025-01-15T09:30:00Z",
+      "senderId": "user-3",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-3-2",
+      "content": "That's fantastic Sophie! When can we review them?",
+      "timestamp": "2025-01-15T09:32:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-3-3",
+      "content": "Here's a quick voice note explaining the design decisions",
+      "timestamp": "2025-01-15T09:35:00Z",
+      "senderId": "user-3",
+      "type": "audio",
+      "isEdited": false,
+      "reactions": [{ "emoji": "👍", "users": ["current-user"], "count": 1 }],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-3-1",
+          "type": "audio",
+          "name": "Design_Explanation.mp3",
+          "url": "/audio/voice-note.mp3",
+          "size": "1.8 MB",
+          "mimeType": "audio/mpeg",
+          "duration": "2:34"
+        }
+      ]
+    },
+    {
+      "id": "msg-3-4",
+      "content": "Here are the updated mockups for the dashboard",
+      "timestamp": "2025-01-15T12:45:00Z",
+      "senderId": "user-3",
+      "type": "image",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-3-2",
+          "type": "image",
+          "name": "Dashboard_Mockup_v3.png",
+          "url": "/chat-image-1.png",
+          "size": "871 KB",
+          "mimeType": "image/png",
+          "thumbnail": "/chat-image-1.png"
+        }
+      ]
+    }
+  ],
+  "conv-4": [
+    {
+      "id": "msg-4-1",
+      "content": "Team, we need to discuss the upcoming release",
+      "timestamp": "2025-01-15T08:00:00Z",
+      "senderId": "user-1",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-4-2",
+      "content": "I've prepared the deployment checklist",
+      "timestamp": "2025-01-15T08:15:00Z",
+      "senderId": "user-4",
+      "type": "file",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-4-1",
+          "type": "pdf",
+          "name": "Deployment_Checklist.pdf",
+          "url": "/files/deployment-checklist.pdf",
+          "size": "156 KB",
+          "mimeType": "application/pdf"
+        }
+      ]
+    },
+    {
+      "id": "msg-4-3",
+      "content": "QA has signed off on all test cases",
+      "timestamp": "2025-01-15T09:00:00Z",
+      "senderId": "user-5",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [
+        { "emoji": "🎉", "users": ["user-1", "user-4"], "count": 2 }
+      ],
+      "replyTo": null
+    },
+    {
+      "id": "msg-4-4",
+      "content": "Marketing materials are ready for launch",
+      "timestamp": "2025-01-15T10:30:00Z",
+      "senderId": "user-7",
+      "type": "file",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-4-2",
+          "type": "pdf",
+          "name": "Launch_Marketing_Plan.pdf",
+          "url": "/files/marketing-plan.pdf",
+          "size": "3.2 MB",
+          "mimeType": "application/pdf"
+        }
+      ]
+    },
+    {
+      "id": "msg-4-5",
+      "content": "Deployment scheduled for tonight",
+      "timestamp": "2025-01-15T11:30:00Z",
+      "senderId": "user-4",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    }
+  ],
+  "conv-5": [
+    {
+      "id": "msg-5-1",
+      "content": "I've been testing the new feature and it looks good overall",
+      "timestamp": "2025-01-15T08:45:00Z",
+      "senderId": "user-5",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-5-2",
+      "content": "Thanks for testing it! Any issues you found?",
+      "timestamp": "2025-01-15T09:10:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-5-3",
+      "content": "Found a few edge cases in the payment flow",
+      "timestamp": "2025-01-15T10:20:00Z",
+      "senderId": "user-5",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    }
+  ],
+  "conv-6": [
+    {
+      "id": "msg-6-1",
+      "content": "Hey! I've finished the code review for the latest PR",
+      "timestamp": "2025-01-15T08:30:00Z",
+      "senderId": "user-2",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-6-2",
+      "content": "Thanks for the quick review! Any feedback?",
+      "timestamp": "2025-01-15T09:15:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-6-3",
+      "content": "Just a few minor suggestions, here's the detailed review",
+      "timestamp": "2025-01-15T09:30:00Z",
+      "senderId": "user-2",
+      "type": "file",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-6-1",
+          "type": "pdf",
+          "name": "Code_Review_Notes.pdf",
+          "url": "/files/code-review.pdf",
+          "size": "89 KB",
+          "mimeType": "application/pdf"
+        }
+      ]
+    },
+    {
+      "id": "msg-6-4",
+      "content": "Code review completed, looks good to merge! 👍",
+      "timestamp": "2025-01-15T09:45:00Z",
+      "senderId": "user-2",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [{ "emoji": "🎉", "users": ["current-user"], "count": 1 }],
+      "replyTo": null
+    }
+  ],
+  "conv-7": [
+    {
+      "id": "msg-7-1",
+      "content": "Hi! I wanted to discuss the marketing strategy for the new product launch",
+      "timestamp": "2025-01-15T14:00:00Z",
+      "senderId": "user-7",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-7-2",
+      "content": "Sure! What's the timeline looking like?",
+      "timestamp": "2025-01-15T14:15:00Z",
+      "senderId": "current-user",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    },
+    {
+      "id": "msg-7-3",
+      "content": "Here's the marketing calendar I've prepared",
+      "timestamp": "2025-01-15T15:00:00Z",
+      "senderId": "user-7",
+      "type": "file",
+      "isEdited": false,
+      "reactions": [{ "emoji": "👏", "users": ["current-user"], "count": 1 }],
+      "replyTo": null,
+      "attachments": [
+        {
+          "id": "att-7-1",
+          "type": "pdf",
+          "name": "Marketing_Calendar_Q1.pdf",
+          "url": "/files/marketing-calendar.pdf",
+          "size": "1.5 MB",
+          "mimeType": "application/pdf"
+        }
+      ]
+    },
+    {
+      "id": "msg-7-4",
+      "content": "The social media campaign is performing great! 📈",
+      "timestamp": "2025-01-15T16:00:00Z",
+      "senderId": "user-7",
+      "type": "text",
+      "isEdited": false,
+      "reactions": [],
+      "replyTo": null
+    }
+  ]
+}
