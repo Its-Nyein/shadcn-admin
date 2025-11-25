@@ -1,0 +1,21 @@
+echo "Running pre push..."
+
+echo "Running typescript types..."
+pnpm run lint
+
+if [ $? -ne 0 ]; then
+    echo "❌ Type checking failed! Push aborted."
+    echo "Please fix the TypeScript errors before pushing."
+    exit 1
+fi
+
+echo "Running build tests..."
+pnpm run build
+
+if [ $? -ne 0 ]; then
+    echo "❌ Build tests failed! Push aborted."
+    echo "Please fix the build errors before pushing."
+    exit 1
+fiØ
+
+echo "✅ Build tests passed! Continuing with push..."
