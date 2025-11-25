@@ -1,3 +1,4 @@
+import { Icons } from "@/features/discord/components/icons";
 import type { SidebarData } from "@/lib/types";
 import {
   IconArrowsExchange,
@@ -94,6 +95,13 @@ export const sidebarData: SidebarData = {
           url: "/mail",
           icon: MailIcon,
           badge: "Coming Soon",
+        },
+        {
+          title: "Discord",
+          url: "/discord",
+          icon: Icons.discord,
+          badge: "New",
+          badgeColor: "green",
         },
         {
           title: "Tasks",
