@@ -1,3 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
 echo "Running pre push..."
 
 echo "Running typescript types..."
@@ -16,6 +19,6 @@ if [ $? -ne 0 ]; then
     echo "❌ Build tests failed! Push aborted."
     echo "Please fix the build errors before pushing."
     exit 1
-fiØ
+fi
 
 echo "✅ Build tests passed! Continuing with push..."
