@@ -2,17 +2,16 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import {
-  type CSSProperties,
-  type ElementType,
-  type JSX,
-  memo,
-  useMemo,
-} from "react";
+import { type CSSProperties, memo, useMemo } from "react";
+
+// Pre-create motion components outside of render
+const MotionP = motion.p;
+const MotionSpan = motion.span;
+const MotionDiv = motion.div;
 
 export type TextShimmerProps = {
   children: string;
-  as?: ElementType;
+  as?: "p" | "span" | "div";
   className?: string;
   duration?: number;
   spread?: number;
@@ -25,20 +24,19 @@ const ShimmerComponent = ({
   duration = 2,
   spread = 2,
 }: TextShimmerProps) => {
-  const MotionComponent = motion.create(
-    Component as keyof JSX.IntrinsicElements
-  );
-
   const dynamicSpread = useMemo(
     () => (children?.length ?? 0) * spread,
     [children, spread]
   );
 
+  const MotionComponent =
+    Component === "span" ? MotionSpan : Component === "div" ? MotionDiv : MotionP;
+
   return (
     <MotionComponent
       animate={{ backgroundPosition: "0% center" }}
       className={cn(
-        "relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent",
+        "relative inline-block bg-size-[250%_100%,auto] bg-clip-text text-transparent",
         "[--bg:linear-gradient(90deg,#0000_calc(50%-var(--spread)),var(--color-background),#0000_calc(50%+var(--spread)))] [background-repeat:no-repeat,padding-box]",
         className
       )}

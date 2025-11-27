@@ -163,8 +163,13 @@ export const InlineCitationCarouselIndex = ({
       return;
     }
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
+    const updateState = () => {
+      setCount(api.scrollSnapList().length);
+      setCurrent(api.selectedScrollSnap() + 1);
+    };
+
+    // Use requestAnimationFrame to avoid synchronous setState in effect
+    requestAnimationFrame(updateState);
 
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap() + 1);

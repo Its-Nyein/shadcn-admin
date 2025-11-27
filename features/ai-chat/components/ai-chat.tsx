@@ -235,6 +235,12 @@ const ChatBotDemo = () => {
                 </PromptInputBody>
                 <PromptInputFooter>
                   <PromptInputTools>
+                    {/* <PromptInputActionMenu>
+                      <PromptInputActionMenuTrigger />
+                      <PromptInputActionMenuContent>
+                        <PromptInputActionAddAttachments />
+                      </PromptInputActionMenuContent>
+                    </PromptInputActionMenu> */}
                     <PromptInputButton
                       variant={webSearch ? "default" : "ghost"}
                       onClick={() => setWebSearch(!webSearch)}
