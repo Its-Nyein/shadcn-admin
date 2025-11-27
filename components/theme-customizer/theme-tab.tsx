@@ -22,7 +22,7 @@ import { colorThemes, tweakcnThemes } from "@/config/theme-data";
 import { useCircularTransition } from "@/hooks/use-circular-transitions";
 import { useThemeManager } from "@/hooks/use-theme-manager";
 import type { ImportedTheme } from "@/lib/types";
-import { Dices, ExternalLink, Moon, Palette, Sun, Upload } from "lucide-react";
+import { Check, Dices, ExternalLink, Moon, Palette, Sun, Upload } from "lucide-react";
 import React from "react";
 import "./circular-transition.css";
 
@@ -287,6 +287,7 @@ export function ThemeTab({
           >
             <Sun className="h-4 w-4 mr-1" />
             Light
+            {!isDarkMode && <Check className="h-3.5 w-3.5 ml-1" />}
           </Button>
           <Button
             variant={isDarkMode ? "secondary" : "outline"}
@@ -296,6 +297,7 @@ export function ThemeTab({
           >
             <Moon className="h-4 w-4 mr-1" />
             Dark
+            {isDarkMode && <Check className="h-3.5 w-3.5 ml-1" />}
           </Button>
         </div>
       </div>

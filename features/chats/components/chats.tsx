@@ -110,7 +110,7 @@ export function Chat({ conversations, messages, users }: ChatProps) {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="h-[calc(100vh-180px)] min-h-[500px] flex rounded-xl border shadow-sm overflow-hidden bg-background">
+      <div className="h-[calc(95vh-180px)] min-h-[500px] flex rounded-xl border shadow-sm overflow-hidden bg-background">
         {isSidebarOpen && (
           <div
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"

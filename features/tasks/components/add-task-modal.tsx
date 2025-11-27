@@ -112,7 +112,7 @@ export function AddTaskModal({ onAddTask, trigger }: AddTaskModalProps) {
       <DialogTrigger asChild>
         {trigger || (
           <Button variant="default" size="sm" className="cursor-pointer">
-            <Plus className="w-4 h-4 mr-2" />
+            <Plus className="w-4 h-4" />
             Add Task
           </Button>
         )}
@@ -250,7 +250,7 @@ export function AddTaskModal({ onAddTask, trigger }: AddTaskModalProps) {
               Cancel
             </Button>
             <Button type="submit" className="cursor-pointer">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="w-4 h-4" />
               Create Task
             </Button>
           </div>
