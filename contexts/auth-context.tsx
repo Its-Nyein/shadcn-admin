@@ -77,10 +77,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     provider: "google" | "github",
     callbackUrl?: string,
   ) => {
-    sessionStorage.setItem("social-sign-in-pending", "true");
+    const redirectUrl = callbackUrl || "/dashboard";
+    const urlWithParam = redirectUrl.includes("?")
+      ? `${redirectUrl}&auth=success`
+      : `${redirectUrl}?auth=success`;
+
     await authClient.signIn.social({
       provider,
-      callbackURL: callbackUrl || "/dashboard",
+      callbackURL: urlWithParam,
     });
   };
 

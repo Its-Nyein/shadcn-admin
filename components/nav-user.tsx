@@ -56,11 +56,6 @@ export function NavUser({
     }
   };
 
-  const initials = user.name
-    .split(" ")
-    .map((name) => name[0])
-    .join("");
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -73,7 +68,10 @@ export function NavUser({
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback className="rounded-lg">
-                  {initials}
+                  {user.name
+                    .split(" ")
+                    .map((name) => name[0])
+                    .join("")}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -94,7 +92,10 @@ export function NavUser({
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback className="rounded-lg">
-                    {initials}
+                    {user.name
+                      .split(" ")
+                      .map((name) => name[0])
+                      .join("")}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
