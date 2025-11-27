@@ -69,11 +69,14 @@ export const Reasoning = memo(
     useEffect(() => {
       if (isStreaming) {
         if (startTime === null) {
-          setStartTime(Date.now());
+          // Use requestAnimationFrame to avoid synchronous setState in effect
+          requestAnimationFrame(() => setStartTime(Date.now()));
         }
       } else if (startTime !== null) {
-        setDuration(Math.ceil((Date.now() - startTime) / MS_IN_S));
-        setStartTime(null);
+        requestAnimationFrame(() => {
+          setDuration(Math.ceil((Date.now() - startTime) / MS_IN_S));
+          setStartTime(null);
+        });
       }
     }, [isStreaming, startTime, setDuration]);
 
