@@ -127,6 +127,7 @@ function SidebarProvider({
   );
 
   return (
+    /* should remove bg-background */
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
         <div
@@ -139,7 +140,7 @@ function SidebarProvider({
             } as React.CSSProperties
           }
           className={cn(
-            "group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full",
+            "group/sidebar-wrapper flex min-h-svh w-full",
             className,
           )}
           {...props}
