@@ -24,7 +24,7 @@ const transactions = [
     customer: {
       name: "Olivia Martin",
       email: "olivia.martin@email.com",
-      avatar: "/avatars/01.png",
+      avatar: "https://github.com/shadcn.png",
     },
     amount: "$1,999.00",
     status: "completed",
@@ -35,7 +35,7 @@ const transactions = [
     customer: {
       name: "Jackson Lee",
       email: "jackson.lee@email.com",
-      avatar: "/avatars/02.png",
+      avatar: "https://github.com/leerob.png",
     },
     amount: "$2,999.00",
     status: "pending",
@@ -46,7 +46,7 @@ const transactions = [
     customer: {
       name: "Isabella Nguyen",
       email: "isabella.nguyen@email.com",
-      avatar: "/avatars/03.png",
+      avatar: "https://github.com/evilrabbit.png",
     },
     amount: "$39.00",
     status: "completed",
@@ -57,7 +57,7 @@ const transactions = [
     customer: {
       name: "William Kim",
       email: "will@email.com",
-      avatar: "/avatars/04.png",
+      avatar: "https://github.com/rauchg.png",
     },
     amount: "$299.00",
     status: "failed",
@@ -68,7 +68,7 @@ const transactions = [
     customer: {
       name: "Sofia Davis",
       email: "sofia.davis@email.com",
-      avatar: "/avatars/05.png",
+      avatar: "https://github.com/jaredpalmer.png",
     },
     amount: "$99.00",
     status: "completed",
@@ -89,7 +89,7 @@ export function RecentTransactions() {
           size="sm"
           className="w-full sm:w-auto cursor-pointer"
         >
-          <Eye className="h-4 w-4 mr-2" />
+          <Eye className="size-4" />
           View All
         </Button>
       </CardHeader>
@@ -98,7 +98,7 @@ export function RecentTransactions() {
           <div key={transaction.id}>
             <div className="flex flex-col sm:flex-row p-3 rounded-lg border gap-3 sm:gap-2">
               <div className="flex items-center gap-3 flex-1 min-w-0">
-                <Avatar className="h-8 w-8 shrink-0">
+                <Avatar className="size-8 shrink-0">
                   <AvatarImage
                     src={transaction.customer.avatar}
                     alt={transaction.customer.name}
@@ -145,9 +145,9 @@ export function RecentTransactions() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-8 w-8 p-0 cursor-pointer shrink-0"
+                      className="size-8 p-0 cursor-pointer shrink-0"
                     >
-                      <MoreHorizontal className="h-4 w-4" />
+                      <MoreHorizontal className="size-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">

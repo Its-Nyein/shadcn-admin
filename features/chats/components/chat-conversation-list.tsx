@@ -81,21 +81,21 @@ export function ChatConversationList({
               size="sm"
               className="h-8 w-8 p-0 cursor-pointer"
             >
-              <MoreVertical className="h-4 w-4" />
+              <MoreVertical className="size-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem className="cursor-pointer">
-              <UserPlus className="h-4 w-4 mr-2" />
+              <UserPlus className="size-4 mr-2" />
               New Chat
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">
-              <Filter className="h-4 w-4 mr-2" />
+              <Filter className="size-4 mr-2" />
               Filter Messages
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="cursor-pointer">
-              <Settings className="h-4 w-4 mr-2" />
+              <Settings className="size-4 mr-2" />
               Chat Settings
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -105,7 +105,7 @@ export function ChatConversationList({
       {/* Search */}
       <div className="px-4 py-3 border-b shrink-0">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
             type="text"
             placeholder="Search conversations..."
@@ -145,7 +145,7 @@ export function ChatConversationList({
                   />
                   <AvatarFallback className="text-sm bg-linear-to-br from-primary/20 to-primary/10">
                     {conversation.type === "group" ? (
-                      <Users className="h-5 w-5 text-primary" />
+                      <Users className="size-5 text-primary" />
                     ) : (
                       conversation.name
                         .split(" ")
@@ -164,8 +164,8 @@ export function ChatConversationList({
 
                 {/* Group indicator */}
                 {conversation.type === "group" && (
-                  <div className="absolute bottom-0 right-0 h-4 w-4 bg-blue-500 border-2 border-background rounded-full flex items-center justify-center">
-                    <Hash className="h-2 w-2 text-white" />
+                  <div className="absolute bottom-0 right-0 size-4 bg-blue-500 border-2 border-background rounded-full flex items-center justify-center">
+                    <Hash className="size-2 text-white" />
                   </div>
                 )}
               </div>
@@ -178,10 +178,10 @@ export function ChatConversationList({
                       {conversation.name}
                     </h3>
                     {conversation.isPinned && (
-                      <Pin className="h-3 w-3 text-muted-foreground shrink-0" />
+                      <Pin className="size-3 text-muted-foreground shrink-0" />
                     )}
                     {conversation.isMuted && (
-                      <VolumeX className="h-3 w-3 text-muted-foreground shrink-0" />
+                      <VolumeX className="size-3 text-muted-foreground shrink-0" />
                     )}
                   </div>
                   <span className="text-xs text-muted-foreground shrink-0 whitespace-nowrap">

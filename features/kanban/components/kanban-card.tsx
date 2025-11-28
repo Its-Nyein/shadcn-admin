@@ -1,12 +1,12 @@
 "use client";
 
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { GripVertical } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { GripVertical } from "lucide-react";
 import type { KanbanTask } from "../utils/schema";
 import { statusConfig } from "../utils/schema";
 
@@ -64,7 +64,7 @@ export function KanbanCard({ task }: KanbanCardProps) {
             {...listeners}
             className="text-muted-foreground hover:text-foreground shrink-0 cursor-grab touch-none"
           >
-            <GripVertical className="h-4 w-4" />
+            <GripVertical className="size-4" />
           </button>
         </div>
 
@@ -77,7 +77,7 @@ export function KanbanCard({ task }: KanbanCardProps) {
         <div className="flex items-center justify-between pt-1">
           <div className="flex items-center gap-2">
             {task.assignee && (
-              <Avatar className="h-6 w-6">
+              <Avatar className="size-6">
                 <AvatarImage
                   src={task.assignee.avatar}
                   alt={task.assignee.name}
@@ -91,7 +91,7 @@ export function KanbanCard({ task }: KanbanCardProps) {
 
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5">
-              <div className={cn("h-2 w-2 rounded-full", status.color)} />
+              <div className={cn("size-2 rounded-full", status.color)} />
               <span className="text-muted-foreground text-xs">
                 {status.label}
               </span>

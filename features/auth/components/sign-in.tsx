@@ -166,7 +166,7 @@ export default function SignIn() {
                 disabled={isSocialLoading !== null || isLoading}
                 type="button"
               >
-                <svg className="h-5 w-5" viewBox="0 0 24 24">
+                <svg className="size-5" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                     fill="#4285F4"
@@ -193,11 +193,7 @@ export default function SignIn() {
                 disabled={isSocialLoading !== null || isLoading}
                 type="button"
               >
-                <svg
-                  className="h-5 w-5"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
+                <svg className="size-5" viewBox="0 0 24 24" fill="currentColor">
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
@@ -276,7 +272,7 @@ export default function SignIn() {
                 >
                   {isLoading ? (
                     <span className="flex items-center gap-2">
-                      <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+                      <svg className="size-4 animate-spin" viewBox="0 0 24 24">
                         <circle
                           className="opacity-25"
                           cx="12"

@@ -66,7 +66,7 @@ export function MessageList({
       return {
         id: currentUserId,
         name: "You",
-        avatar: "/avatars/current-user.png",
+        avatar: "https://github.com/shadcn.png",
         status: "online" as const,
         email: "you@example.com",
         lastSeen: new Date().toISOString(),
@@ -184,7 +184,7 @@ export function MessageList({
                     {!isOwnMessage && (
                       <div className="w-8">
                         {showAvatar && user && (
-                          <Avatar className="h-8 w-8 cursor-pointer">
+                          <Avatar className="size-8 cursor-pointer">
                             <AvatarImage src={user.avatar} alt={user.name} />
                             <AvatarFallback className="text-xs">
                               {user.name
@@ -227,31 +227,31 @@ export function MessageList({
                                   variant="ghost"
                                   size="icon"
                                   className={cn(
-                                    "h-6 w-6 rounded-full",
+                                    "size-6 rounded-full",
                                     isOwnMessage
                                       ? "hover:bg-primary-foreground/20 text-primary-foreground/70 hover:text-primary-foreground"
                                       : "hover:bg-background/50 text-muted-foreground hover:text-foreground",
                                   )}
                                 >
-                                  <MoreVertical className="h-3.5 w-3.5" />
+                                  <MoreVertical className="size-3.5" />
                                 </Button>
                               </DropdownMenuTrigger>
                               <DropdownMenuContent
                                 align={isOwnMessage ? "start" : "end"}
                               >
                                 <DropdownMenuItem className="cursor-pointer">
-                                  <Reply className="h-4 w-4 mr-2" />
+                                  <Reply className="size-4" />
                                   Reply
                                 </DropdownMenuItem>
                                 <DropdownMenuItem className="cursor-pointer">
-                                  <Copy className="h-4 w-4 mr-2" />
+                                  <Copy className="size-4" />
                                   Copy
                                 </DropdownMenuItem>
                                 {isOwnMessage && (
                                   <>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
-                                      <Trash2 className="h-4 w-4 mr-2" />
+                                      <Trash2 className="size-4" />
                                       Delete
                                     </DropdownMenuItem>
                                   </>
@@ -308,7 +308,7 @@ export function MessageList({
                             )}
                             {isOwnMessage && (
                               <div className="flex">
-                                <CheckCheck className="h-3 w-3" />
+                                <CheckCheck className="size-3" />
                               </div>
                             )}
                           </div>

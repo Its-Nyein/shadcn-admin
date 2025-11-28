@@ -135,7 +135,7 @@ export function Chat({ conversations, messages, users }: ChatProps) {
               onClick={() => setIsSidebarOpen(false)}
               className="cursor-pointer"
             >
-              <X className="h-4 w-4" />
+              <X className="size-4" />
             </Button>
           </div>
 
@@ -158,7 +158,7 @@ export function Chat({ conversations, messages, users }: ChatProps) {
               onClick={() => setIsSidebarOpen(true)}
               className="cursor-pointer lg:hidden mr-2"
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="size-4" />
             </Button>
 
             <div className="flex-1">

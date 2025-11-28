@@ -104,11 +104,11 @@ export function ChatHeader({
     <div className="flex items-center justify-between h-full">
       {/* Left side - Avatar and info */}
       <div className="flex items-center gap-3">
-        <Avatar className="h-10 w-10 cursor-pointer">
+        <Avatar className="size-10 cursor-pointer">
           <AvatarImage src={conversation.avatar} alt={conversation.name} />
           <AvatarFallback>
             {conversation.type === "group" ? (
-              <Users className="h-5 w-5" />
+              <Users className="size-5" />
             ) : (
               conversation.name
                 .split(" ")
@@ -123,7 +123,7 @@ export function ChatHeader({
           <div className="flex items-center gap-2">
             <h2 className="font-semibold truncate">{conversation.name}</h2>
             {conversation.isMuted && (
-              <BellOff className="h-4 w-4 text-muted-foreground" />
+              <BellOff className="size-4 text-muted-foreground" />
             )}
             {conversation.type === "group" && (
               <Badge variant="secondary" className="text-xs cursor-pointer">
@@ -142,7 +142,7 @@ export function ChatHeader({
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="cursor-pointer">
-                <Search className="h-4 w-4" />
+                <Search className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -154,7 +154,7 @@ export function ChatHeader({
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="cursor-pointer">
-                <Phone className="h-4 w-4" />
+                <Phone className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -166,7 +166,7 @@ export function ChatHeader({
           <Tooltip>
             <TooltipTrigger asChild>
               <Button variant="ghost" size="icon" className="cursor-pointer">
-                <Video className="h-4 w-4" />
+                <Video className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -183,7 +183,7 @@ export function ChatHeader({
                 onClick={onToggleInfo}
                 className="cursor-pointer"
               >
-                <Info className="h-4 w-4" />
+                <Info className="size-4" />
               </Button>
             </TooltipTrigger>
             <TooltipContent>
@@ -196,32 +196,32 @@ export function ChatHeader({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="cursor-pointer">
-              <MoreVertical className="h-4 w-4" />
+              <MoreVertical className="size-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={onToggleMute} className="cursor-pointer">
               {conversation.isMuted ? (
                 <>
-                  <Bell className="h-4 w-4 mr-2" />
+                  <Bell className="size-4 mr-2" />
                   Unmute conversation
                 </>
               ) : (
                 <>
-                  <BellOff className="h-4 w-4 mr-2" />
+                  <BellOff className="size-4 mr-2" />
                   Mute conversation
                 </>
               )}
             </DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">
-              <Search className="h-4 w-4 mr-2" />
+              <Search className="size-4 mr-2" />
               Search messages
             </DropdownMenuItem>
             {conversation.type === "group" && (
               <>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="cursor-pointer">
-                  <Users className="h-4 w-4 mr-2" />
+                  <Users className="size-4 mr-2" />
                   Manage members
                 </DropdownMenuItem>
               </>

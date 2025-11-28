@@ -28,15 +28,16 @@ export function CalendarSidebar({
     <div
       className={`flex flex-col h-full bg-background rounded-lg ${className}`}
     >
-      {/* Add New Event Button */}
       <div className="p-6 border-b">
-        <Button className="w-full cursor-pointer bg-violet-500 hover:bg-violet-600" onClick={onNewEvent}>
-          <Plus className="w-4 h-4 mr-2" />
+        <Button
+          className="w-full cursor-pointer bg-violet-500 hover:bg-violet-600"
+          onClick={onNewEvent}
+        >
+          <Plus className="size-4" />
           Add New Event
         </Button>
       </div>
 
-      {/* Date Picker */}
       <DatePicker
         selectedDate={selectedDate}
         onDateSelect={onDateSelect}
@@ -45,7 +46,6 @@ export function CalendarSidebar({
 
       <Separator />
 
-      {/* Calendars */}
       <div className="flex-1 p-4">
         <Calendars
           onNewCalendar={onNewCalendar}
@@ -61,14 +61,13 @@ export function CalendarSidebar({
         />
       </div>
 
-      {/* Footer */}
       <div className="p-4 border-t">
         <Button
           variant="outline"
           className="w-full justify-start cursor-pointer border-violet-500/30 hover:bg-violet-500/10 hover:border-violet-500/50"
           onClick={onNewCalendar}
         >
-          <Plus className="w-4 h-4 mr-2" />
+          <Plus className="size-4" />
           New Calendar
         </Button>
       </div>

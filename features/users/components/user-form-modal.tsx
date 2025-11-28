@@ -61,7 +61,7 @@ export function UserFormDialog({ onAddUser }: UserFormDialogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="cursor-pointer">
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="size-4" />
           Add New User
         </Button>
       </DialogTrigger>

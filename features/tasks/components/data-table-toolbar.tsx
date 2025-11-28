@@ -27,7 +27,7 @@ export function DataTableToolbar<TData>({
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-1 flex-wrap items-center gap-2">
         <div className="relative">
-          <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search tasks..."
             value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -58,7 +58,7 @@ export function DataTableToolbar<TData>({
             className="h-9 px-3"
           >
             Reset
-            <X className="ml-1 h-4 w-4" />
+            <X className="ml-1 size-4" />
           </Button>
         )}
       </div>

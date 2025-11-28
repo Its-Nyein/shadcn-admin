@@ -22,7 +22,15 @@ import { colorThemes, tweakcnThemes } from "@/config/theme-data";
 import { useCircularTransition } from "@/hooks/use-circular-transitions";
 import { useThemeManager } from "@/hooks/use-theme-manager";
 import type { ImportedTheme } from "@/lib/types";
-import { Check, Dices, ExternalLink, Moon, Palette, Sun, Upload } from "lucide-react";
+import {
+  Check,
+  Dices,
+  ExternalLink,
+  Moon,
+  Palette,
+  Sun,
+  Upload,
+} from "lucide-react";
 import React from "react";
 import "./circular-transition.css";
 
@@ -285,7 +293,7 @@ export function ThemeTab({
             onClick={handleLightMode}
             className="cursor-pointer"
           >
-            <Sun className="h-4 w-4 mr-1" />
+            <Sun className="size-4 mr-1" />
             Light
             {!isDarkMode && <Check className="h-3.5 w-3.5 ml-1" />}
           </Button>
@@ -295,7 +303,7 @@ export function ThemeTab({
             onClick={handleDarkMode}
             className="cursor-pointer"
           >
-            <Moon className="h-4 w-4 mr-1" />
+            <Moon className="size-4 mr-1" />
             Dark
             {isDarkMode && <Check className="h-3.5 w-3.5 ml-1" />}
           </Button>
@@ -312,7 +320,7 @@ export function ThemeTab({
           onClick={onImportClick}
           className="w-full cursor-pointer"
         >
-          <Upload className="h-3.5 w-3.5 mr-1.5" />
+          <Upload className="size-3.5 mr-1.5" />
           Import Theme
         </Button>
       </div>
@@ -353,7 +361,7 @@ export function ThemeTab({
       {/* Tweakcn */}
       <div className="p-4 bg-muted rounded-lg space-y-3">
         <div className="flex items-center gap-2">
-          <Palette className="h-4 w-4 text-primary" />
+          <Palette className="size-4 text-primary" />
           <span className="text-sm font-medium">Advanced Customization</span>
         </div>
         <p className="text-xs text-muted-foreground">
@@ -377,7 +385,7 @@ export function ThemeTab({
             window.open("https://tweakcn.com/editor/theme", "_blank")
           }
         >
-          <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+          <ExternalLink className="size-3.5 mr-1.5" />
           Open Tweakcn
         </Button>
       </div>

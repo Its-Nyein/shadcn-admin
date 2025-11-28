@@ -111,7 +111,7 @@ export const columns: ColumnDef<Task>[] = [
               "border-red-500/50 bg-red-500/10 text-red-600 dark:text-red-400",
           )}
         >
-          {status.icon && <status.icon className="h-3.5 w-3.5" />}
+          {status.icon && <status.icon className="size-3.5" />}
           {status.label}
         </Badge>
       );
@@ -143,7 +143,7 @@ export const columns: ColumnDef<Task>[] = [
             priority.value === "low" && "text-slate-600 dark:text-slate-400",
           )}
         >
-          {priority.icon && <priority.icon className="h-4 w-4" />}
+          {priority.icon && <priority.icon className="size-4" />}
           <span>{priority.label}</span>
         </div>
       );

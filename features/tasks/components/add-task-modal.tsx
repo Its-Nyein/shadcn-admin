@@ -112,7 +112,7 @@ export function AddTaskModal({ onAddTask, trigger }: AddTaskModalProps) {
       <DialogTrigger asChild>
         {trigger || (
           <Button variant="default" size="sm" className="cursor-pointer">
-            <Plus className="w-4 h-4" />
+            <Plus className="size-4" />
             Add Task
           </Button>
         )}
@@ -178,7 +178,7 @@ export function AddTaskModal({ onAddTask, trigger }: AddTaskModalProps) {
                   <SelectItem key={status.value} value={status.value}>
                     <div className="flex items-center">
                       {status.icon && (
-                        <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                        <status.icon className="mr-2 size-4 text-muted-foreground" />
                       )}
                       {status.label}
                     </div>
@@ -229,7 +229,7 @@ export function AddTaskModal({ onAddTask, trigger }: AddTaskModalProps) {
                   <SelectItem key={priority.value} value={priority.value}>
                     <div className="flex items-center">
                       {priority.icon && (
-                        <priority.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+                        <priority.icon className="mr-2 size-4 text-muted-foreground" />
                       )}
                       {priority.label}
                     </div>
@@ -250,7 +250,7 @@ export function AddTaskModal({ onAddTask, trigger }: AddTaskModalProps) {
               Cancel
             </Button>
             <Button type="submit" className="cursor-pointer">
-              <Plus className="w-4 h-4" />
+              <Plus className="size-4" />
               Create Task
             </Button>
           </div>

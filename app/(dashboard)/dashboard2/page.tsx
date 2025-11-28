@@ -8,8 +8,8 @@ import { TopProducts } from "@/features/dashboard2/components/top-products";
 
 export default function Dashboard2() {
   return (
-    <div className="flex-1 space-y-6 px-6 py-4">
-      <div className="flex md:flex-row flex-col md:items-center justify-between gap-4 md:gap-6">
+    <>
+      <div className="px-4 lg:px-6 py-4 flex md:flex-row flex-col md:items-center justify-between gap-2">
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl font-bold tracking-tight">
             Business Dashboard
@@ -21,7 +21,7 @@ export default function Dashboard2() {
         <QuickActions />
       </div>
 
-      <div className="@container/main space-y-6">
+      <div className="@container/main px-4 lg:px-6 space-y-6">
         <MetricsOverview />
 
         <div className="grid gap-6 grid-cols-1 @5xl:grid-cols-2">
@@ -36,6 +36,6 @@ export default function Dashboard2() {
 
         <CustomerInsights />
       </div>
-    </div>
+    </>
   );
 }

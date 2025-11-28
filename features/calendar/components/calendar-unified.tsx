@@ -214,7 +214,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold">Calendar</h2>
           <Button size="sm" onClick={handleNewEvent}>
-            <Plus className="h-4 w-4 mr-1" />
+            <Plus className="size-4 mr-1" />
             Event
           </Button>
         </div>
@@ -239,7 +239,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-sm font-medium">My Calendars</h3>
           <Button variant="ghost" size="sm" onClick={handleNewCalendar}>
-            <Plus className="h-4 w-4" />
+            <Plus className="size-4" />
           </Button>
         </div>
 
@@ -274,7 +274,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
                   className="xl:hidden"
                   onClick={() => setShowCalendarSheet(true)}
                 >
-                  <Menu className="h-4 w-4" />
+                  <Menu className="size-4" />
                 </Button>
 
                 {/* Month Navigation */}
@@ -284,7 +284,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
                     size="sm"
                     onClick={() => navigateMonth("prev")}
                   >
-                    <ChevronLeft className="h-4 w-4" />
+                    <ChevronLeft className="size-4" />
                   </Button>
                   <h2 className="text-lg font-semibold min-w-[140px] text-center">
                     {format(currentDate, "MMMM yyyy")}
@@ -294,7 +294,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
                     size="sm"
                     onClick={() => navigateMonth("next")}
                   >
-                    <ChevronRight className="h-4 w-4" />
+                    <ChevronRight className="size-4" />
                   </Button>
                 </div>
 
@@ -306,7 +306,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
               <div className="flex items-center space-x-2">
                 <div className="hidden sm:flex items-center space-x-2">
                   <Button variant="ghost" size="sm" className="text-xs">
-                    <Search className="h-4 w-4 mr-1" />
+                    <Search className="size-4 mr-1" />
                     Search
                   </Button>
                 </div>
@@ -315,7 +315,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="sm">
-                      <Grid3X3 className="h-4 w-4 mr-1" />
+                      <Grid3X3 className="size-4 mr-1" />
                       {viewMode === "month"
                         ? "Month"
                         : viewMode === "week"
@@ -323,24 +323,24 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
                           : viewMode === "day"
                             ? "Day"
                             : "List"}
-                      <ChevronDown className="h-4 w-4 ml-1" />
+                      <ChevronDown className="size-4 ml-1" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={() => setViewMode("month")}>
-                      <Grid3X3 className="h-4 w-4 mr-2" />
+                      <Grid3X3 className="size-4 mr-2" />
                       Month
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setViewMode("week")}>
-                      <List className="h-4 w-4 mr-2" />
+                      <List className="size-4 mr-2" />
                       Week
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setViewMode("day")}>
-                      <CalendarIcon className="h-4 w-4 mr-2" />
+                      <CalendarIcon className="size-4 mr-2" />
                       Day
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => setViewMode("list")}>
-                      <List className="h-4 w-4 mr-2" />
+                      <List className="size-4 mr-2" />
                       List
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -377,7 +377,7 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
           {selectedEvent && (
             <div className="space-y-4 pt-4">
               <div className="flex items-center space-x-2 text-sm">
-                <Clock className="h-4 w-4 text-muted-foreground" />
+                <Clock className="size-4 text-muted-foreground" />
                 <span>
                   {selectedEvent.time} • {selectedEvent.duration}
                 </span>
@@ -385,17 +385,17 @@ export function CalendarMain({ eventDates = [] }: CalendarMainProps) {
 
               {selectedEvent.location && (
                 <div className="flex items-center space-x-2 text-sm">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
+                  <MapPin className="size-4 text-muted-foreground" />
                   <span>{selectedEvent.location}</span>
                 </div>
               )}
 
               {selectedEvent.attendees.length > 0 && (
                 <div className="flex items-center space-x-2 text-sm">
-                  <Users className="h-4 w-4 text-muted-foreground" />
+                  <Users className="size-4 text-muted-foreground" />
                   <div className="flex space-x-1">
                     {selectedEvent.attendees.map((attendee, index) => (
-                      <Avatar key={index} className="h-6 w-6">
+                      <Avatar key={index} className="size-6">
                         <AvatarFallback className="text-xs">
                           {attendee}
                         </AvatarFallback>

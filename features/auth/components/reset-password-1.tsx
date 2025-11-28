@@ -186,7 +186,7 @@ export default function ResetPassword1() {
                       )}
                     >
                       {isCompleted ? (
-                        <CheckCircle2 className="h-5 w-5" />
+                        <CheckCircle2 className="size-5" />
                       ) : (
                         <span className="text-sm font-semibold">{step.id}</span>
                       )}
@@ -195,7 +195,7 @@ export default function ResetPassword1() {
                       <div className="flex items-center gap-2">
                         <Icon
                           className={cn(
-                            "h-4 w-4",
+                            "size-4",
                             isCompleted && "text-green-400",
                             isActive && "text-violet-400",
                             !isCompleted && !isActive && "text-zinc-500",
@@ -265,7 +265,7 @@ export default function ResetPassword1() {
             <CardHeader className="space-y-1">
               <div className="flex items-center gap-2">
                 <CardTitle className="text-2xl">Reset Password</CardTitle>
-                <ShieldCheck className="h-5 w-5 text-violet-500" />
+                <ShieldCheck className="size-5 text-violet-500" />
               </div>
               <CardDescription>
                 {currentStep === 1 &&
@@ -311,7 +311,7 @@ export default function ResetPassword1() {
                       {isLoading ? (
                         <span className="flex items-center gap-2">
                           <svg
-                            className="h-4 w-4 animate-spin"
+                            className="size-4 animate-spin"
                             viewBox="0 0 24 24"
                           >
                             <circle
@@ -374,7 +374,7 @@ export default function ResetPassword1() {
                       {isLoading ? (
                         <span className="flex items-center gap-2">
                           <svg
-                            className="h-4 w-4 animate-spin"
+                            className="size-4 animate-spin"
                             viewBox="0 0 24 24"
                           >
                             <circle
@@ -466,7 +466,7 @@ export default function ResetPassword1() {
                       {isLoading ? (
                         <span className="flex items-center gap-2">
                           <svg
-                            className="h-4 w-4 animate-spin"
+                            className="size-4 animate-spin"
                             viewBox="0 0 24 24"
                           >
                             <circle

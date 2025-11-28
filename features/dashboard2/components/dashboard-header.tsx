@@ -38,11 +38,11 @@ export function DashboardHeader() {
           </div>
           <div className="flex items-center space-x-2">
             <Badge variant="outline" className="cursor-pointer">
-              <Clock className="h-3 w-3 mr-1" />
+              <Clock className="size-3 mr-1" />
               Live Data
             </Badge>
             <Button variant="outline" size="sm" className="cursor-pointer">
-              <RefreshCw className="h-4 w-4 mr-2" />
+              <RefreshCw className="size-4 mr-2" />
               Refresh
             </Button>
           </div>
@@ -53,7 +53,7 @@ export function DashboardHeader() {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <Calendar className="size-4 text-muted-foreground" />
               <span className="text-sm text-muted-foreground">Date Range:</span>
               <Select value={dateRange} onValueChange={setDateRange}>
                 <SelectTrigger className="w-40 cursor-pointer">
@@ -76,7 +76,7 @@ export function DashboardHeader() {
               </Select>
             </div>
             <Button variant="outline" size="sm" className="cursor-pointer">
-              <Filter className="h-4 w-4 mr-2" />
+              <Filter className="size-4 mr-2" />
               Filters
             </Button>
           </div>

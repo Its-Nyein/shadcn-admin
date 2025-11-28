@@ -78,7 +78,7 @@ export function TopProducts() {
           size="sm"
           className="w-full sm:w-auto cursor-pointer"
         >
-          <Eye className="h-4 w-4 mr-2" />
+          <Eye className="size-4" />
           View All
         </Button>
       </CardHeader>
@@ -101,7 +101,7 @@ export function TopProducts() {
                 </div>
                 <div className="flex items-center space-x-2 mt-1">
                   <div className="flex items-center space-x-1">
-                    <Star className="h-3 w-3 fill-yellow-400 text-yellow-400 shrink-0" />
+                    <Star className="size-3 fill-yellow-400 text-yellow-400 shrink-0" />
                     <span className="text-xs text-muted-foreground">
                       {product.rating}
                     </span>
@@ -119,7 +119,7 @@ export function TopProducts() {
                     variant="outline"
                     className="text-green-600 border-green-200 cursor-pointer shrink-0"
                   >
-                    <TrendingUp className="h-3 w-3 mr-1" />
+                    <TrendingUp className="size-3 mr-1" />
                     {product.growth}
                   </Badge>
                 </div>

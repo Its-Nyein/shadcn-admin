@@ -149,21 +149,21 @@ export function CustomerInsights() {
               value="growth"
               className="cursor-pointer flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground"
             >
-              <TrendingUp className="h-4 w-4" />
+              <TrendingUp className="size-4" />
               <span className="hidden sm:inline">Growth</span>
             </TabsTrigger>
             <TabsTrigger
               value="demographics"
               className="cursor-pointer flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground"
             >
-              <UserIcon className="h-4 w-4" />
+              <UserIcon className="size-4" />
               <span className="hidden sm:inline">Demographics</span>
             </TabsTrigger>
             <TabsTrigger
               value="regions"
               className="cursor-pointer flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-foreground"
             >
-              <MapPin className="h-4 w-4" />
+              <MapPin className="size-4" />
               <span className="hidden sm:inline">Regions</span>
             </TabsTrigger>
           </TabsList>
@@ -231,40 +231,40 @@ export function CustomerInsights() {
                   <div className="grid grid-cols-3 gap-5">
                     <div className="p-4 rounded-lg max-lg:col-span-3 xl:col-span-3 border">
                       <div className="flex items-center gap-2 mb-2">
-                        <TrendingUp className="h-4 w-4 text-primary" />
+                        <TrendingUp className="size-4 text-primary" />
                         <span className="text-sm font-medium">
                           Total Customers
                         </span>
                       </div>
                       <div className="text-2xl font-bold">15,847</div>
                       <div className="text-xs text-green-600 flex items-center gap-1 mt-1">
-                        <ArrowUpIcon className="h-3 w-3" />
+                        <ArrowUpIcon className="size-3" />
                         +12.5% from last month
                       </div>
                     </div>
 
                     <div className="p-4 rounded-lg max-lg:col-span-3 xl:col-span-3 border">
                       <div className="flex items-center gap-2 mb-2">
-                        <Users className="h-4 w-4 text-muted-foreground" />
+                        <Users className="size-4 text-muted-foreground" />
                         <span className="text-sm font-medium">
                           Retention Rate
                         </span>
                       </div>
                       <div className="text-2xl font-bold">92.4%</div>
                       <div className="text-xs text-green-600 flex items-center gap-1 mt-1">
-                        <ArrowUpIcon className="h-3 w-3" />
+                        <ArrowUpIcon className="size-3" />
                         +2.1% improvement
                       </div>
                     </div>
 
                     <div className="p-4 rounded-lg max-lg:col-span-3 xl:col-span-3 border">
                       <div className="flex items-center gap-2 mb-2">
-                        <Target className="h-4 w-4 text-muted-foreground" />
+                        <Target className="size-4 text-muted-foreground" />
                         <span className="text-sm font-medium">Avg. LTV</span>
                       </div>
                       <div className="text-2xl font-bold">$2,847</div>
                       <div className="text-xs text-green-600 flex items-center gap-1 mt-1">
-                        <ArrowUpIcon className="h-3 w-3" />
+                        <ArrowUpIcon className="size-3" />
                         +8.3% growth
                       </div>
                     </div>

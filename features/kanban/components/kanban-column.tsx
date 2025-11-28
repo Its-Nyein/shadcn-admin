@@ -50,10 +50,10 @@ export function KanbanColumn({
         <Button
           variant="ghost"
           size="icon-sm"
-          className="h-7 w-7"
+          className="size-7"
           onClick={() => onAddTask(id)}
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="size-4" />
         </Button>
       </div>
 

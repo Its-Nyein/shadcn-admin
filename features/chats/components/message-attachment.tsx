@@ -52,13 +52,13 @@ export function MessageAttachment({
       >
         <div
           className={cn(
-            "flex h-10 w-10 items-center justify-center rounded-lg",
+            "flex size-10 items-center justify-center rounded-lg",
             isOwnMessage ? "bg-primary-foreground/20" : "bg-red-500/10",
           )}
         >
           <FileText
             className={cn(
-              "h-5 w-5",
+              "size-5",
               isOwnMessage ? "text-primary-foreground" : "text-red-500",
             )}
           />
@@ -88,21 +88,21 @@ export function MessageAttachment({
             variant="ghost"
             size="icon"
             className={cn(
-              "h-8 w-8",
+              "size-8",
               isOwnMessage && "hover:bg-primary-foreground/20",
             )}
           >
-            <Eye className="h-4 w-4" />
+            <Eye className="size-4" />
           </Button>
           <Button
             variant="ghost"
             size="icon"
             className={cn(
-              "h-8 w-8",
+              "size-8",
               isOwnMessage && "hover:bg-primary-foreground/20",
             )}
           >
-            <Download className="h-4 w-4" />
+            <Download className="size-4" />
           </Button>
         </div>
       </div>
@@ -131,9 +131,9 @@ export function MessageAttachment({
           onClick={() => setIsPlaying(!isPlaying)}
         >
           {isPlaying ? (
-            <Pause className="h-4 w-4" />
+            <Pause className="size-4" />
           ) : (
-            <Play className="h-4 w-4 ml-0.5" />
+            <Play className="size-4 ml-0.5" />
           )}
         </Button>
 
@@ -172,7 +172,7 @@ export function MessageAttachment({
             </span>
             <Headphones
               className={cn(
-                "h-3 w-3",
+                "size-3",
                 isOwnMessage
                   ? "text-primary-foreground/50"
                   : "text-muted-foreground",
@@ -201,7 +201,7 @@ export function MessageAttachment({
       >
         <ImageIcon
           className={cn(
-            "h-5 w-5",
+            "size-5",
             isOwnMessage ? "text-primary-foreground" : "text-muted-foreground",
           )}
         />
@@ -230,11 +230,11 @@ export function MessageAttachment({
         variant="ghost"
         size="icon"
         className={cn(
-          "h-8 w-8",
+          "size-8",
           isOwnMessage && "hover:bg-primary-foreground/20",
         )}
       >
-        <Download className="h-4 w-4" />
+        <Download className="size-4" />
       </Button>
     </div>
   );

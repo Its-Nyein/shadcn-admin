@@ -1,8 +1,7 @@
 "use client";
 
-import type { Column } from "@tanstack/react-table";
-import { PlusCircle } from "lucide-react";
-import * as React from "react";
+import type { Table } from "@tanstack/react-table";
+import { Download, PlusCircle, Search, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,28 +15,44 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import {
+  gateways,
+  paymentMethods,
+  transactionStatuses,
+} from "../utils/transaction-data";
+import { TransactionsViewOptions } from "./transactions-view-options";
 
-interface DataTableFacetedFilterProps<TData, TValue> {
-  column?: Column<TData, TValue>;
-  title?: string;
-  options: {
-    label: string;
-    value: string;
-    icon?: React.ComponentType<{ className?: string }>;
-  }[];
+interface TransactionsTableToolbarProps<TData> {
+  table: Table<TData>;
 }
 
-export function DataTableFacetedFilter<TData, TValue>({
-  column,
+interface FilterOption {
+  label: string;
+  value: string;
+  color?: string;
+}
+
+interface FacetedFilterProps<TData> {
+  table: Table<TData>;
+  columnId: string;
+  title: string;
+  options: FilterOption[];
+}
+
+function FacetedFilter<TData>({
+  table,
+  columnId,
   title,
   options,
-}: DataTableFacetedFilterProps<TData, TValue>) {
+}: FacetedFilterProps<TData>) {
+  const column = table.getColumn(columnId);
   const facets = column?.getFacetedUniqueValues();
   const selectedValues = new Set(column?.getFilterValue() as string[]);
 
@@ -47,9 +62,9 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          className="h-8 border-dashed cursor-pointer"
+          className="h-8 cursor-pointer border-dashed"
         >
-          <PlusCircle />
+          <PlusCircle className="size-4" />
           {title}
           {selectedValues?.size > 0 && (
             <>
@@ -75,7 +90,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                       <Badge
                         variant="secondary"
                         key={option.value}
-                        className="rounded-sm px-1 font-normal cursor-pointer"
+                        className="cursor-pointer rounded-sm px-1 font-normal"
                       >
                         {option.label}
                       </Badge>
@@ -108,26 +123,9 @@ export function DataTableFacetedFilter<TData, TValue>({
                         filterValues.length ? filterValues : undefined,
                       );
                     }}
-                    className="cursor-pointer [&_svg:not([class*='text-'])]:text-primary-foreground"
+                    className="cursor-pointer"
                   >
-                    <Checkbox
-                      checked={isSelected}
-                      onCheckedChange={(checked) => {
-                        if (checked) {
-                          selectedValues.add(option.value);
-                        } else {
-                          selectedValues.delete(option.value);
-                        }
-                        const filterValues = Array.from(selectedValues);
-                        column?.setFilterValue(
-                          filterValues.length ? filterValues : undefined,
-                        );
-                      }}
-                      className="mr-2"
-                    />
-                    {option.icon && (
-                      <option.icon className="mr-2 size-4 text-muted-foreground" />
-                    )}
+                    <Checkbox checked={isSelected} className="mr-2" />
                     <span>{option.label}</span>
                     {facets?.get(option.value) && (
                       <span className="ml-auto flex size-4 items-center justify-center font-mono text-xs">
@@ -144,7 +142,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                 <CommandGroup>
                   <CommandItem
                     onSelect={() => column?.setFilterValue(undefined)}
-                    className="justify-center text-center cursor-pointer"
+                    className="cursor-pointer justify-center text-center"
                   >
                     Clear filters
                   </CommandItem>
@@ -155,5 +153,66 @@ export function DataTableFacetedFilter<TData, TValue>({
         </Command>
       </PopoverContent>
     </Popover>
+  );
+}
+
+export function TransactionsTableToolbar<TData>({
+  table,
+}: TransactionsTableToolbarProps<TData>) {
+  const isFiltered = table.getState().columnFilters.length > 0;
+
+  return (
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-1 flex-wrap items-center gap-2">
+        <div className="relative">
+          <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            placeholder="Search transactions..."
+            value={
+              (table.getColumn("customer")?.getFilterValue() as string) ?? ""
+            }
+            onChange={(event) =>
+              table.getColumn("customer")?.setFilterValue(event.target.value)
+            }
+            className="h-8 w-[200px] pl-8 lg:w-[280px]"
+          />
+        </div>
+        <FacetedFilter
+          table={table}
+          columnId="status"
+          title="Status"
+          options={transactionStatuses}
+        />
+        <FacetedFilter
+          table={table}
+          columnId="method"
+          title="Method"
+          options={paymentMethods}
+        />
+        <FacetedFilter
+          table={table}
+          columnId="gateway"
+          title="Gateway"
+          options={gateways}
+        />
+        {isFiltered && (
+          <Button
+            variant="ghost"
+            onClick={() => table.resetColumnFilters()}
+            className="h-8 cursor-pointer px-3"
+          >
+            Reset
+            <X className="ml-1 size-4" />
+          </Button>
+        )}
+      </div>
+      <div className="flex items-center gap-2">
+        <TransactionsViewOptions table={table} />
+        <Button variant="outline" size="sm" className="h-8 cursor-pointer">
+          <Download className="size-4" />
+          Export
+        </Button>
+      </div>
+    </div>
   );
 }

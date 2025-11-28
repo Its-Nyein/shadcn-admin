@@ -96,7 +96,7 @@ export function ColumnPricing() {
                 <ul className="space-y-3">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2">
-                      <Check className="text-primary h-4 w-4" />
+                      <Check className="text-primary size-4" />
                       <span className="text-sm">{feature}</span>
                     </li>
                   ))}

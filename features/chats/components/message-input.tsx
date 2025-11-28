@@ -96,7 +96,7 @@ export function MessageInput({
                     disabled={disabled}
                     className="cursor-pointer disabled:cursor-not-allowed"
                   >
-                    <Paperclip className="h-4 w-4" />
+                    <Paperclip className="size-4" />
                   </Button>
                 </DropdownMenuTrigger>
               </TooltipTrigger>
@@ -109,14 +109,14 @@ export function MessageInput({
                 onClick={() => handleFileUpload("image")}
                 className="cursor-pointer"
               >
-                <ImageIcon className="h-4 w-4 mr-2" />
+                <ImageIcon className="size-4 mr-2" />
                 Photo or video
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => handleFileUpload("file")}
                 className="cursor-pointer"
               >
-                <FileText className="h-4 w-4 mr-2" />
+                <FileText className="size-4 mr-2" />
                 Document
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -146,9 +146,9 @@ export function MessageInput({
                     variant="ghost"
                     size="sm"
                     disabled={disabled}
-                    className="h-6 w-6 p-0 cursor-pointer disabled:cursor-not-allowed"
+                    className="size-6 p-0 cursor-pointer disabled:cursor-not-allowed"
                   >
-                    <Smile className="h-4 w-4" />
+                    <Smile className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -164,9 +164,9 @@ export function MessageInput({
                     variant="ghost"
                     size="sm"
                     disabled={disabled}
-                    className="h-6 w-6 p-0 cursor-pointer disabled:cursor-not-allowed"
+                    className="size-6 p-0 cursor-pointer disabled:cursor-not-allowed"
                   >
-                    <MoreHorizontal className="h-4 w-4" />
+                    <MoreHorizontal className="size-4" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -186,7 +186,7 @@ export function MessageInput({
                   disabled={disabled}
                   className="cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Send className="h-4 w-4" />
+                  <Send className="size-4" />
                 </Button>
               ) : (
                 <Button
@@ -195,7 +195,7 @@ export function MessageInput({
                   disabled={disabled}
                   className="cursor-pointer disabled:cursor-not-allowed"
                 >
-                  <Mic className="h-4 w-4" />
+                  <Mic className="size-4" />
                 </Button>
               )}
             </TooltipTrigger>

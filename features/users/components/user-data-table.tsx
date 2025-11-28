@@ -15,6 +15,8 @@ import {
 } from "@tanstack/react-table";
 import {
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Download,
   EllipsisVertical,
   Eye,
@@ -262,7 +264,7 @@ export function DataTable({
                   className="cursor-pointer"
                   onClick={() => onDeleteUser(user.id)}
                 >
-                  <Trash2 className="mr-2 size-4" />
+                  <Trash2 className="size-4" />
                   Delete User
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -315,7 +317,7 @@ export function DataTable({
         </div>
         <div className="flex items-center space-x-2">
           <Button variant="outline" className="cursor-pointer">
-            <Download className="mr-2 size-4" />
+            <Download className="size-4" />
             Export
           </Button>
           <UserFormDialog onAddUser={onAddUser} />
@@ -402,7 +404,7 @@ export function DataTable({
           <DropdownMenu>
             <DropdownMenuTrigger asChild id="column-visibility">
               <Button variant="outline" className="cursor-pointer w-full">
-                Columns <ChevronDown className="ml-2 size-4" />
+                Columns <ChevronDown className="size-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -479,59 +481,64 @@ export function DataTable({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between space-x-2 py-4">
-        <div className="flex items-center space-x-2">
-          <Label htmlFor="page-size" className="text-sm font-medium">
-            Show
-          </Label>
-          <Select
-            value={`${table.getState().pagination.pageSize}`}
-            onValueChange={(value) => {
-              table.setPageSize(Number(value));
-            }}
-          >
-            <SelectTrigger className="w-20 cursor-pointer" id="page-size">
-              <SelectValue placeholder={table.getState().pagination.pageSize} />
-            </SelectTrigger>
-            <SelectContent side="top">
-              {[10, 20, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
-                  {pageSize}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex-1 text-sm text-muted-foreground hidden sm:block">
+      <div className="flex items-center justify-between px-4">
+        <div className="text-muted-foreground hidden flex-1 text-sm lg:flex">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
-        <div className="flex items-center space-x-6 lg:space-x-8">
-          <div className="flex items-center space-x-2 sm:block">
-            <p className="text-sm font-medium">Page</p>
-            <strong className="text-sm">
-              {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
-            </strong>
+        <div className="flex w-full items-center gap-8 lg:w-fit">
+          <div className="hidden items-center gap-2 lg:flex">
+            <Label htmlFor="page-size" className="text-sm font-medium">
+              Rows per page
+            </Label>
+            <Select
+              value={`${table.getState().pagination.pageSize}`}
+              onValueChange={(value) => {
+                table.setPageSize(Number(value));
+              }}
+            >
+              <SelectTrigger
+                size="sm"
+                className="w-20 cursor-pointer"
+                id="page-size"
+              >
+                <SelectValue
+                  placeholder={table.getState().pagination.pageSize}
+                />
+              </SelectTrigger>
+              <SelectContent side="top">
+                {[10, 20, 30, 40, 50].map((pageSize) => (
+                  <SelectItem key={pageSize} value={`${pageSize}`}>
+                    {pageSize}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex w-fit items-center justify-center text-sm font-medium">
+            Page {table.getState().pagination.pageIndex + 1} of{" "}
+            {table.getPageCount()}
+          </div>
+          <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <Button
               variant="outline"
-              size="sm"
+              className="size-8 cursor-pointer"
+              size="icon"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
-              className="cursor-pointer"
             >
-              Previous
+              <span className="sr-only">Go to previous page</span>
+              <ChevronLeft />
             </Button>
             <Button
               variant="outline"
-              size="sm"
+              className="size-8 cursor-pointer"
+              size="icon"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
-              className="cursor-pointer"
             >
-              Next
+              <span className="sr-only">Go to next page</span>
+              <ChevronRight />
             </Button>
           </div>
         </div>

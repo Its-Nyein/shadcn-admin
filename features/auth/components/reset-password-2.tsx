@@ -204,7 +204,7 @@ export default function ResetPassword2() {
                     {isLoading ? (
                       <span className="flex items-center gap-2">
                         <svg
-                          className="h-4 w-4 animate-spin"
+                          className="size-4 animate-spin"
                           viewBox="0 0 24 24"
                         >
                           <circle
@@ -245,12 +245,12 @@ export default function ResetPassword2() {
               {/* Account Found Badge */}
               <div className="rounded-lg border bg-muted/30 p-4 space-y-3">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-500" />
+                  <CheckCircle2 className="size-4 text-green-500" />
                   <span className="text-sm font-medium">Account Found</span>
                 </div>
                 <p className="text-sm text-muted-foreground">{email}</p>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-amber-500" />
+                  <ShieldCheck className="size-4 text-amber-500" />
                   <span className="text-sm text-amber-600 dark:text-amber-400">
                     Pending Verification
                   </span>
@@ -323,7 +323,7 @@ export default function ResetPassword2() {
                     {isLoading ? (
                       <span className="flex items-center gap-2">
                         <svg
-                          className="h-4 w-4 animate-spin"
+                          className="size-4 animate-spin"
                           viewBox="0 0 24 24"
                         >
                           <circle
@@ -390,9 +390,9 @@ export default function ResetPassword2() {
                               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                             >
                               {showPassword ? (
-                                <EyeOff className="h-4 w-4" />
+                                <EyeOff className="size-4" />
                               ) : (
-                                <Eye className="h-4 w-4" />
+                                <Eye className="size-4" />
                               )}
                             </button>
                           </div>
@@ -427,9 +427,9 @@ export default function ResetPassword2() {
                               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                             >
                               {showConfirmPassword ? (
-                                <EyeOff className="h-4 w-4" />
+                                <EyeOff className="size-4" />
                               ) : (
-                                <Eye className="h-4 w-4" />
+                                <Eye className="size-4" />
                               )}
                             </button>
                           </div>
@@ -446,7 +446,7 @@ export default function ResetPassword2() {
                     {isLoading ? (
                       <span className="flex items-center gap-2">
                         <svg
-                          className="h-4 w-4 animate-spin"
+                          className="size-4 animate-spin"
                           viewBox="0 0 24 24"
                         >
                           <circle
@@ -487,7 +487,7 @@ export default function ResetPassword2() {
               {/* Success Icon */}
               <div className="flex justify-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
-                  <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
+                  <CheckCircle2 className="size-8 text-green-600 dark:text-green-400" />
                 </div>
               </div>
 
@@ -508,22 +508,22 @@ export default function ResetPassword2() {
               {/* Security Recommendations */}
               <div className="rounded-lg border bg-muted/30 p-4 space-y-3 mt-6">
                 <div className="flex items-center gap-2">
-                  <Lock className="h-4 w-4 text-muted-foreground" />
+                  <Lock className="size-4 text-muted-foreground" />
                   <span className="text-sm font-medium">
                     Security Recommendations
                   </span>
                 </div>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-center gap-2">
-                    <KeyRound className="h-3 w-3" />
+                    <KeyRound className="size-3" />
                     Use a different password for each account
                   </li>
                   <li className="flex items-center gap-2">
-                    <ShieldCheck className="h-3 w-3" />
+                    <ShieldCheck className="size-3" />
                     Enable two-factor authentication where available
                   </li>
                   <li className="flex items-center gap-2">
-                    <Lock className="h-3 w-3" />
+                    <Lock className="size-3" />
                     Consider using a password manager
                   </li>
                 </ul>

@@ -124,7 +124,7 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
           <SheetHeader className="space-y-0 p-4 pb-2">
             <div className="flex items-center gap-2">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Settings className="h-4 w-4" />
+                <Settings className="size-4" />
               </div>
               <SheetTitle className="text-lg font-semibold">
                 Customizer
@@ -136,7 +136,7 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
                   onClick={handleReset}
                   className="cursor-pointer h-8 w-8"
                 >
-                  <RotateCcw className="h-4 w-4" />
+                  <RotateCcw className="size-4" />
                 </Button>
                 <Button
                   variant="outline"
@@ -144,7 +144,7 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
                   onClick={() => onOpenChange(false)}
                   className="cursor-pointer h-8 w-8"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="size-4" />
                 </Button>
               </div>
             </div>
@@ -165,13 +165,13 @@ export function ThemeCustomizer({ open, onOpenChange }: ThemeCustomizerProps) {
                     value="theme"
                     className="cursor-pointer data-[state=active]:bg-background"
                   >
-                    <Palette className="h-4 w-4 mr-1" /> Theme
+                    <Palette className="size-4" /> Theme
                   </TabsTrigger>
                   <TabsTrigger
                     value="layout"
                     className="cursor-pointer data-[state=active]:bg-background"
                   >
-                    <Layout className="h-4 w-4 mr-1" /> Layout
+                    <Layout className="size-4" /> Layout
                   </TabsTrigger>
                 </TabsList>
                 {/* <TabsList className="grid w-full grid-cols-2 rounded-none h-12 p-1.5">
@@ -223,7 +223,7 @@ export function ThemeCustomizerTrigger({ onClick }: { onClick: () => void }) {
         sidebarConfig.side === "left" ? "right-4" : "left-4",
       )}
     >
-      <Settings className="h-5 w-5" />
+      <Settings className="size-5" />
     </Button>
   );
 }
