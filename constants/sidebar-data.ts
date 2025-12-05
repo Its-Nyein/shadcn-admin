@@ -94,7 +94,9 @@ export const sidebarData: SidebarData = {
           title: "Mail",
           url: "/mail",
           icon: MailIcon,
-          badge: "Coming Soon",
+          // badge: "Coming Soon",
+          badge: "New",
+          badgeColor: "green",
         },
         {
           title: "Discord",

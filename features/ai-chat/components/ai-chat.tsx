@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Conversation,
   ConversationContent,
@@ -249,7 +250,6 @@ const ChatBotDemo = () => {
                       }
                     >
                       <GlobeIcon size={16} />
-                      <span className="hidden sm:inline">Search</span>
                     </PromptInputButton>
                     <PromptInputSelect
                       onValueChange={(value) => {
@@ -257,7 +257,7 @@ const ChatBotDemo = () => {
                       }}
                       value={model}
                     >
-                      <PromptInputSelectTrigger className="w-[140px]">
+                      <PromptInputSelectTrigger className="w-auto max-w-[130px] md:max-w-[160px]">
                         <PromptInputSelectValue />
                       </PromptInputSelectTrigger>
                       <PromptInputSelectContent>
