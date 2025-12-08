@@ -139,4 +139,9 @@
     background-color: var(--border);
     border-radius: 9999px;
   }
+
+  .faded-bottom {
+    mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent 100%);
+  }
 }

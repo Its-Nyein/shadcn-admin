@@ -240,7 +240,7 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: "Profile",
-              url: "/settings/profile",
+              url: "/settings",
               icon: IconUserCog,
             },
             {
