@@ -236,7 +236,7 @@ export const sidebarData: SidebarData = {
         {
           title: "Settings",
           icon: IconSettings,
-          badge: "Coming Soon",
+          // badge: "Coming Soon",
           items: [
             {
               title: "Profile",

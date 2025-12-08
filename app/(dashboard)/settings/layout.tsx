@@ -1,11 +1,19 @@
 "use client";
 
 import { buttonVariants } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Bell, Monitor, Palette, UserCog, Wrench } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const sidebarNavItems = [
   {
@@ -68,6 +76,56 @@ function SidebarNav({ items, className, ...props }: SidebarNavProps) {
   );
 }
 
+function SidebarNavMobile({ items }: SidebarNavProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const currentItem = items.find((item) => item.href === pathname) ?? items[0];
+  const CurrentIcon = currentItem.icon;
+
+  return (
+    <Select value={pathname} onValueChange={(value) => router.push(value)}>
+      <SelectTrigger className="w-full">
+        <SelectValue>
+          <CurrentIcon className="size-4" />
+          {currentItem.title}
+        </SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        {items.map((item) => {
+          const Icon = item.icon;
+          return (
+            <SelectItem key={item.href} value={item.href}>
+              <Icon className="size-4" />
+              {item.title}
+            </SelectItem>
+          );
+        })}
+      </SelectContent>
+    </Select>
+  );
+}
+
+function SidebarNavTabs({ items }: SidebarNavProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  return (
+    <Tabs value={pathname} onValueChange={(value) => router.push(value)}>
+      <TabsList>
+        {items.map((item) => {
+          const Icon = item.icon;
+          return (
+            <TabsTrigger key={item.href} value={item.href}>
+              <Icon className="size-4" />
+              {item.title}
+            </TabsTrigger>
+          );
+        })}
+      </TabsList>
+    </Tabs>
+  );
+}
+
 export default function SettingsLayout({
   children,
 }: {
@@ -85,9 +143,15 @@ export default function SettingsLayout({
           </p>
         </div>
         <Separator className="my-4 lg:my-6" />
+        <div className="md:hidden">
+          <SidebarNavMobile items={sidebarNavItems} />
+        </div>
+        <div className="hidden md:block lg:hidden">
+          <SidebarNavTabs items={sidebarNavItems} />
+        </div>
       </div>
 
-      <div className="flex min-h-0 flex-1 gap-12 px-4 lg:px-6">
+      <div className="flex min-h-0 flex-1 gap-12 px-4 lg:px-6 mt-2">
         <aside className="hidden shrink-0 lg:block lg:w-52">
           <SidebarNav items={sidebarNavItems} />
         </aside>
