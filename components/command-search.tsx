@@ -149,7 +149,7 @@ const searchItems: SearchItem[] = [
   },
   {
     title: "Profile",
-    url: "/settings/profile",
+    url: "/settings",
     group: "Settings",
     icon: IconUserCog,
   },
