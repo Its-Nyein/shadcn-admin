@@ -16,7 +16,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
   return (
     <Sonner
       theme={theme as ToasterProps["theme"]}
-      className="toaster group"
+      className="toaster group [&_div[data-content]]:w-full"
       icons={{
         success: <CircleCheckIcon className="size-4" />,
         info: <InfoIcon className="size-4" />,
@@ -24,11 +24,11 @@ const Toaster = ({ ...props }: ToasterProps) => {
         error: <OctagonXIcon className="size-4" />,
         loading: <Loader2Icon className="size-4 animate-spin" />,
       }}
-      toastOptions={{
-        classNames: {
-          toast: "justify-center !w-fit",
-        },
-      }}
+      // toastOptions={{
+      //   classNames: {
+      //     toast: "justify-center px-1",
+      //   },
+      // }}
       style={
         {
           "--normal-bg": "var(--popover)",

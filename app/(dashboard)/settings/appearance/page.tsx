@@ -11,9 +11,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { FontOption, useFont } from "@/contexts/font-context";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -36,16 +38,29 @@ const defaultValues: Partial<AppearanceFormValues> = {
 
 export default function AppearancePage() {
   const { theme, setTheme } = useTheme();
+  const { font, setFont } = useFont();
+
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
     defaultValues: {
       ...defaultValues,
-      theme: (theme as "light" | "dark") ?? "light",
+      font: font,
     },
   });
 
+  useEffect(() => {
+    if (theme && theme !== form.getValues("theme")) {
+      form.setValue("theme", theme as "light" | "dark");
+    }
+    if (font && font !== form.getValues("font")) {
+      form.setValue("font", font);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme, font]);
+
   function onSubmit(data: AppearanceFormValues) {
     setTheme(data.theme);
+    setFont(data.font as FontOption);
     toast.message("Appearance updated successfully!", {
       description: (
         <pre className="mt-2 overflow-x-auto rounded-md bg-slate-950 p-4">

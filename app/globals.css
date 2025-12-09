@@ -119,6 +119,17 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  :root.font-inter body {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+  :root.font-manrope body {
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  }
+  :root.font-system body {
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
 }
 
 @layer utilities {
