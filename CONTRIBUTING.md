@@ -99,7 +99,6 @@ pnpm lint
    ```
 
    Branch type prefixes:
-
    - `feat/` - New features
    - `fix/` - Bug fixes
    - `docs/` - Documentation changes

@@ -162,7 +162,8 @@ export function CalendarMain({
                   isCurrentMonth
                     ? "bg-background hover:bg-violet-500/5"
                     : "bg-muted/30 text-muted-foreground",
-                  isSelected && "ring-2 ring-violet-500 ring-inset bg-violet-500/5",
+                  isSelected &&
+                    "ring-2 ring-violet-500 ring-inset bg-violet-500/5",
                   isDayToday && "bg-violet-500/10",
                 )}
                 onClick={() => onDateSelect?.(day)}

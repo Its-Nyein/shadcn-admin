@@ -32,7 +32,9 @@ async function seed() {
         console.log(`Deleting existing user "${seedUser.email}"...`);
         await db.delete(user).where(eq(user.email, seedUser.email));
       } else {
-        console.log(`User "${seedUser.email}" already exists, skipping... (use --force to recreate)`);
+        console.log(
+          `User "${seedUser.email}" already exists, skipping... (use --force to recreate)`,
+        );
         continue;
       }
     }

@@ -57,11 +57,11 @@ After seeding the database, you can sign in with:
 
 ## Database Commands
 
-| Command                     | Description                |
-| --------------------------- | -------------------------- |
-| `pnpm db:push`              | Push schema to database    |
-| `pnpm db:studio`            | Open Drizzle Studio        |
-| `pnpm db:generate`          | Generate migrations        |
-| `pnpm db:migrate`           | Run migrations             |
-| `pnpm db:seed`              | Seed test user             |
-| `pnpm db:seed -- --force`   | Recreate test user         |
+| Command                   | Description             |
+| ------------------------- | ----------------------- |
+| `pnpm db:push`            | Push schema to database |
+| `pnpm db:studio`          | Open Drizzle Studio     |
+| `pnpm db:generate`        | Generate migrations     |
+| `pnpm db:migrate`         | Run migrations          |
+| `pnpm db:seed`            | Seed test user          |
+| `pnpm db:seed -- --force` | Recreate test user      |

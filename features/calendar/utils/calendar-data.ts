@@ -9,7 +9,9 @@ import calendarsData from "@/constants/calendars.json";
  * Parse calendar events from JSON and convert to CalendarEvent objects
  * Uses current month/year with the day and time from JSON data
  */
-export function parseCalendarEvents(rawEvents: typeof eventsData): CalendarEvent[] {
+export function parseCalendarEvents(
+  rawEvents: typeof eventsData,
+): CalendarEvent[] {
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth();

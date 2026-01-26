@@ -6,7 +6,9 @@ export default function PaymentTransactionsPage() {
   return (
     <>
       <div className="px-4 lg:px-6 py-4 flex flex-col gap-2">
-        <h1 className="text-2xl font-bold tracking-tight">Payment Transactions</h1>
+        <h1 className="text-2xl font-bold tracking-tight">
+          Payment Transactions
+        </h1>
         <p className="text-muted-foreground">
           View and manage all payment transactions across your platform.
         </p>
