@@ -2,6 +2,7 @@
 
 import { CommandSearch, SearchTrigger } from "@/components/command-search";
 import { ProfileDropdown } from "@/components/profile-dropdown";
+import { SnowToggle } from "@/components/snow-toggle";
 import { ThemeCustomizer } from "@/components/theme-customizer";
 import { ToggleTheme } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -73,6 +74,7 @@ export function DashboardHeader() {
         onOpenChange={setCommandSearchOpen}
       />
       <div className="ml-auto flex items-center gap-1">
+        <SnowToggle />
         <ToggleTheme />
 
         <Button

@@ -134,6 +134,43 @@
 }
 
 @layer utilities {
+  /* Snow effect - smooth infinite falling animation */
+  @keyframes snow-fall {
+    0% {
+      transform: translateY(-5vh) translateX(0);
+    }
+    25% {
+      transform: translateY(25vh) translateX(var(--snow-drift, 10px));
+    }
+    50% {
+      transform: translateY(50vh) translateX(0);
+    }
+    75% {
+      transform: translateY(75vh) translateX(calc(var(--snow-drift, 10px) * -1));
+    }
+    100% {
+      transform: translateY(105vh) translateX(0);
+    }
+  }
+
+  .animate-snow-fall {
+    animation: snow-fall linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
+  }
+
   .dashboard-scroll {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;

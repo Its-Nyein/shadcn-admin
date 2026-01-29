@@ -381,9 +381,7 @@ export function DataTable({
     [focusDocuments],
   );
 
-  {
-    /* eslint-disable-next-line */
-  }
+  /* eslint-disable-next-line */
   const pastPerformanceTable = useReactTable({
     data: pastPerformance,
     columns,

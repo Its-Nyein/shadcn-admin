@@ -1,7 +1,9 @@
+import { SnowEffect } from "@/components/snow-effect";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/contexts/auth-context";
 import { FontProvider } from "@/contexts/font-context";
+import { SnowProvider } from "@/contexts/snow-context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Manrope } from "next/font/google";
 import NextToploader from "nextjs-toploader";
@@ -70,10 +72,13 @@ export default function RootLayout({
         >
           <FontProvider>
             <NextToploader color="var(--primary)" showSpinner={false} />
-            <AuthProvider>
-              {children}
-              <Toaster />
-            </AuthProvider>
+            <SnowProvider>
+              <AuthProvider>
+                {children}
+                <SnowEffect />
+                <Toaster />
+              </AuthProvider>
+            </SnowProvider>
           </FontProvider>
         </ThemeProvider>
       </body>
