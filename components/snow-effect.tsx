@@ -1,9 +1,7 @@
 "use client";
 
-import { useSnow } from "@/contexts/snow-context";
 import { Snowflake } from "lucide-react";
 import * as React from "react";
-import { cn } from "@/lib/utils";
 
 const SNOWFLAKES = Array.from({ length: 50 }, (_, i) => {
   const seed = (i * 7919) % 100;
@@ -21,34 +19,25 @@ const SNOWFLAKES = Array.from({ length: 50 }, (_, i) => {
   };
 });
 
+function isWinterSeason(): boolean {
+  const now = new Date();
+  const month = now.getMonth(); // 0-11 (0 = January, 11 = December)
+
+  // Winter months: December (11), January (0), February (1)
+  return month === 11 || month === 0 || month === 1;
+}
+
 export function SnowEffect() {
-  const { isSnowing } = useSnow();
   const [isVisible, setIsVisible] = React.useState(false);
-  const [isFadingOut, setIsFadingOut] = React.useState(false);
 
   React.useEffect(() => {
-    if (isSnowing) {
-      setIsVisible(true);
-      setIsFadingOut(false);
-    } else if (isVisible) {
-      setIsFadingOut(true);
-      const timer = setTimeout(() => {
-        setIsVisible(false);
-        setIsFadingOut(false);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [isSnowing, isVisible]);
+    setIsVisible(isWinterSeason());
+  }, []);
 
   if (!isVisible) return null;
 
   return (
-    <div
-      className={cn(
-        "fixed inset-0 pointer-events-none overflow-hidden z-9999 transition-opacity duration-1000",
-        isFadingOut ? "opacity-0" : "opacity-100",
-      )}
-    >
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-9999">
       {SNOWFLAKES.map((flake) => (
         <div
           key={flake.id}
