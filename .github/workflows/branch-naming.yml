@@ -1,0 +1,30 @@
+name: Branch Naming Convention
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          PATTERN="^(feat|fix|docs|refactor|chore)/.+$"
+
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
+            echo "::error::Branch name '$BRANCH_NAME' does not follow the naming convention."
+            echo ""
+            echo "Branch names must use one of these prefixes:"
+            echo "  feat/    - New features"
+            echo "  fix/     - Bug fixes"
+            echo "  docs/    - Documentation changes"
+            echo "  refactor/ - Code refactoring"
+            echo "  chore/   - Build process or tooling changes"
+            echo ""
+            echo "Example: feat/user-profile, fix/auth-redirect"
+            exit 1
+          fi
+
+          echo "Branch name '$BRANCH_NAME' follows the naming convention."
