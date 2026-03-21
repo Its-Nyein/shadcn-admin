@@ -18,6 +18,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { blockDisallowedPasswordChars } from "../utils/password-validation";
 import { SignIn2Schema, signIn2Schema } from "../utils/sign-in-2-schema";
 
 export function SignIn2({ className, ...props }: React.ComponentProps<"div">) {
@@ -207,6 +208,7 @@ export function SignIn2({ className, ...props }: React.ComponentProps<"div">) {
                         placeholder="Enter your password"
                         disabled={isLoading}
                         className="h-11 bg-muted/30 border-muted-foreground/20 pr-10"
+                        onBeforeInput={blockDisallowedPasswordChars}
                         {...field}
                       />
                       <button
