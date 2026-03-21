@@ -1,5 +1,6 @@
 "use client";
 
+import { PasswordRequirements } from "@/components/password-requirements";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -30,6 +31,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { blockDisallowedPasswordChars } from "../utils/password-validation";
 import {
   IdentifySchema,
   NewPasswordSchema,
@@ -382,6 +384,7 @@ export default function ResetPassword2() {
                               placeholder="Enter password"
                               disabled={isLoading}
                               className="h-12 bg-muted/30 border-muted-foreground/20 pr-10"
+                              onBeforeInput={blockDisallowedPasswordChars}
                               {...field}
                             />
                             <button
@@ -397,11 +400,8 @@ export default function ResetPassword2() {
                             </button>
                           </div>
                         </FormControl>
+                        <PasswordRequirements password={field.value} />
                         <FormMessage />
-                        <p className="text-xs text-muted-foreground">
-                          Password must be at least 8 characters with uppercase,
-                          lowercase, and number.
-                        </p>
                       </FormItem>
                     )}
                   />
@@ -417,6 +417,7 @@ export default function ResetPassword2() {
                               placeholder="Confirm password"
                               disabled={isLoading}
                               className="h-12 bg-muted/30 border-muted-foreground/20 pr-10"
+                              onBeforeInput={blockDisallowedPasswordChars}
                               {...field}
                             />
                             <button

@@ -20,6 +20,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { blockDisallowedPasswordChars } from "../utils/password-validation";
 import { SignInSchema, signInSchema } from "../utils/sign-in-schema";
 
 export default function SignIn() {
@@ -304,6 +305,7 @@ export default function SignIn() {
                             placeholder="Admin123!@#"
                             disabled={isLoading}
                             className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background pr-12"
+                            onBeforeInput={blockDisallowedPasswordChars}
                             {...field}
                           />
                           <button

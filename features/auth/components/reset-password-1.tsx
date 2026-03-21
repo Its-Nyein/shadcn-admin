@@ -1,5 +1,6 @@
 "use client";
 
+import { PasswordRequirements } from "@/components/password-requirements";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,18 +20,26 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircle2, KeyRound, Mail, ShieldCheck } from "lucide-react";
+import {
+  CheckCircle2,
+  Eye,
+  EyeOff,
+  KeyRound,
+  Mail,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { blockDisallowedPasswordChars } from "../utils/password-validation";
 import {
-  emailSchema,
   EmailSchema,
-  otpSchema,
   OtpSchema,
-  passwordSchema,
   PasswordSchema,
+  emailSchema,
+  otpSchema,
+  passwordSchema,
 } from "../utils/reset-password-schema";
 
 const steps = [
@@ -58,6 +67,8 @@ export default function ResetPassword1() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const emailForm = useForm<EmailSchema>({
     resolver: zodResolver(emailSchema),
@@ -427,14 +438,29 @@ export default function ResetPassword1() {
                         <FormItem>
                           <FormLabel>New Password</FormLabel>
                           <FormControl>
-                            <Input
-                              type="password"
-                              placeholder="Enter new password"
-                              disabled={isLoading}
-                              className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background"
-                              {...field}
-                            />
+                            <div className="relative">
+                              <Input
+                                type={showPassword ? "text" : "password"}
+                                placeholder="Enter new password"
+                                disabled={isLoading}
+                                className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background pr-10"
+                                onBeforeInput={blockDisallowedPasswordChars}
+                                {...field}
+                              />
+                              <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                {showPassword ? (
+                                  <EyeOff className="size-4" />
+                                ) : (
+                                  <Eye className="size-4" />
+                                )}
+                              </button>
+                            </div>
                           </FormControl>
+                          <PasswordRequirements password={field.value} />
                           <FormMessage />
                         </FormItem>
                       )}
@@ -446,13 +472,29 @@ export default function ResetPassword1() {
                         <FormItem>
                           <FormLabel>Confirm Password</FormLabel>
                           <FormControl>
-                            <Input
-                              type="password"
-                              placeholder="Confirm new password"
-                              disabled={isLoading}
-                              className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background"
-                              {...field}
-                            />
+                            <div className="relative">
+                              <Input
+                                type={showConfirmPassword ? "text" : "password"}
+                                placeholder="Confirm new password"
+                                disabled={isLoading}
+                                className="h-12 bg-muted/30 border-muted-foreground/20 transition-colors focus:bg-background pr-10"
+                                onBeforeInput={blockDisallowedPasswordChars}
+                                {...field}
+                              />
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setShowConfirmPassword(!showConfirmPassword)
+                                }
+                                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                              >
+                                {showConfirmPassword ? (
+                                  <EyeOff className="size-4" />
+                                ) : (
+                                  <Eye className="size-4" />
+                                )}
+                              </button>
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
