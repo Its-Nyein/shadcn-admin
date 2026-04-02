@@ -14,6 +14,7 @@ import { type Mail } from "@/constants/mail-data";
 import { Nav } from "@/features/mail/components/mail-nav";
 import { useMail } from "@/features/mail/utils/use-mail";
 import { useMailSearchParams } from "@/hooks/search-params";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { cn } from "@/lib/utils";
 import {
   AlertCircle,
@@ -56,26 +57,10 @@ export function Mail({
   const [mail] = useMail();
   const [{ search, tab }, setSearchParams] = useMailSearchParams();
 
-  const [searchValue, setSearchValue] = React.useState(search);
-  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    setSearchValue(search);
-  }, [search]);
-
-  React.useEffect(() => {
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, []);
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      setSearchParams({ search: value || null });
-    }, 300);
-  };
+  const [searchValue, handleSearchChange] = useDebouncedCallback(
+    search,
+    (value) => setSearchParams({ search: value || null }),
+  );
 
   const setTab = React.useCallback(
     (value: string) => setSearchParams({ tab: value === "all" ? null : value }),

@@ -29,7 +29,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { exportToCSV, exportToJSON } from "@/helpers/export-data";
 import { DEFAULT_PAGE_SIZE, useUsersSearchParams } from "@/hooks/search-params";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import {
   flexRender,
   getCoreRowModel,
@@ -78,27 +80,10 @@ export function DataTable({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  // Debounced search
-  const [searchValue, setSearchValue] = React.useState(searchParams.search);
-  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    setSearchValue(searchParams.search);
-  }, [searchParams.search]);
-
-  React.useEffect(() => {
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, []);
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      setSearchParams({ search: value || null, page: null });
-    }, 300);
-  };
+  const [searchValue, handleSearchChange] = useDebouncedCallback(
+    searchParams.search,
+    (value) => setSearchParams({ search: value || null, page: null }),
+  );
 
   // Derive pagination from URL
   const pagination = React.useMemo(
@@ -420,10 +405,54 @@ export function DataTable({
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" className="cursor-pointer">
-            <Download className="size-4" />
-            Export
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="cursor-pointer">
+                <Download className="size-4" />
+                Export
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => {
+                  const rows = table
+                    .getFilteredRowModel()
+                    .rows.map((row) => row.original as Record<string, unknown>);
+                  const cols = [
+                    { key: "name", label: "Name" },
+                    { key: "email", label: "Email" },
+                    { key: "role", label: "Role" },
+                    { key: "plan", label: "Plan" },
+                    { key: "billing", label: "Billing" },
+                    { key: "status", label: "Status" },
+                  ] as const;
+                  exportToCSV(rows, "users", [...cols]);
+                }}
+              >
+                Export as CSV
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => {
+                  const rows = table
+                    .getFilteredRowModel()
+                    .rows.map((row) => row.original as Record<string, unknown>);
+                  const cols = [
+                    { key: "name", label: "Name" },
+                    { key: "email", label: "Email" },
+                    { key: "role", label: "Role" },
+                    { key: "plan", label: "Plan" },
+                    { key: "billing", label: "Billing" },
+                    { key: "status", label: "Status" },
+                  ] as const;
+                  exportToJSON(rows, "users", [...cols]);
+                }}
+              >
+                Export as JSON
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <UserFormDialog onAddUser={onAddUser} />
         </div>
       </div>

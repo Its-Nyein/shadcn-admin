@@ -12,6 +12,12 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Popover,
@@ -19,9 +25,10 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import { exportToCSV, exportToJSON } from "@/helpers/export-data";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import type { Table } from "@tanstack/react-table";
 import { Download, PlusCircle, Search, X } from "lucide-react";
-import * as React from "react";
 import {
   gateways,
   paymentMethods,
@@ -163,27 +170,10 @@ export function TransactionsTableToolbar<TData>({
   const filterValue =
     (table.getColumn("customer")?.getFilterValue() as string) ?? "";
 
-  const [searchValue, setSearchValue] = React.useState(filterValue);
-  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    setSearchValue(filterValue);
-  }, [filterValue]);
-
-  // Cleanup debounce timer on unmount
-  React.useEffect(() => {
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, []);
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      table.getColumn("customer")?.setFilterValue(value || undefined);
-    }, 300);
-  };
+  const [searchValue, handleSearchChange] = useDebouncedCallback(
+    filterValue,
+    (value) => table.getColumn("customer")?.setFilterValue(value || undefined),
+  );
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -228,10 +218,64 @@ export function TransactionsTableToolbar<TData>({
       </div>
       <div className="flex items-center gap-2">
         <TransactionsViewOptions table={table} />
-        <Button variant="outline" size="sm" className="h-8 cursor-pointer">
-          <Download className="size-4" />
-          Export
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm" className="h-8 cursor-pointer">
+              <Download className="size-4" />
+              Export
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => {
+                const rows = table
+                  .getFilteredRowModel()
+                  .rows.map((row) => row.original as Record<string, unknown>);
+                const cols = [
+                  { key: "reference", label: "Reference" },
+                  { key: "customer", label: "Customer" },
+                  { key: "amount", label: "Amount" },
+                  { key: "currency", label: "Currency" },
+                  { key: "status", label: "Status" },
+                  { key: "method", label: "Method" },
+                  { key: "gateway", label: "Gateway" },
+                  { key: "fee", label: "Fee" },
+                  { key: "net", label: "Net" },
+                  { key: "country", label: "Country" },
+                  { key: "createdAt", label: "Date" },
+                ] as const;
+                exportToCSV(rows, "transactions", [...cols]);
+              }}
+            >
+              Export as CSV
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer"
+              onClick={() => {
+                const rows = table
+                  .getFilteredRowModel()
+                  .rows.map((row) => row.original as Record<string, unknown>);
+                const cols = [
+                  { key: "reference", label: "Reference" },
+                  { key: "customer", label: "Customer" },
+                  { key: "amount", label: "Amount" },
+                  { key: "currency", label: "Currency" },
+                  { key: "status", label: "Status" },
+                  { key: "method", label: "Method" },
+                  { key: "gateway", label: "Gateway" },
+                  { key: "fee", label: "Fee" },
+                  { key: "net", label: "Net" },
+                  { key: "country", label: "Country" },
+                  { key: "createdAt", label: "Date" },
+                ] as const;
+                exportToJSON(rows, "transactions", [...cols]);
+              }}
+            >
+              Export as JSON
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );

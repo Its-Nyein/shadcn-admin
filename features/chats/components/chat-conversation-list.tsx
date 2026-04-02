@@ -1,18 +1,5 @@
 "use client";
 
-import * as React from "react";
-import {
-  Filter,
-  Hash,
-  MoreVertical,
-  Pin,
-  Search,
-  Settings,
-  UserPlus,
-  Users,
-  VolumeX,
-} from "lucide-react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,7 +14,19 @@ import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatMessageTime } from "@/helpers/format-message-time";
 import { useChatsSearchParams } from "@/hooks/search-params";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { cn } from "@/lib/utils";
+import {
+  Filter,
+  Hash,
+  MoreVertical,
+  Pin,
+  Search,
+  Settings,
+  UserPlus,
+  Users,
+  VolumeX,
+} from "lucide-react";
 import type { ChatConversation, ChatUser } from "../utils/types";
 import { useChat } from "../utils/use-chat";
 
@@ -47,26 +46,10 @@ export function ChatConversationList({
   const { searchQuery } = useChat();
   const [, setSearchParams] = useChatsSearchParams();
 
-  const [searchValue, setSearchValue] = React.useState(searchQuery);
-  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    setSearchValue(searchQuery);
-  }, [searchQuery]);
-
-  React.useEffect(() => {
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, []);
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      setSearchParams({ search: value || null });
-    }, 300);
-  };
+  const [searchValue, handleSearchChange] = useDebouncedCallback(
+    searchQuery,
+    (value) => setSearchParams({ search: value || null }),
+  );
 
   const filteredConversations = conversations.filter((conversation) =>
     conversation.name.toLowerCase().includes(searchQuery.toLowerCase()),
