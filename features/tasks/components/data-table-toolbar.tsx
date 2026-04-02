@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import type { Table } from "@tanstack/react-table";
 import { Search, X } from "lucide-react";
-import * as React from "react";
 import type { Task } from "../utils/schema";
 import { priorities, statuses } from "../utils/task-data";
 import { AddTaskModal } from "./add-task-modal";
@@ -24,26 +24,10 @@ export function DataTableToolbar<TData>({
   const filterValue =
     (table.getColumn("title")?.getFilterValue() as string) ?? "";
 
-  const [searchValue, setSearchValue] = React.useState(filterValue);
-  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
-
-  React.useEffect(() => {
-    setSearchValue(filterValue);
-  }, [filterValue]);
-
-  React.useEffect(() => {
-    return () => {
-      if (debounceRef.current) clearTimeout(debounceRef.current);
-    };
-  }, []);
-
-  const handleSearchChange = (value: string) => {
-    setSearchValue(value);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
-    debounceRef.current = setTimeout(() => {
-      table.getColumn("title")?.setFilterValue(value || undefined);
-    }, 300);
-  };
+  const [searchValue, handleSearchChange] = useDebouncedCallback(
+    filterValue,
+    (value) => table.getColumn("title")?.setFilterValue(value || undefined),
+  );
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
