@@ -1,5 +1,20 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { type Mail } from "@/constants/mail-data";
+import { Nav } from "@/features/mail/components/mail-nav";
+import { useMail } from "@/features/mail/utils/use-mail";
+import { useMailSearchParams } from "@/hooks/search-params";
+import { cn } from "@/lib/utils";
 import {
   AlertCircle,
   Archive,
@@ -14,21 +29,6 @@ import {
   Users2,
 } from "lucide-react";
 import * as React from "react";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { type Mail } from "@/constants/mail-data";
-import { Nav } from "@/features/mail/components/mail-nav";
-import { useMail } from "@/features/mail/utils/use-mail";
-import { cn } from "@/lib/utils";
 import { AccountSwitcher } from "./account-switcher";
 import { MailDisplay } from "./mail-display";
 import { MailList } from "./mail-list";
@@ -54,6 +54,39 @@ export function Mail({
 }: MailProps) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const [mail] = useMail();
+  const [{ search, tab }, setSearchParams] = useMailSearchParams();
+
+  const [searchValue, setSearchValue] = React.useState(search);
+  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+
+  React.useEffect(() => {
+    setSearchValue(search);
+  }, [search]);
+
+  React.useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      setSearchParams({ search: value || null });
+    }, 300);
+  };
+
+  const setTab = React.useCallback(
+    (value: string) => setSearchParams({ tab: value === "all" ? null : value }),
+    [setSearchParams],
+  );
+
+  const filteredMails = React.useMemo(() => {
+    if (!search) return mails;
+    const query = search.toLowerCase();
+    return mails.filter((item) => item.name.toLowerCase().includes(query));
+  }, [mails, search]);
 
   return (
     <TooltipProvider delayDuration={0}>
@@ -91,7 +124,7 @@ export function Mail({
             <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} />
           </div>
           <Separator className="mx-0" />
-          <div className="m-3">
+          <div className="px-2 py-3">
             <Button className="w-full cursor-pointer">
               {isCollapsed ? "" : "Compose"}
               <Send className="size-4" />
@@ -178,7 +211,7 @@ export function Mail({
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-          <Tabs defaultValue="all" className="gap-1">
+          <Tabs value={tab} onValueChange={setTab} className="gap-1">
             <div className="flex items-center px-4 py-1.5">
               <h1 className="text-foreground text-xl font-bold">Inbox</h1>
               <TabsList className="ml-auto">
@@ -192,18 +225,21 @@ export function Mail({
             </div>
             <Separator />
             <div className="bg-background/95 supports-backdrop-filter:bg-background/60 p-4 backdrop-blur">
-              <form>
-                <div className="relative">
-                  <Search className="text-muted-foreground absolute top-2.5 left-2 size-4 cursor-pointer" />
-                  <Input placeholder="Search" className="pl-8 cursor-text" />
-                </div>
-              </form>
+              <div className="relative">
+                <Search className="text-muted-foreground absolute top-2.5 left-2 size-4" />
+                <Input
+                  placeholder="Search by name..."
+                  value={searchValue}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  className="pl-8 cursor-text"
+                />
+              </div>
             </div>
             <TabsContent value="all" className="m-0">
-              <MailList items={mails} />
+              <MailList items={filteredMails} />
             </TabsContent>
             <TabsContent value="unread" className="m-0">
-              <MailList items={mails.filter((item) => !item.read)} />
+              <MailList items={filteredMails.filter((item) => !item.read)} />
             </TabsContent>
           </Tabs>
         </ResizablePanel>

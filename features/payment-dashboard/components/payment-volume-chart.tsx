@@ -20,9 +20,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { usePaymentDashboardSearchParams } from "@/hooks/search-params";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Download } from "lucide-react";
-import { useState } from "react";
+import { useCallback } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const paymentData = [
@@ -56,8 +57,18 @@ const chartConfig = {
 };
 
 export function PaymentVolumeChart() {
-  const [timeRange, setTimeRange] = useState("3m");
-  const [metric, setMetric] = useState<"volume" | "transactions">("volume");
+  const [{ timeRange, metric }, setSearchParams] =
+    usePaymentDashboardSearchParams();
+  const setTimeRange = useCallback(
+    (value: string) =>
+      setSearchParams({ timeRange: value === "3m" ? null : value }),
+    [setSearchParams],
+  );
+  const setMetric = useCallback(
+    (value: string) =>
+      setSearchParams({ metric: value === "volume" ? null : value }),
+    [setSearchParams],
+  );
   const isMobile = useIsMobile();
 
   return (
@@ -72,10 +83,7 @@ export function PaymentVolumeChart() {
           </CardDescription>
         </div>
         <div className="flex w-full flex-col items-stretch gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-2">
-          <Select
-            value={metric}
-            onValueChange={(v) => setMetric(v as "volume" | "transactions")}
-          >
+          <Select value={metric} onValueChange={setMetric}>
             <SelectTrigger className="w-full cursor-pointer sm:w-36">
               <SelectValue />
             </SelectTrigger>

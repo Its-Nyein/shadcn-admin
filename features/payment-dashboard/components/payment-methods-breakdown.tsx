@@ -19,8 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { usePaymentDashboardSearchParams } from "@/hooks/search-params";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useState } from "react";
+import { useCallback } from "react";
 import { Cell, Pie, PieChart } from "recharts";
 
 const paymentMethodsData = [
@@ -79,7 +80,12 @@ const chartConfig = {
 };
 
 export function PaymentMethodsBreakdown() {
-  const [period, setPeriod] = useState("month");
+  const [{ period }, setSearchParams] = usePaymentDashboardSearchParams();
+  const setPeriod = useCallback(
+    (value: string) =>
+      setSearchParams({ period: value === "month" ? null : value }),
+    [setSearchParams],
+  );
   const isMobile = useIsMobile();
 
   const totalAmount = paymentMethodsData.reduce(

@@ -99,6 +99,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  DEFAULT_PAGE_SIZE,
+  useDashboardSearchParams,
+} from "@/hooks/search-params";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { schema } from "../utils/task-schema";
 
@@ -332,6 +336,18 @@ export function DataTable({
   keyPersonnelData?: z.infer<typeof schema>[];
   focusDocumentsData?: z.infer<typeof schema>[];
 }) {
+  const [{ tab: activeTab, page, perPage }, setSearchParams] =
+    useDashboardSearchParams();
+
+  const setActiveTab = React.useCallback(
+    (value: string) =>
+      setSearchParams({
+        tab: value === "outline" ? null : value,
+        page: null,
+      }),
+    [setSearchParams],
+  );
+
   const [data, setData] = React.useState(() => initialData);
   const [pastPerformance, setPastPerformance] = React.useState(
     () => pastPerformanceData,
@@ -349,10 +365,38 @@ export function DataTable({
     [],
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
+
+  const pagination = React.useMemo(
+    () => ({
+      pageIndex: page - 1,
+      pageSize: perPage,
+    }),
+    [page, perPage],
+  );
+
+  const onPaginationChange = React.useCallback(
+    (
+      updaterOrValue: React.SetStateAction<{
+        pageIndex: number;
+        pageSize: number;
+      }>,
+    ) => {
+      const newPagination =
+        typeof updaterOrValue === "function"
+          ? updaterOrValue(pagination)
+          : updaterOrValue;
+
+      setSearchParams({
+        page:
+          newPagination.pageIndex === 0 ? null : newPagination.pageIndex + 1,
+        perPage:
+          newPagination.pageSize === DEFAULT_PAGE_SIZE
+            ? null
+            : newPagination.pageSize,
+      });
+    },
+    [pagination, setSearchParams],
+  );
   const sortableId = React.useId();
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
@@ -398,7 +442,7 @@ export function DataTable({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -423,7 +467,7 @@ export function DataTable({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -448,7 +492,7 @@ export function DataTable({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -473,7 +517,7 @@ export function DataTable({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -676,14 +720,15 @@ export function DataTable({
 
   return (
     <Tabs
-      defaultValue="outline"
+      value={activeTab}
+      onValueChange={setActiveTab}
       className="w-full flex-col justify-start gap-6"
     >
       <div className="flex items-center justify-between px-4 lg:px-6 flex-wrap gap-3">
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
-        <Select defaultValue="outline">
+        <Select value={activeTab} onValueChange={setActiveTab}>
           <SelectTrigger
             className="flex w-fit sm:hidden cursor-pointer"
             size="sm"

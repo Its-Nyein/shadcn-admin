@@ -1,31 +1,5 @@
 "use client";
 
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type ColumnDef,
-  type ColumnFiltersState,
-  type Row,
-  type SortingState,
-  type VisibilityState,
-} from "@tanstack/react-table";
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  Download,
-  EllipsisVertical,
-  Eye,
-  Pencil,
-  Search,
-  Trash2,
-} from "lucide-react";
-import { useState } from "react";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -55,6 +29,32 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DEFAULT_PAGE_SIZE, useUsersSearchParams } from "@/hooks/search-params";
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+  type ColumnDef,
+  type ColumnFiltersState,
+  type Row,
+  type SortingState,
+  type VisibilityState,
+} from "@tanstack/react-table";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  EllipsisVertical,
+  Eye,
+  Pencil,
+  Search,
+  Trash2,
+} from "lucide-react";
+import * as React from "react";
 import type { User, UserFormValues } from "../utils/schema";
 import { UserFormDialog } from "./user-form-modal";
 
@@ -71,11 +71,112 @@ export function DataTable({
   onEditUser,
   onAddUser,
 }: DataTableProps) {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [searchParams, setSearchParams] = useUsersSearchParams();
+
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+
+  // Debounced search
+  const [searchValue, setSearchValue] = React.useState(searchParams.search);
+  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+
+  React.useEffect(() => {
+    setSearchValue(searchParams.search);
+  }, [searchParams.search]);
+
+  React.useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      setSearchParams({ search: value || null, page: null });
+    }, 300);
+  };
+
+  // Derive pagination from URL
+  const pagination = React.useMemo(
+    () => ({
+      pageIndex: searchParams.page - 1,
+      pageSize: searchParams.perPage,
+    }),
+    [searchParams.page, searchParams.perPage],
+  );
+
+  // Derive column filters from URL
+  const columnFilters = React.useMemo<ColumnFiltersState>(() => {
+    const filters: ColumnFiltersState = [];
+    if (searchParams.role) {
+      filters.push({ id: "role", value: searchParams.role });
+    }
+    if (searchParams.plan) {
+      filters.push({ id: "plan", value: searchParams.plan });
+    }
+    if (searchParams.status) {
+      filters.push({ id: "status", value: searchParams.status });
+    }
+    return filters;
+  }, [searchParams.role, searchParams.plan, searchParams.status]);
+
+  // Sync column filter changes back to URL
+  const onColumnFiltersChange = React.useCallback(
+    (
+      updaterOrValue:
+        | ColumnFiltersState
+        | ((old: ColumnFiltersState) => ColumnFiltersState),
+    ) => {
+      const newFilters =
+        typeof updaterOrValue === "function"
+          ? updaterOrValue(columnFilters)
+          : updaterOrValue;
+
+      const role =
+        (newFilters.find((f) => f.id === "role")?.value as string) || "";
+      const plan =
+        (newFilters.find((f) => f.id === "plan")?.value as string) || "";
+      const status =
+        (newFilters.find((f) => f.id === "status")?.value as string) || "";
+
+      setSearchParams({
+        role: role || null,
+        plan: plan || null,
+        status: status || null,
+        page: null,
+      });
+    },
+    [columnFilters, setSearchParams],
+  );
+
+  // Sync pagination changes back to URL
+  const onPaginationChange = React.useCallback(
+    (
+      updaterOrValue: React.SetStateAction<{
+        pageIndex: number;
+        pageSize: number;
+      }>,
+    ) => {
+      const newPagination =
+        typeof updaterOrValue === "function"
+          ? updaterOrValue(pagination)
+          : updaterOrValue;
+
+      setSearchParams({
+        page:
+          newPagination.pageIndex === 0 ? null : newPagination.pageIndex + 1,
+        perPage:
+          newPagination.pageSize === DEFAULT_PAGE_SIZE
+            ? null
+            : newPagination.pageSize,
+      });
+    },
+    [pagination, setSearchParams],
+  );
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -280,20 +381,23 @@ export function DataTable({
     data: users,
     columns,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
+    onColumnFiltersChange,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-    onGlobalFilterChange: setGlobalFilter,
+    onGlobalFilterChange: (value) =>
+      setSearchParams({ search: value || null, page: null }),
+    onPaginationChange,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
-      globalFilter,
+      globalFilter: searchParams.search,
+      pagination,
     },
   });
 
@@ -309,8 +413,8 @@ export function DataTable({
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search users..."
-              value={globalFilter ?? ""}
-              onChange={(event) => setGlobalFilter(String(event.target.value))}
+              value={searchValue}
+              onChange={(event) => handleSearchChange(event.target.value)}
               className="pl-9"
             />
           </div>
