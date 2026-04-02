@@ -25,8 +25,7 @@ export interface UseCalendarActions {
 }
 
 export interface UseCalendarReturn
-  extends UseCalendarState,
-    UseCalendarActions {}
+  extends UseCalendarState, UseCalendarActions {}
 
 export function useCalendar(
   initialEvents: CalendarEvent[] = [],
