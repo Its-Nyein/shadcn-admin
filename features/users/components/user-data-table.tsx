@@ -32,6 +32,7 @@ import {
 import { exportToCSV, exportToJSON } from "@/helpers/export-data";
 import { DEFAULT_PAGE_SIZE, useUsersSearchParams } from "@/hooks/search-params";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
+import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import {
   flexRender,
   getCoreRowModel,
@@ -84,6 +85,21 @@ export function DataTable({
     searchParams.search,
     (value) => setSearchParams({ search: value || null, page: null }),
   );
+
+  const searchRef = React.useRef<HTMLInputElement>(null);
+
+  useKeyboardShortcuts({
+    onFocusSearch: React.useCallback(() => searchRef.current?.focus(), []),
+    onClearFilters: React.useCallback(() => {
+      setSearchParams({
+        search: null,
+        role: null,
+        plan: null,
+        status: null,
+        page: null,
+      });
+    }, [setSearchParams]),
+  });
 
   // Derive pagination from URL
   const pagination = React.useMemo(
@@ -397,7 +413,8 @@ export function DataTable({
           <div className="relative flex-1 max-w-sm">
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Search users..."
+              ref={searchRef}
+              placeholder="Search users... ( / )"
               value={searchValue}
               onChange={(event) => handleSearchChange(event.target.value)}
               className="pl-9"
@@ -574,9 +591,9 @@ export function DataTable({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
                     </TableHead>
                   );
                 })}
