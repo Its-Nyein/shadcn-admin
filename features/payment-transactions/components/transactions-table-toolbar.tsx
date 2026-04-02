@@ -27,8 +27,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { exportToCSV, exportToJSON } from "@/helpers/export-data";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
+import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import type { Table } from "@tanstack/react-table";
 import { Download, PlusCircle, Search, X } from "lucide-react";
+import { useCallback, useRef } from "react";
 import {
   gateways,
   paymentMethods,
@@ -175,13 +177,21 @@ export function TransactionsTableToolbar<TData>({
     (value) => table.getColumn("customer")?.setFilterValue(value || undefined),
   );
 
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useKeyboardShortcuts({
+    onFocusSearch: useCallback(() => searchRef.current?.focus(), []),
+    onClearFilters: useCallback(() => table.resetColumnFilters(), [table]),
+  });
+
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-1 flex-wrap items-center gap-2">
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
-            placeholder="Search transactions..."
+            ref={searchRef}
+            placeholder="Search transactions... ( / )"
             value={searchValue}
             onChange={(event) => handleSearchChange(event.target.value)}
             className="h-8 w-[200px] pl-8 lg:w-[280px]"
