@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { useChatsSearchParams } from "@/hooks/search-params";
 import type { ChatConversation, ChatMessage, ChatUser } from "../utils/types";
 import { useChat } from "../utils/use-chat";
 import { ChatConversationList } from "./chat-conversation-list";
@@ -28,7 +29,15 @@ export function Chat({ conversations, messages, users }: ChatProps) {
     setUsers,
     addMessage,
     toggleMute,
+    setSearchQuery,
   } = chatStore;
+
+  const [{ search: urlSearch }] = useChatsSearchParams();
+
+  // Sync search from URL to Zustand store
+  useEffect(() => {
+    setSearchQuery(urlSearch);
+  }, [urlSearch, setSearchQuery]);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

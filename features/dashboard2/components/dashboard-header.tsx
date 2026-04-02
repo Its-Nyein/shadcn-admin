@@ -16,11 +16,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
+import { useDashboard2SearchParams } from "@/hooks/search-params";
 import { Calendar, Clock, Filter, RefreshCw } from "lucide-react";
-import { useState } from "react";
+import { useCallback } from "react";
 
 export function DashboardHeader() {
-  const [dateRange, setDateRange] = useState("30d");
+  const [{ dateRange }, setSearchParams] = useDashboard2SearchParams();
+  const setDateRange = useCallback(
+    (value: string) =>
+      setSearchParams({ dateRange: value === "30d" ? null : value }),
+    [setSearchParams],
+  );
   const lastUpdated = new Date().toLocaleString();
 
   return (

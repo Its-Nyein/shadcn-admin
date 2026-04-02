@@ -6,6 +6,7 @@ import { FontProvider } from "@/contexts/font-context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Manrope } from "next/font/google";
 import NextToploader from "nextjs-toploader";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -63,21 +64,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${manrope.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <FontProvider>
-            <NextToploader color="var(--primary)" showSpinner={false} />
-            <AuthProvider>
-              {children}
-              <SnowEffect />
-              <Toaster />
-            </AuthProvider>
-          </FontProvider>
-        </ThemeProvider>
+        <NuqsAdapter>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <FontProvider>
+              <NextToploader color="var(--primary)" showSpinner={false} />
+              <AuthProvider>
+                {children}
+                <SnowEffect />
+                <Toaster />
+              </AuthProvider>
+            </FontProvider>
+          </ThemeProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );

@@ -20,7 +20,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useDashboard2SearchParams } from "@/hooks/search-params";
+import { useCallback } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const salesData = [
@@ -50,7 +51,13 @@ const chartConfig = {
 };
 
 export function SalesChart() {
-  const [timeRange, setTimeRange] = useState("12m");
+  const [{ salesRange: timeRange }, setSearchParams] =
+    useDashboard2SearchParams();
+  const setTimeRange = useCallback(
+    (value: string) =>
+      setSearchParams({ salesRange: value === "12m" ? null : value }),
+    [setSearchParams],
+  );
 
   return (
     <Card className="cursor-pointer bg-linear-to-br from-violet-500/5 via-background to-background border-border/50 shadow-sm hover:shadow-md transition-shadow">

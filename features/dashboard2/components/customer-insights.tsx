@@ -22,6 +22,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useDashboard2SearchParams } from "@/hooks/search-params";
 import {
   ArrowUpIcon,
   MapPin,
@@ -30,7 +31,7 @@ import {
   UserIcon,
   Users,
 } from "lucide-react";
-import { useState } from "react";
+import { useCallback } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 const customerGrowthData = [
@@ -134,7 +135,13 @@ const regionsData = [
 ];
 
 export function CustomerInsights() {
-  const [activeTab, setActiveTab] = useState("growth");
+  const [{ insights: activeTab }, setSearchParams] =
+    useDashboard2SearchParams();
+  const setActiveTab = useCallback(
+    (value: string) =>
+      setSearchParams({ insights: value === "growth" ? null : value }),
+    [setSearchParams],
+  );
 
   return (
     <Card className="h-fit bg-linear-to-br from-violet-500/5 via-background to-background border-border/50 shadow-sm">

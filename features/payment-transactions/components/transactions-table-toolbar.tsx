@@ -1,8 +1,5 @@
 "use client";
 
-import type { Table } from "@tanstack/react-table";
-import { Download, PlusCircle, Search, X } from "lucide-react";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -22,6 +19,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
+import type { Table } from "@tanstack/react-table";
+import { Download, PlusCircle, Search, X } from "lucide-react";
+import * as React from "react";
 import {
   gateways,
   paymentMethods,
@@ -160,6 +160,30 @@ export function TransactionsTableToolbar<TData>({
   table,
 }: TransactionsTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
+  const filterValue =
+    (table.getColumn("customer")?.getFilterValue() as string) ?? "";
+
+  const [searchValue, setSearchValue] = React.useState(filterValue);
+  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+
+  React.useEffect(() => {
+    setSearchValue(filterValue);
+  }, [filterValue]);
+
+  // Cleanup debounce timer on unmount
+  React.useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      table.getColumn("customer")?.setFilterValue(value || undefined);
+    }, 300);
+  };
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -168,12 +192,8 @@ export function TransactionsTableToolbar<TData>({
           <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search transactions..."
-            value={
-              (table.getColumn("customer")?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table.getColumn("customer")?.setFilterValue(event.target.value)
-            }
+            value={searchValue}
+            onChange={(event) => handleSearchChange(event.target.value)}
             className="h-8 w-[200px] pl-8 lg:w-[280px]"
           />
         </div>

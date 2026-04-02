@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import {
   Filter,
   Hash,
@@ -25,6 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { formatMessageTime } from "@/helpers/format-message-time";
+import { useChatsSearchParams } from "@/hooks/search-params";
 import { cn } from "@/lib/utils";
 import type { ChatConversation, ChatUser } from "../utils/types";
 import { useChat } from "../utils/use-chat";
@@ -42,7 +44,29 @@ export function ChatConversationList({
   selectedConversation,
   onSelectConversation,
 }: ConversationListProps) {
-  const { searchQuery, setSearchQuery } = useChat();
+  const { searchQuery } = useChat();
+  const [, setSearchParams] = useChatsSearchParams();
+
+  const [searchValue, setSearchValue] = React.useState(searchQuery);
+  const debounceRef = React.useRef<ReturnType<typeof setTimeout>>(null);
+
+  React.useEffect(() => {
+    setSearchValue(searchQuery);
+  }, [searchQuery]);
+
+  React.useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      setSearchParams({ search: value || null });
+    }, 300);
+  };
 
   const filteredConversations = conversations.filter((conversation) =>
     conversation.name.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -109,8 +133,8 @@ export function ChatConversationList({
           <Input
             type="text"
             placeholder="Search conversations..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchValue}
+            onChange={(e) => handleSearchChange(e.target.value)}
             className="pl-9 cursor-text"
           />
         </div>

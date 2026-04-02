@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useDashboard2SearchParams } from "@/hooks/search-params";
 import * as React from "react";
 import { Label, Pie, PieChart, Sector } from "recharts";
 import type { PieSectorDataItem } from "recharts/types/polar/Pie";
@@ -74,7 +75,13 @@ const chartConfig = {
 
 export function RevenueBreakdown() {
   const id = "revenue-breakdown";
-  const [activeCategory, setActiveCategory] = React.useState("sales");
+  const [{ category: activeCategory }, setSearchParams] =
+    useDashboard2SearchParams();
+  const setActiveCategory = React.useCallback(
+    (value: string) =>
+      setSearchParams({ category: value === "sales" ? null : value }),
+    [setSearchParams],
+  );
 
   const activeIndex = React.useMemo(
     () => revenueData.findIndex((item) => item.category === activeCategory),

@@ -13,6 +13,8 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { usePaymentDashboardSearchParams } from "@/hooks/search-params";
+import { useCallback } from "react";
 import {
   Bar,
   BarChart,
@@ -20,7 +22,6 @@ import {
   Cell,
   Line,
   LineChart,
-  ResponsiveContainer,
   XAxis,
   YAxis,
 } from "recharts";
@@ -79,6 +80,13 @@ const regionColors = [
 ];
 
 export function PaymentAnalytics() {
+  const [{ analyticsTab }, setSearchParams] = usePaymentDashboardSearchParams();
+  const setAnalyticsTab = useCallback(
+    (value: string) =>
+      setSearchParams({ analyticsTab: value === "hourly" ? null : value }),
+    [setSearchParams],
+  );
+
   return (
     <Card className="border-border/50 shadow-sm transition-shadow hover:shadow-md">
       <CardHeader>
@@ -88,7 +96,11 @@ export function PaymentAnalytics() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="hourly" className="space-y-4">
+        <Tabs
+          value={analyticsTab}
+          onValueChange={setAnalyticsTab}
+          className="space-y-4"
+        >
           <TabsList className="h-auto flex-wrap">
             <TabsTrigger
               value="hourly"
@@ -144,80 +156,73 @@ export function PaymentAnalytics() {
               config={chartConfig}
               className="h-[200px] w-full sm:h-[250px]"
             >
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={hourlyData} margin={{ left: -20, right: 5 }}>
-                  <CartesianGrid
-                    strokeDasharray="3 3"
-                    className="stroke-muted/30"
-                  />
-                  <XAxis
-                    dataKey="hour"
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 10 }}
-                    interval="preserveStartEnd"
-                  />
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fontSize: 10 }}
-                    width={40}
-                  />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <Line
-                    type="monotone"
-                    dataKey="payments"
-                    stroke="var(--color-payments)"
-                    strokeWidth={2}
-                    dot={{
-                      fill: "var(--color-payments)",
-                      strokeWidth: 0,
-                      r: 3,
-                    }}
-                    activeDot={{ r: 5, strokeWidth: 0 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+              <LineChart data={hourlyData} margin={{ left: -20, right: 5 }}>
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  className="stroke-muted/30"
+                />
+                <XAxis
+                  dataKey="hour"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 10 }}
+                  interval="preserveStartEnd"
+                />
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 10 }}
+                  width={40}
+                />
+                <ChartTooltip content={<ChartTooltipContent />} />
+                <Line
+                  type="monotone"
+                  dataKey="payments"
+                  stroke="var(--color-payments)"
+                  strokeWidth={2}
+                  dot={{
+                    fill: "var(--color-payments)",
+                    strokeWidth: 0,
+                    r: 3,
+                  }}
+                  activeDot={{ r: 5, strokeWidth: 0 }}
+                />
+              </LineChart>
             </ChartContainer>
           </TabsContent>
 
           <TabsContent value="regions" className="space-y-4">
             <div className="hidden sm:block">
               <ChartContainer config={chartConfig} className="h-[220px] w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={regionData}
-                    layout="vertical"
-                    margin={{ left: -10, right: 10 }}
-                  >
-                    <CartesianGrid
-                      strokeDasharray="3 3"
-                      className="stroke-muted/30"
-                    />
-                    <XAxis type="number" tick={{ fontSize: 10 }} />
-                    <YAxis
-                      type="category"
-                      dataKey="region"
-                      tick={{ fontSize: 10 }}
-                      width={85}
-                    />
-                    <ChartTooltip
-                      content={
-                        <ChartTooltipContent
-                          formatter={(value) => value?.toLocaleString()}
-                        />
-                      }
-                    />
-                    <Bar dataKey="payments" radius={[0, 4, 4, 0]}>
-                      {regionData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={regionColors[index]}
-                        />
-                      ))}
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
+                <BarChart
+                  data={regionData}
+                  layout="vertical"
+                  margin={{ left: -10, right: 10 }}
+                >
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    className="stroke-muted/30"
+                  />
+                  <XAxis type="number" tick={{ fontSize: 10 }} />
+                  <YAxis
+                    type="category"
+                    dataKey="region"
+                    tick={{ fontSize: 10 }}
+                    width={85}
+                  />
+                  <ChartTooltip
+                    content={
+                      <ChartTooltipContent
+                        formatter={(value) => value?.toLocaleString()}
+                      />
+                    }
+                  />
+                  <Bar dataKey="payments" radius={[0, 4, 4, 0]}>
+                    {regionData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={regionColors[index]} />
+                    ))}
+                  </Bar>
+                </BarChart>
               </ChartContainer>
             </div>
             <div className="space-y-2 sm:space-y-3">

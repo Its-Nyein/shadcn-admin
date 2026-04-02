@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useDashboardSearchParams } from "@/hooks/search-params";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 export const description = "An interactive area chart";
@@ -139,13 +140,19 @@ const chartConfig = {
 
 export function ChartAreaInteractive() {
   const isMobile = useIsMobile();
-  const [timeRange, setTimeRange] = React.useState("90d");
+  const [{ range: timeRange }, setSearchParams] = useDashboardSearchParams();
+
+  const setTimeRange = React.useCallback(
+    (value: string) =>
+      setSearchParams({ range: value === "90d" ? null : value }),
+    [setSearchParams],
+  );
 
   React.useEffect(() => {
     if (isMobile) {
       setTimeRange("7d");
     }
-  }, [isMobile]);
+  }, [isMobile, setTimeRange]);
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
