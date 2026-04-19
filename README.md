@@ -55,6 +55,37 @@ After seeding the database, you can sign in with:
 - **Email:** admin@example.com
 - **Password:** Admin123!@#
 
+## Docker Setup
+
+### 1. Set up environment variables
+
+```bash
+cp .env.example .env
+```
+
+Then update `.env` with your values.
+
+### 2. Build and run with Docker Compose
+
+```bash
+docker compose up --build
+```
+
+This will build the production image and start the app at [http://localhost:3000](http://localhost:3000).
+
+### 3. Or build and run manually
+
+```bash
+docker build -t shadcn-admin .
+docker run -p 3000:3000 --env-file .env shadcn-admin
+```
+
+### Stop the container
+
+```bash
+docker compose down
+```
+
 ## Database Commands
 
 | Command                   | Description             |
