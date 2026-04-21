@@ -11,7 +11,18 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "./ui/alert-dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   DropdownMenu,
@@ -41,6 +52,7 @@ export function NavUser({
   const { isMobile } = useSidebar();
   const { logout } = useAuth();
   const router = useRouter();
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
   const handleLogout = async () => {
     try {
@@ -133,12 +145,29 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
+            <DropdownMenuItem onSelect={() => setShowLogoutDialog(true)}>
               <LogOut />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+        <AlertDialog open={showLogoutDialog} onOpenChange={setShowLogoutDialog}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Confirm Logout</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to log out? You will need to sign in again
+                to access your account.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={handleLogout}>
+                Confirm
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </SidebarMenuItem>
     </SidebarMenu>
   );
