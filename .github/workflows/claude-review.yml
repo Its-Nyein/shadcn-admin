@@ -1,0 +1,158 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+    branches: [main]
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    if: ${{ !github.event.pull_request.draft }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Claude Auto Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: true
+
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+            PR TITLE: ${{ github.event.pull_request.title }}
+            PR AUTHOR: ${{ github.event.pull_request.user.login }}
+            BASE BRANCH: ${{ github.event.pull_request.base.ref }}
+            BASE SHA: ${{ github.event.pull_request.base.sha }}
+            HEAD SHA: ${{ github.event.pull_request.head.sha }}
+
+            You are a senior code reviewer for a Next.js 15 admin dashboard (TypeScript strict, Tailwind CSS, shadcn/ui, better-auth, Drizzle ORM).
+            Read `CLAUDE.md` at the repo root for project conventions before reviewing.
+
+            ## Step 1: Analyze the diff
+
+            ```bash
+            git diff --stat ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+            git diff ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}
+            ```
+
+            Also read the full content of every changed file to understand context beyond the diff.
+
+            ## Step 2: Review Checklist
+
+            Check against these criteria:
+
+            Code Quality: separation of concerns, error handling, type safety, DRY, edge cases
+            Architecture: design decisions, scalability, performance, security
+            Testing: real logic tests, edge cases, integration tests
+            Requirements: spec match, no scope creep, breaking changes documented
+            Production Readiness: migration strategy, backward compatibility, no obvious bugs
+
+            Project Conventions:
+            - Package manager: pnpm only — never npm or yarn
+            - Folder structure: feature code in features/[name]/{components,hooks,schema.ts,data.ts,types.ts}; shared UI in components/ui/; layout in components/layout/; general shared in components/shared/
+            - Auth: better-auth — use lib/auth.ts (server) and lib/auth-client.ts (client); never roll custom sessions
+            - Database: Drizzle ORM — watch for N+1 queries, unbounded fetches, missing indexes; migration files must be present for schema changes
+            - Config: sidebar nav in config/sidebar.ts; theme config in config/theme-data.ts
+            - Utilities: shared utils in lib/ — never recreate helpers that exist there (export-data, format-message-time, etc.)
+            - Components: shadcn/ui primitives from components/ui/ only — no raw Radix imports where a shadcn wrapper exists
+            - Styling: Tailwind CSS utility classes — no inline styles, no hardcoded colors (use CSS variables)
+            - Icons: lucide-react only
+            - TypeScript: strict mode — no any types, no missing return types, no unsafe assertions
+            - AI features: API calls to Anthropic only via app/api/chat/route.ts — never from client components
+
+            ## Step 3: Post review
+
+            Post a SINGLE `gh pr comment` with this EXACT format. No emojis anywhere. Write in English.
+
+            ---
+
+            FORMAT START (follow exactly):
+
+            ## Code Review: {PR_TITLE}
+
+            ### Summary
+            [1-3 sentences summarizing the PR quality and what needs to happen before merge]
+
+            ---
+
+            ### Critical Issues
+
+            #### 1. [Issue title] (`file/path.ts`)
+            ```ts
+            [problematic code snippet]
+            ```
+            [Explanation of the problem and why it matters]
+            [Suggested fix with code snippet:]
+            ```ts
+            [fix code]
+            ```
+
+            #### 2. [Next critical issue...]
+
+            ---
+
+            ### Medium Issues
+
+            #### N. [Issue title] (`file/path.ts`)
+            ```ts
+            [code snippet]
+            ```
+            [Explanation and fix suggestion]
+
+            ---
+
+            ### Minor Issues
+
+            #### N. [Issue title] (`file/path.ts:line`)
+            [Brief explanation]
+
+            ---
+
+            ### Strengths
+            - [Specific strength with file reference]
+            - [Another strength]
+
+            ---
+
+            **Verdict:** [One of: "Ready to merge" / "Needs changes — [list critical items]" / "No critical issues. Remaining items can be iterated on later."]
+
+            FORMAT END
+
+            ---
+
+            ## Review Rules
+
+            DO:
+            - Number ALL issues sequentially across sections (1, 2, 3... not restarting per section)
+            - Include code snippets for every issue — show the problematic code AND the fix
+            - Be specific with file:line references
+            - Categorize by actual severity (not everything is Critical)
+            - Explain WHY each issue matters
+            - List specific strengths with file references
+            - Give a clear verdict
+
+            DON'T:
+            - Use any emojis
+            - Post inline comments — only ONE single PR comment
+            - Say "looks good" without thorough review
+            - Mark nitpicks as Critical
+            - Be vague ("improve error handling")
+            - Skip the verdict
+
+          claude_args: |
+            --allowedTools "Read,Glob,Grep,Bash(git diff:*),Bash(git log:*),Bash(git show:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
