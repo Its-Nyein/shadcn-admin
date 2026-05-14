@@ -12,11 +12,9 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useLogout } from "@/components/layout/hooks/use-logout";
 import { useAuth } from "@/contexts/auth-context";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -29,23 +27,8 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export function ProfileDropdown() {
-  const { user, logout } = useAuth();
-  const router = useRouter();
-  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast.success("Logged out successfully", {
-        description: "You have been logged out of your account.",
-      });
-      router.push("/sign-in");
-    } catch {
-      toast.error("Logout failed", {
-        description: "An error occurred while logging out.",
-      });
-    }
-  };
+  const { user } = useAuth();
+  const { showLogoutDialog, setShowLogoutDialog, handleLogout } = useLogout();
 
   if (!user) return null;
   const initials = user.name
@@ -75,19 +58,19 @@ export function ProfileDropdown() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="#">
+            <Link href="/settings/account">
               Profile
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="#">
+            <Link href="/settings">
               Billing
               <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="#">
+            <Link href="/settings">
               Settings
               <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
             </Link>

@@ -1,4 +1,14 @@
-import { type CalendarEvent, type Calendar } from "./types";
+import { type Calendar, type CalendarEvent } from "./types";
+
+const EVENT_TYPES: CalendarEvent["type"][] = [
+  "meeting",
+  "event",
+  "personal",
+  "task",
+  "reminder",
+];
+
+const CALENDAR_TYPES: Calendar["type"][] = ["personal", "work", "shared"];
 
 import eventsData from "@/features/calendar/data/events.json";
 import eventDatesData from "@/features/calendar/data/event-dates.json";
@@ -21,7 +31,9 @@ export function parseCalendarEvents(
     return {
       ...event,
       date: eventDate,
-      type: event.type as CalendarEvent["type"],
+      type: EVENT_TYPES.includes(event.type as CalendarEvent["type"])
+        ? (event.type as CalendarEvent["type"])
+        : "task",
     };
   });
 }
@@ -42,5 +54,10 @@ export function parseEventDates(rawDates: typeof eventDatesData) {
 
 export const events: CalendarEvent[] = parseCalendarEvents(eventsData);
 export const eventDates = parseEventDates(eventDatesData);
-export const calendars: Calendar[] = calendarsData as Calendar[];
+export const calendars: Calendar[] = calendarsData.map((c) => ({
+  ...c,
+  type: CALENDAR_TYPES.includes(c.type as Calendar["type"])
+    ? (c.type as Calendar["type"])
+    : "personal",
+}));
 export { eventsData, eventDatesData, calendarsData };
