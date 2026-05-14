@@ -7,10 +7,10 @@ import {
   SidebarRail,
   Sidebar as UISidebar,
 } from "@/components/ui/sidebar";
+import React from "react";
 import { sidebarData } from "@/config/sidebar";
 import { useAuth } from "@/contexts/auth-context";
 import { useSidebarConfig } from "@/contexts/sidebar-context";
-import React from "react";
 import { NavGroup } from "@/components/layout/nav-group";
 import { NavUser } from "@/components/layout/nav-user";
 import { TeamSwitcher } from "@/components/layout/team-switcher";

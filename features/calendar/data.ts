@@ -1,4 +1,4 @@
-import { type Calendar, type CalendarEvent } from "./types";
+import { type Calendar, type CalendarEvent } from "@/features/calendar/types";
 import eventsData from "@/features/calendar/data/events.json";
 import eventDatesData from "@/features/calendar/data/event-dates.json";
 import calendarsData from "@/features/calendar/data/calendars.json";
