@@ -5,15 +5,15 @@ import {
   ConversationContent,
   ConversationEmptyState,
   ConversationScrollButton,
-} from "./elements/conversation";
-import { Loader } from "./elements/loader";
+} from "@/features/ai-chat/components/elements/conversation";
+import { Loader } from "@/features/ai-chat/components/elements/loader";
 import {
   Message,
   MessageAction,
   MessageActions,
   MessageContent,
   MessageResponse,
-} from "./elements/message";
+} from "@/features/ai-chat/components/elements/message";
 import {
   PromptInput,
   PromptInputBody,
@@ -28,18 +28,18 @@ import {
   PromptInputTextarea,
   PromptInputTools,
   type PromptInputMessage,
-} from "./elements/prompt-input";
+} from "@/features/ai-chat/components/elements/prompt-input";
 import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
-} from "./elements/reasoning";
+} from "@/features/ai-chat/components/elements/reasoning";
 import {
   Source,
   Sources,
   SourcesContent,
   SourcesTrigger,
-} from "./elements/sources";
+} from "@/features/ai-chat/components/elements/sources";
 import { Card, CardContent } from "@/components/ui/card";
 import { useChat } from "@ai-sdk/react";
 import type { UIMessage } from "ai";

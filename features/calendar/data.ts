@@ -1,14 +1,9 @@
 import { type CalendarEvent, type Calendar } from "./types";
 
-// Import JSON data from constants
 import eventsData from "@/features/calendar/data/events.json";
 import eventDatesData from "@/features/calendar/data/event-dates.json";
 import calendarsData from "@/features/calendar/data/calendars.json";
 
-/**
- * Parse calendar events from JSON and convert to CalendarEvent objects
- * Uses current month/year with the day and time from JSON data
- */
 export function parseCalendarEvents(
   rawEvents: typeof eventsData,
 ): CalendarEvent[] {
@@ -31,10 +26,6 @@ export function parseCalendarEvents(
   });
 }
 
-/**
- * Parse event dates for calendar date picker highlighting
- * Uses current month/year with the day from JSON data
- */
 export function parseEventDates(rawDates: typeof eventDatesData) {
   const now = new Date();
   const currentYear = now.getFullYear();
