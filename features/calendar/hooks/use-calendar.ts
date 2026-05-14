@@ -19,8 +19,8 @@ export interface UseCalendarActions {
   handleDateSelect: (date: Date) => void;
   handleNewEvent: () => void;
   handleNewCalendar: () => void;
-  handleSaveEvent: (eventData: Partial<CalendarEvent>) => void;
-  handleDeleteEvent: (eventId: number) => void;
+  handleSaveEvent: (_eventData: Partial<CalendarEvent>) => void;
+  handleDeleteEvent: (_eventId: number) => void;
   handleEditEvent: (event: CalendarEvent) => void;
 }
 
@@ -49,12 +49,12 @@ export function useCalendar(
 
   const handleNewCalendar = useCallback(() => {}, []);
 
-  const handleSaveEvent = useCallback((eventData: Partial<CalendarEvent>) => {
+  const handleSaveEvent = useCallback((_eventData: Partial<CalendarEvent>) => {
     setShowEventForm(false);
     setEditingEvent(null);
   }, []);
 
-  const handleDeleteEvent = useCallback((eventId: number) => {
+  const handleDeleteEvent = useCallback((_eventId: number) => {
     setShowEventForm(false);
     setEditingEvent(null);
   }, []);
