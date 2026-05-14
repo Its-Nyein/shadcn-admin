@@ -9,7 +9,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { Plus } from "lucide-react";
-import type { ColumnStatus, KanbanTask } from "../utils/schema";
+import type { ColumnStatus, KanbanTask } from "../schema";
 import { KanbanCard } from "./kanban-card";
 
 interface KanbanColumnProps {

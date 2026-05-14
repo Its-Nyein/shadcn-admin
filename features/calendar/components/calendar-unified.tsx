@@ -52,11 +52,11 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { type CalendarEvent } from "../utils/types";
+import { type CalendarEvent } from "../types";
 
 // Import data
-import calendarsData from "@/constants/calendars.json";
-import eventsData from "@/constants/events.json";
+import calendarsData from "@/features/calendar/data/calendars.json";
+import eventsData from "@/features/calendar/data/events.json";
 
 interface CalendarMainProps {
   eventDates?: Array<{ date: Date; count: number }>;

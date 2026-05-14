@@ -46,10 +46,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { type CalendarEvent } from "../utils/types";
+import { type CalendarEvent } from "../types";
 
 // Import data
-import eventsData from "@/constants/events.json";
+import eventsData from "@/features/calendar/data/events.json";
 
 interface CalendarMainProps {
   selectedDate?: Date;

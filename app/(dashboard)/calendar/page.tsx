@@ -13,7 +13,7 @@ import {
   calendars,
   eventDates,
   events,
-} from "@/features/calendar/utils/calendar-data";
+} from "@/features/calendar/data";
 import { cn } from "@/lib/utils";
 import {
   ArrowUpRight,

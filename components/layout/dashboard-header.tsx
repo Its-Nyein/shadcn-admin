@@ -1,9 +1,9 @@
 "use client";
 
-import { CommandSearch, SearchTrigger } from "@/components/command-search";
-import { ProfileDropdown } from "@/components/profile-dropdown";
-import { ThemeCustomizer } from "@/components/theme-customizer";
-import { ToggleTheme } from "@/components/theme-toggle";
+import { CommandSearch, SearchTrigger } from "@/components/layout/command-search";
+import { ProfileDropdown } from "@/components/layout/profile-dropdown";
+import { ThemeCustomizer } from "@/components/shared/theme-customizer";
+import { ToggleTheme } from "@/components/shared/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";

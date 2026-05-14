@@ -7,7 +7,7 @@ import {
   SidebarRail,
   Sidebar as UISidebar,
 } from "@/components/ui/sidebar";
-import { sidebarData } from "@/constants/sidebar-data";
+import { sidebarData } from "@/config/sidebar";
 import { useAuth } from "@/contexts/auth-context";
 import { useSidebarConfig } from "@/contexts/sidebar-context";
 import React from "react";

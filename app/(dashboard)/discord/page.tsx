@@ -1,4 +1,4 @@
-import { AnimatedList } from "@/components/animated-list";
+import { AnimatedList } from "@/components/shared/animated-list";
 import MockDiscordUI from "@/features/discord/components/discord";
 import DiscordMessage from "@/features/discord/components/discord-message";
 

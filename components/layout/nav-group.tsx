@@ -14,12 +14,12 @@ import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "./ui/collapsible";
+} from "../ui/collapsible";
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -30,7 +30,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   useSidebar,
-} from "./ui/sidebar";
+} from "../ui/sidebar";
 
 export function NavGroup({ title, items }: NavGroup) {
   const pathName = usePathname();

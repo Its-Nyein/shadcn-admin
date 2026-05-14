@@ -1,6 +1,6 @@
 "use client";
 
-import { PasswordRequirements } from "@/components/password-requirements";
+import { PasswordRequirements } from "@/components/shared/password-requirements";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -31,7 +31,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { blockDisallowedPasswordChars } from "../utils/password-validation";
+import { blockDisallowedPasswordChars } from "../schemas/password-validation";
 import {
   IdentifySchema,
   NewPasswordSchema,
@@ -39,7 +39,7 @@ import {
   identifySchema,
   newPasswordSchema,
   securityQuestionSchema,
-} from "../utils/reset-password-2-schema";
+} from "../schemas/reset-password-2-schema";
 
 const securityQuestions = [
   "What was the name of your first pet?",

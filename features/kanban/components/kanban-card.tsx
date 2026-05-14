@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
-import type { KanbanTask } from "../utils/schema";
-import { statusConfig } from "../utils/schema";
+import type { KanbanTask } from "../schema";
+import { statusConfig } from "../schema";
 
 interface KanbanCardProps {
   task: KanbanTask;

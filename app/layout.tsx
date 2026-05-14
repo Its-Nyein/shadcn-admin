@@ -1,5 +1,5 @@
-import { SnowEffect } from "@/components/snow-effect";
-import { ThemeProvider } from "@/components/theme-provider";
+import { SnowEffect } from "@/components/shared/snow-effect";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/contexts/auth-context";
 import { FontProvider } from "@/contexts/font-context";

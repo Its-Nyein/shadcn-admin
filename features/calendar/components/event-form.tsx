@@ -32,7 +32,7 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
-import { type CalendarEvent } from "../utils/types";
+import { type CalendarEvent } from "../types";
 
 interface EventFormProps {
   event?: CalendarEvent | null;

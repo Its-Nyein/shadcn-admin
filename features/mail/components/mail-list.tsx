@@ -6,8 +6,8 @@ import type { ComponentProps } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import type { Mail } from "@/constants/mail-data";
-import { useMail } from "@/features/mail/utils/use-mail";
+import type { Mail } from "@/features/mail/data";
+import { useMail } from "@/features/mail/hooks/use-mail";
 import { cn } from "@/lib/utils";
 
 interface MailListProps {

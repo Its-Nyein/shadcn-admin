@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import * as schema from "@/db/schema";
-import { generateRandomUUID } from "@/helpers/generate-random-uuid";
+import { generateRandomUUID } from "@/lib/generate-random-uuid";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 

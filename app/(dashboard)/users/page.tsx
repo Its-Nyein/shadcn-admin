@@ -2,10 +2,10 @@
 
 import { DataTable } from "@/features/users/components/user-data-table";
 import { UserStateCards } from "@/features/users/components/user-state-cards";
-import type { User, UserFormValues } from "@/features/users/utils/schema";
+import type { User, UserFormValues } from "@/features/users/schema";
 import { useState } from "react";
 
-import initialUsersData from "@/constants/user-data.json";
+import initialUsersData from "@/features/users/data/user-data.json";
 
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>(initialUsersData as User[]);

@@ -5,15 +5,15 @@ import {
   ConversationContent,
   ConversationEmptyState,
   ConversationScrollButton,
-} from "@/components/ai-elements/conversation";
-import { Loader } from "@/components/ai-elements/loader";
+} from "./elements/conversation";
+import { Loader } from "./elements/loader";
 import {
   Message,
   MessageAction,
   MessageActions,
   MessageContent,
   MessageResponse,
-} from "@/components/ai-elements/message";
+} from "./elements/message";
 import {
   PromptInput,
   PromptInputBody,
@@ -28,18 +28,18 @@ import {
   PromptInputTextarea,
   PromptInputTools,
   type PromptInputMessage,
-} from "@/components/ai-elements/prompt-input";
+} from "./elements/prompt-input";
 import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
-} from "@/components/ai-elements/reasoning";
+} from "./elements/reasoning";
 import {
   Source,
   Sources,
   SourcesContent,
   SourcesTrigger,
-} from "@/components/ai-elements/sources";
+} from "./elements/sources";
 import { Card, CardContent } from "@/components/ui/card";
 import { useChat } from "@ai-sdk/react";
 import type { UIMessage } from "ai";

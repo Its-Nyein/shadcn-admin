@@ -26,7 +26,7 @@ import {
   type VisibilityState,
 } from "@tanstack/react-table";
 import * as React from "react";
-import type { Transaction } from "../utils/transaction-schema";
+import type { Transaction } from "../schema";
 import { columns } from "./transaction-columns";
 import { TransactionsTablePagination } from "./transactions-table-pagination";
 import { TransactionsTableToolbar } from "./transactions-table-toolbar";

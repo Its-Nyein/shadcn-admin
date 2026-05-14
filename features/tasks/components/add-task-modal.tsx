@@ -25,9 +25,9 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 
-import type { Task } from "../utils/schema";
-import { taskFormSchema, type TaskFormSchema } from "../utils/schema";
-import { labels, priorities, statuses } from "../utils/task-data";
+import type { Task } from "../schema";
+import { taskFormSchema, type TaskFormSchema } from "../schema";
+import { labels, priorities, statuses } from "../data";
 
 interface AddTaskModalProps {
   onAddTask?: (task: Task) => void;

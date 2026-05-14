@@ -32,7 +32,7 @@ import {
   Wallet,
   XCircle,
 } from "lucide-react";
-import type { Transaction } from "../utils/transaction-schema";
+import type { Transaction } from "../schema";
 
 const statusConfig = {
   completed: {

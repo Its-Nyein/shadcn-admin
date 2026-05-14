@@ -1,6 +1,6 @@
 "use client";
 
-import { ImportModal } from "@/components/theme-customizer/import-modal";
+import { ImportModal } from "@/components/shared/theme-customizer/import-modal";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,

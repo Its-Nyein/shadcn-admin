@@ -24,9 +24,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import userData from "@/constants/user-data.json";
-import type { ColumnStatus, KanbanTask, Priority } from "../utils/schema";
-import { taskFormSchema } from "../utils/schema";
+import userData from "@/features/users/data/user-data.json";
+import type { ColumnStatus, KanbanTask, Priority } from "../schema";
+import { taskFormSchema } from "../schema";
 
 interface AddTaskDialogProps {
   open: boolean;

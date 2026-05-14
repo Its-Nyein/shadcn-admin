@@ -14,8 +14,8 @@ import {
 import { arrayMove } from "@dnd-kit/sortable";
 import { useCallback, useState } from "react";
 
-import { initialTasks } from "../utils/data";
-import type { ColumnStatus, KanbanTask } from "../utils/schema";
+import { initialTasks } from "../data";
+import type { ColumnStatus, KanbanTask } from "../schema";
 import { AddTaskDialog } from "./add-task-dialog";
 import { KanbanCard } from "./kanban-card";
 import { KanbanColumn } from "./kanban-column";

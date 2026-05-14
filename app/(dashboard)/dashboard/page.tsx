@@ -2,10 +2,10 @@ import { ChartAreaInteractive } from "@/features/dashboard/components/chart-area
 import { DataTable } from "@/features/dashboard/components/data-table";
 import { SectionCards } from "@/features/dashboard/components/selection-cards";
 
-import data from "@/constants/data.json";
-import focusDocumentsData from "@/constants/format-documents-data.json";
-import keyPersonnelData from "@/constants/key-personal-data.json";
-import pastPerformanceData from "@/constants/past-performance-data.json";
+import data from "@/features/dashboard/data/data.json";
+import focusDocumentsData from "@/features/dashboard/data/format-documents-data.json";
+import keyPersonnelData from "@/features/dashboard/data/key-personal-data.json";
+import pastPerformanceData from "@/features/dashboard/data/past-performance-data.json";
 
 export default function Page() {
   return (

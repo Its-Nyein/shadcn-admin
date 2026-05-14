@@ -27,7 +27,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { ChatConversation, ChatUser } from "../utils/types";
+import type { ChatConversation, ChatUser } from "../types";
 
 interface ChatHeaderProps {
   conversation: ChatConversation | null;

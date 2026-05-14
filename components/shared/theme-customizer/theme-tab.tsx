@@ -1,6 +1,6 @@
 "use client";
 
-import { ColorPicker } from "@/components/color-picker";
+import { ColorPicker } from "@/components/shared/color-picker";
 import {
   Accordion,
   AccordionContent,

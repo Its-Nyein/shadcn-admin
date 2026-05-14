@@ -1,6 +1,6 @@
 "use client";
 
-import { PasswordRequirements } from "@/components/password-requirements";
+import { PasswordRequirements } from "@/components/shared/password-requirements";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -27,8 +27,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { blockDisallowedPasswordChars } from "../utils/password-validation";
-import { SignUp1Schema, signUp1Schema } from "../utils/sign-up-1-schema";
+import { blockDisallowedPasswordChars } from "../schemas/password-validation";
+import { SignUp1Schema, signUp1Schema } from "../schemas/sign-up-1-schema";
 
 export function SignUp1({ className, ...props }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);

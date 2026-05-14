@@ -1,5 +1,5 @@
-import AppSidebar from "@/components/app-sidebar";
-import { DashboardHeader } from "@/components/dashboard-header";
+import AppSidebar from "@/components/layout/app-sidebar";
+import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SidebarConfigProvider } from "@/contexts/sidebar-context";
 import { isAuthenticated } from "@/lib/session";

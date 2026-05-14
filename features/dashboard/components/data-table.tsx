@@ -104,7 +104,7 @@ import {
   useDashboardSearchParams,
 } from "@/hooks/search-params";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { schema } from "../utils/task-schema";
+import { schema } from "../schema";
 
 function DragHandle({ id }: { id: number }) {
   const { attributes, listeners } = useSortable({

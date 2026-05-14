@@ -18,8 +18,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { blockDisallowedPasswordChars } from "../utils/password-validation";
-import { SignIn2Schema, signIn2Schema } from "../utils/sign-in-2-schema";
+import { blockDisallowedPasswordChars } from "../schemas/password-validation";
+import { SignIn2Schema, signIn2Schema } from "../schemas/sign-in-2-schema";
 
 export function SignIn2({ className, ...props }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);

@@ -1,9 +1,9 @@
 import { type CalendarEvent, type Calendar } from "./types";
 
 // Import JSON data from constants
-import eventsData from "@/constants/events.json";
-import eventDatesData from "@/constants/event-dates.json";
-import calendarsData from "@/constants/calendars.json";
+import eventsData from "@/features/calendar/data/events.json";
+import eventDatesData from "@/features/calendar/data/event-dates.json";
+import calendarsData from "@/features/calendar/data/calendars.json";
 
 /**
  * Parse calendar events from JSON and convert to CalendarEvent objects

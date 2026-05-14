@@ -1,6 +1,6 @@
 "use client";
 
-import { ContentSection } from "@/components/content-section";
+import { ContentSection } from "@/components/shared/content-section";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {

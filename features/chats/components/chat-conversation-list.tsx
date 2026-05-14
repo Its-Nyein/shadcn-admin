@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { formatMessageTime } from "@/helpers/format-message-time";
+import { formatMessageTime } from "@/lib/format-message-time";
 import { useChatsSearchParams } from "@/hooks/search-params";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { cn } from "@/lib/utils";
@@ -27,8 +27,8 @@ import {
   Users,
   VolumeX,
 } from "lucide-react";
-import type { ChatConversation, ChatUser } from "../utils/types";
-import { useChat } from "../utils/use-chat";
+import type { ChatConversation, ChatUser } from "../types";
+import { useChat } from "../hooks/use-chat";
 
 interface ConversationListProps {
   conversations: ChatConversation[];

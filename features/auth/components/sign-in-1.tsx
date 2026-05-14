@@ -26,8 +26,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { blockDisallowedPasswordChars } from "../utils/password-validation";
-import { SignIn1Schema, signIn1Schema } from "../utils/sign-in-1-schema";
+import { blockDisallowedPasswordChars } from "../schemas/password-validation";
+import { SignIn1Schema, signIn1Schema } from "../schemas/sign-in-1-schema";
 
 export function SignIn1({ className, ...props }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false);

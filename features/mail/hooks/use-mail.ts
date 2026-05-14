@@ -1,5 +1,5 @@
-import type { Mail } from "@/constants/mail-data";
-import { mails } from "@/constants/mail-data";
+import type { Mail } from "@/features/mail/data";
+import { mails } from "@/features/mail/data";
 import { create } from "zustand";
 
 interface Config {
