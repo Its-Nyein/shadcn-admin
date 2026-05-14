@@ -1,4 +1,7 @@
 import { type Calendar, type CalendarEvent } from "./types";
+import eventsData from "@/features/calendar/data/events.json";
+import eventDatesData from "@/features/calendar/data/event-dates.json";
+import calendarsData from "@/features/calendar/data/calendars.json";
 
 const EVENT_TYPES: CalendarEvent["type"][] = [
   "meeting",
@@ -9,10 +12,6 @@ const EVENT_TYPES: CalendarEvent["type"][] = [
 ];
 
 const CALENDAR_TYPES: Calendar["type"][] = ["personal", "work", "shared"];
-
-import eventsData from "@/features/calendar/data/events.json";
-import eventDatesData from "@/features/calendar/data/event-dates.json";
-import calendarsData from "@/features/calendar/data/calendars.json";
 
 export function parseCalendarEvents(
   rawEvents: typeof eventsData,
