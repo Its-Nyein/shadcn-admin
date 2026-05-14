@@ -40,14 +40,7 @@ export function parseEventDates(rawDates: typeof eventDatesData) {
   });
 }
 
-// Parsed calendar events with proper Date objects
 export const events: CalendarEvent[] = parseCalendarEvents(eventsData);
-
-// Parsed event dates for calendar picker
 export const eventDates = parseEventDates(eventDatesData);
-
-// Calendar categories
 export const calendars: Calendar[] = calendarsData as Calendar[];
-
-// Export raw data for reference
 export { eventsData, eventDatesData, calendarsData };

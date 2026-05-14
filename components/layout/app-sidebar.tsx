@@ -11,9 +11,9 @@ import { sidebarData } from "@/config/sidebar";
 import { useAuth } from "@/contexts/auth-context";
 import { useSidebarConfig } from "@/contexts/sidebar-context";
 import React from "react";
-import { NavGroup } from "./nav-group";
-import { NavUser } from "./nav-user";
-import { TeamSwitcher } from "./team-switcher";
+import { NavGroup } from "@/components/layout/nav-group";
+import { NavUser } from "@/components/layout/nav-user";
+import { TeamSwitcher } from "@/components/layout/team-switcher";
 
 export default function AppSidebar({
   ...props
