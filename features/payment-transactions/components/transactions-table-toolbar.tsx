@@ -25,7 +25,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
-import { exportToCSV, exportToJSON } from "@/helpers/export-data";
+import { exportToCSV, exportToJSON } from "@/lib/export-data";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
 import type { Table } from "@tanstack/react-table";
@@ -35,7 +35,7 @@ import {
   gateways,
   paymentMethods,
   transactionStatuses,
-} from "../utils/transaction-data";
+} from "../data";
 import { TransactionsViewOptions } from "./transactions-view-options";
 
 interface TransactionsTableToolbarProps<TData> {

@@ -1,4 +1,4 @@
-import { accounts, mails } from "@/constants/mail-data";
+import { accounts, mails } from "@/features/mail/data";
 import { Mail } from "@/features/mail/components/mail";
 
 export default function MailPage() {

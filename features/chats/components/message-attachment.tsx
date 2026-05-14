@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import type { MessageAttachment } from "../utils/types";
+import type { MessageAttachment } from "../types";
 
 interface MessageAttachmentProps {
   attachment: MessageAttachment;

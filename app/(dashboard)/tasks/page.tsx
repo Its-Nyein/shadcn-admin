@@ -8,10 +8,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import tasksData from "@/constants/tasks.json";
+import tasksData from "@/features/tasks/data/tasks.json";
 import { columns } from "@/features/tasks/components/columns";
 import { DataTable } from "@/features/tasks/components/data-table";
-import type { Task } from "@/features/tasks/utils/schema";
+import type { Task } from "@/features/tasks/schema";
 import { cn } from "@/lib/utils";
 import {
   ArrowUpRight,

@@ -20,8 +20,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { blockDisallowedPasswordChars } from "../utils/password-validation";
-import { SignInSchema, signInSchema } from "../utils/sign-in-schema";
+import { blockDisallowedPasswordChars } from "../schemas/password-validation";
+import { SignInSchema, signInSchema } from "../schemas/sign-in-schema";
 
 export default function SignIn() {
   const searchParams = useSearchParams();

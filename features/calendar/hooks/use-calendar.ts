@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { type CalendarEvent } from "./types";
+import { type CalendarEvent } from "@/features/calendar/types";
 
 export interface UseCalendarState {
   selectedDate: Date;
@@ -34,11 +34,10 @@ export function useCalendar(
   const [showEventForm, setShowEventForm] = useState(false);
   const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
   const [showCalendarSheet, setShowCalendarSheet] = useState(false);
-  const [events] = useState<CalendarEvent[]>(initialEvents);
+  const [events, setEvents] = useState<CalendarEvent[]>(initialEvents);
 
   const handleDateSelect = useCallback((date: Date) => {
     setSelectedDate(date);
-    // Auto-close mobile sheet when date is selected
     setShowCalendarSheet(false);
   }, []);
 
@@ -47,21 +46,21 @@ export function useCalendar(
     setShowEventForm(true);
   }, []);
 
-  const handleNewCalendar = useCallback(() => {
-    console.log("Creating new calendar");
-    // In a real app, this would open a new calendar form
-  }, []);
+  // TODO: open new calendar form
+  const handleNewCalendar = useCallback(() => {}, []);
 
   const handleSaveEvent = useCallback((eventData: Partial<CalendarEvent>) => {
-    console.log("Saving event:", eventData);
-    // In a real app, this would save to a backend
+    setEvents((prev) =>
+      eventData.id
+        ? prev.map((e) => (e.id === eventData.id ? { ...e, ...eventData } : e))
+        : [...prev, { ...eventData, id: Date.now() } as CalendarEvent],
+    );
     setShowEventForm(false);
     setEditingEvent(null);
   }, []);
 
   const handleDeleteEvent = useCallback((eventId: number) => {
-    console.log("Deleting event:", eventId);
-    // In a real app, this would delete from backend
+    setEvents((prev) => prev.filter((e) => e.id !== eventId));
     setShowEventForm(false);
     setEditingEvent(null);
   }, []);
@@ -72,13 +71,11 @@ export function useCalendar(
   }, []);
 
   return {
-    // State
     selectedDate,
     showEventForm,
     editingEvent,
     showCalendarSheet,
     events,
-    // Actions
     setSelectedDate,
     setShowEventForm,
     setEditingEvent,

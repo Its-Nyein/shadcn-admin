@@ -29,7 +29,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { exportToCSV, exportToJSON } from "@/helpers/export-data";
+import { exportToCSV, exportToJSON } from "@/lib/export-data";
 import { DEFAULT_PAGE_SIZE, useUsersSearchParams } from "@/hooks/search-params";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { useKeyboardShortcuts } from "@/hooks/use-keyboard-shortcuts";
@@ -58,7 +58,7 @@ import {
   Trash2,
 } from "lucide-react";
 import * as React from "react";
-import type { User, UserFormValues } from "../utils/schema";
+import type { User, UserFormValues } from "../schema";
 import { UserFormDialog } from "./user-form-modal";
 
 interface DataTableProps {

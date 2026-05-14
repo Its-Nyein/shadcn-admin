@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/contexts/auth-context";
+import { useLogout } from "@/components/layout/hooks/use-logout";
 import {
   BadgeCheck,
   Bell,
@@ -10,9 +10,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,8 +19,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "./ui/alert-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,13 +29,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "./ui/sidebar";
+} from "@/components/ui/sidebar";
 
 export function NavUser({
   user,
@@ -50,23 +47,7 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
-  const { logout } = useAuth();
-  const router = useRouter();
-  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast.success("Logged out successfully", {
-        description: "You have been logged out of your account.",
-      });
-      router.push("/sign-in");
-    } catch {
-      toast.error("Logout failed", {
-        description: "An error occurred while logging out.",
-      });
-    }
-  };
+  const { showLogoutDialog, setShowLogoutDialog, handleLogout } = useLogout();
 
   return (
     <SidebarMenu>

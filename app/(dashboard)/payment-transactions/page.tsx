@@ -1,6 +1,6 @@
 import { TransactionsStats } from "@/features/payment-transactions/components/transactions-stats";
 import { TransactionsTable } from "@/features/payment-transactions/components/transactions-table";
-import { transactions } from "@/features/payment-transactions/utils/transaction-data";
+import { transactions } from "@/features/payment-transactions/data";
 
 export default function PaymentTransactionsPage() {
   return (

@@ -1,14 +1,18 @@
-import { type CalendarEvent, type Calendar } from "./types";
+import { type Calendar, type CalendarEvent } from "@/features/calendar/types";
+import eventsData from "@/features/calendar/data/events.json";
+import eventDatesData from "@/features/calendar/data/event-dates.json";
+import calendarsData from "@/features/calendar/data/calendars.json";
 
-// Import JSON data from constants
-import eventsData from "@/constants/events.json";
-import eventDatesData from "@/constants/event-dates.json";
-import calendarsData from "@/constants/calendars.json";
+const EVENT_TYPES: CalendarEvent["type"][] = [
+  "meeting",
+  "event",
+  "personal",
+  "task",
+  "reminder",
+];
 
-/**
- * Parse calendar events from JSON and convert to CalendarEvent objects
- * Uses current month/year with the day and time from JSON data
- */
+const CALENDAR_TYPES: Calendar["type"][] = ["personal", "work", "shared"];
+
 export function parseCalendarEvents(
   rawEvents: typeof eventsData,
 ): CalendarEvent[] {
@@ -26,15 +30,13 @@ export function parseCalendarEvents(
     return {
       ...event,
       date: eventDate,
-      type: event.type as CalendarEvent["type"],
+      type: EVENT_TYPES.includes(event.type as CalendarEvent["type"])
+        ? (event.type as CalendarEvent["type"])
+        : "task",
     };
   });
 }
 
-/**
- * Parse event dates for calendar date picker highlighting
- * Uses current month/year with the day from JSON data
- */
 export function parseEventDates(rawDates: typeof eventDatesData) {
   const now = new Date();
   const currentYear = now.getFullYear();
@@ -49,14 +51,12 @@ export function parseEventDates(rawDates: typeof eventDatesData) {
   });
 }
 
-// Parsed calendar events with proper Date objects
 export const events: CalendarEvent[] = parseCalendarEvents(eventsData);
-
-// Parsed event dates for calendar picker
 export const eventDates = parseEventDates(eventDatesData);
-
-// Calendar categories
-export const calendars: Calendar[] = calendarsData as Calendar[];
-
-// Export raw data for reference
+export const calendars: Calendar[] = calendarsData.map((c) => ({
+  ...c,
+  type: CALENDAR_TYPES.includes(c.type as Calendar["type"])
+    ? (c.type as Calendar["type"])
+    : "personal",
+}));
 export { eventsData, eventDatesData, calendarsData };

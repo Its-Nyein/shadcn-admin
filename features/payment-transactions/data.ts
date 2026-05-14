@@ -1,4 +1,4 @@
-import type { Transaction } from "./transaction-schema";
+import type { Transaction } from "./schema";
 
 export const transactionStatuses = [
   { label: "Completed", value: "completed", color: "text-green-500" },

@@ -10,9 +10,9 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { type Mail } from "@/constants/mail-data";
+import { type Mail } from "@/features/mail/data";
 import { Nav } from "@/features/mail/components/mail-nav";
-import { useMail } from "@/features/mail/utils/use-mail";
+import { useMail } from "@/features/mail/hooks/use-mail";
 import { useMailSearchParams } from "@/hooks/search-params";
 import { useDebouncedCallback } from "@/hooks/use-debounced-callback";
 import { cn } from "@/lib/utils";

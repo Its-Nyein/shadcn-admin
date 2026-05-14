@@ -7,8 +7,8 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { type CalendarEvent } from "../utils/types";
-import { useCalendar } from "../utils/use-calendar";
+import { type CalendarEvent } from "../types";
+import { useCalendar } from "../hooks/use-calendar";
 import { CalendarMain } from "./calendar-main";
 import { CalendarSidebar } from "./calendar-sidebar";
 import { EventForm } from "./event-form";

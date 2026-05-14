@@ -1,14 +1,14 @@
 "use client";
 
 import { create } from "zustand";
-import type { ChatConversation, ChatMessage, ChatUser } from "./types";
+import type { ChatConversation, ChatMessage, ChatUser } from "../types";
 
 export type {
   ChatConversation,
   ChatMessage,
   ChatUser,
   MessageAttachment,
-} from "./types";
+} from "../types";
 
 interface ChatState {
   conversations: ChatConversation[];

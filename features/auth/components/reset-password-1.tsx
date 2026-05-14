@@ -1,6 +1,6 @@
 "use client";
 
-import { PasswordRequirements } from "@/components/password-requirements";
+import { PasswordRequirements } from "@/components/shared/password-requirements";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -32,7 +32,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { blockDisallowedPasswordChars } from "../utils/password-validation";
+import { blockDisallowedPasswordChars } from "../schemas/password-validation";
 import {
   EmailSchema,
   OtpSchema,
@@ -40,7 +40,7 @@ import {
   emailSchema,
   otpSchema,
   passwordSchema,
-} from "../utils/reset-password-schema";
+} from "../schemas/reset-password-schema";
 
 const steps = [
   {

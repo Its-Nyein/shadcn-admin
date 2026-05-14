@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
-import type { ChatMessage, ChatUser } from "../utils/types";
+import type { ChatMessage, ChatUser } from "../types";
 import { MessageAttachment } from "./message-attachment";
 
 interface MessageListProps {
